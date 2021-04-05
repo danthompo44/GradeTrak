@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand_cobalt">#455a64</color>
+    <color name="brand_cobalt_dark">#1c313a</color>
+    <color name="brand_cobalt_light">#718792</color>
+    <color name="brand_duck_egg">#c8e6c9</color>
+    <color name="brand_duck_egg_dark">#97b498</color>
+    <color name="brand_duck_egg_light">#fbfffc</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="red">#b00020</color>
+    <color name="green">#6cc465</color>
+</resources>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "43574629007",
+    "firebase_url": "https://gradetrak-3142f-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "gradetrak-3142f",
+    "storage_bucket": "gradetrak-3142f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43574629007:android:77c6200b134e315de496fa",
+        "android_client_info": {
+          "package_name": "com.university.gradetrak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "43574629007-4ugueud5mkfmmf4a4a497q3q0hnlj82b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAseyAIxIMhIvhiJ5OTzeFzjmdjgX7dZnA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "43574629007-4ugueud5mkfmmf4a4a497q3q0hnlj82b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
