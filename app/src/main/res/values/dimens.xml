@@ -2,5 +2,10 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Recycler View Dimensions -->
     <dimen name="recycler_background_radius">20dp</dimen>
+    <dimen name="recycler_view_layout_margin_top">3dp</dimen>
+    <dimen name="recycler_view_layout_margin_bottom">3dp</dimen>
+    <dimen name="recycler_view_height">250dp</dimen>
 </resources>

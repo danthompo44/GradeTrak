@@ -4,24 +4,61 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.university.gradetrak.R
+import com.university.gradetrak.databinding.FragmentHomeBinding
+import com.university.gradetrak.models.Module
+import com.university.gradetrak.ui.adapters.ModuleRecyclerAdapter
 
 class HomeFragment : Fragment() {
-
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var binding: FragmentHomeBinding
+    private lateinit var viewModel: HomeViewModel
+    private lateinit var linearLayoutManagerLevel5: LinearLayoutManager
+    private lateinit var linearLayoutManagerLevel6: LinearLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        return root
+    ): View {
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        setupViewModelBinding()
+        setupRecyclerViews()
+
+        return binding.root
+    }
+
+    private fun setupViewModelBinding(){
+        val viewModelFactory = HomeViewModelFactory()
+        viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+    }
+
+    private fun setupRecyclerViews(){
+        linearLayoutManagerLevel5 = LinearLayoutManager(activity)
+        linearLayoutManagerLevel6 = LinearLayoutManager(activity)
+        binding.rvLevel5ModulesList.layoutManager = linearLayoutManagerLevel5
+        binding.rvLevel6ModulesList.layoutManager = linearLayoutManagerLevel6
+
+        val adapterLevel5 = ModuleRecyclerAdapter(generateModuleList())
+        val adapterLevel6 = ModuleRecyclerAdapter(generateModuleList())
+        binding.rvLevel5ModulesList.adapter = adapterLevel5
+        binding.rvLevel5ModulesList.setHasFixedSize(true)
+        binding.rvLevel6ModulesList.adapter = adapterLevel6
+        binding.rvLevel6ModulesList.setHasFixedSize(true)
+    }
+
+    private fun generateModuleList(): List<Module>{
+        val listOfDummyModules: MutableList<Module> = ArrayList()
+        for(i in 0..5){
+            listOfDummyModules.add(Module("description", i))
+        }
+        listOfDummyModules[2].result = null
+
+        return listOfDummyModules
     }
 }

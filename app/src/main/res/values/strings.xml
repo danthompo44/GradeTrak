@@ -4,4 +4,13 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <!-- Home Page Strings -->
+    <string name="enrol_button_text">Enrol</string>
+    <string name="recycler_view_level_five_title">Level 5 Modules</string>
+    <string name="recycler_view_level_six_title">Level 6 Modules</string>
+    <string name="recycler_view_description_placeholder">Module Description</string>
+    <string name="recycler_view_result_placeholder">96%</string>
+    <string name="recycler_view_percentage">%</string>
+    <string name="recycler_view_image_view_description">Edit</string>
 </resources>
