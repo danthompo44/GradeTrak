@@ -13,4 +13,19 @@
     <string name="recycler_view_result_placeholder">96%</string>
     <string name="recycler_view_percentage">%</string>
     <string name="recycler_view_image_view_description">Edit</string>
+
+    <!-- Enrol Page Strings -->
+    <string name="enrol_page_title">Enrol</string>
+
+    <!-- Add a module Page Strings   -->
+    <string name="add_module_page_title">Add a Module</string>
+    <string name="module_name_edit_text_hint">Module Name</string>
+    <string name="module_credits_edit_text_hint">Module Credits</string>
+    <string name="test">Test</string>
+    <string-array name="module_level_spinner_strings">
+        <item>Level 5</item>
+        <item>Level 6</item>
+    </string-array>
+    <string name="module_level_prompt">Module Level</string>
+    <string name="add_module_button_text">Submit</string>
 </resources>

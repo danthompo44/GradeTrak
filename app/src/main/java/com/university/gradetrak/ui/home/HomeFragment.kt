@@ -52,6 +52,8 @@ class HomeFragment : Fragment() {
         binding.rvLevel6ModulesList.setHasFixedSize(true)
     }
 
+
+
     private fun generateModuleList(): List<Module>{
         val listOfDummyModules: MutableList<Module> = ArrayList()
         for(i in 0..5){

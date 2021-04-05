@@ -1,6 +1,8 @@
 package com.university.gradetrak
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -28,5 +30,9 @@ class MainActivity : AppCompatActivity() {
 
         //hide the top action bar
         supportActionBar?.hide()
+    }
+
+    fun handleEnrolButtonClicked(view: View){
+        startActivity(Intent(this, EnrolActivity::class.java))
     }
 }

@@ -30,7 +30,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/enrol_button_text"
                 android:layout_alignParentEnd="true"
-                android:elevation="8dp" />
+                android:elevation="8dp"
+                android:onClick="handleEnrolButtonClicked"/>
         </RelativeLayout>
 
         <LinearLayout

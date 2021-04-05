@@ -3,5 +3,6 @@
     <style name="Button.DuckEgg" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">?attr/colorSecondary</item>
         <item name="android:textColor">?attr/colorOnSecondary</item>
+        <item name="cornerRadius">20dp</item>
     </style>
 </resources>
