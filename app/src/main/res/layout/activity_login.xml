@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
-    android:elevation="0dp">
-`    <FrameLayout
+    android:elevation="0dp"
+    android:background="?attr/colorSurface">
+    <FrameLayout
         android:id="@+id/fl_login_header_image"
         android:layout_width="match_parent"
         android:layout_height="@dimen/auth_header_image_height"

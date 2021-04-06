@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".AddModuleActivity"
     android:elevation="0dp"
+    android:background="?attr/colorSurface"
     >
 
     <androidx.appcompat.widget.Toolbar
