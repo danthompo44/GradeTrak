@@ -19,7 +19,6 @@ class AddModuleActivity : AppCompatActivity() {
 
     private fun addNavigationListener(){
         binding.tbAddModulePage.setNavigationOnClickListener {
-            Log.v("GradeTrak", "Listener")
             finish()
         }
     }

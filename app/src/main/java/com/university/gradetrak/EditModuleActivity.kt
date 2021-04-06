@@ -2,6 +2,7 @@ package com.university.gradetrak
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.university.gradetrak.databinding.ActivityEditModuleBinding
 
 class EditModuleActivity : AppCompatActivity() {
@@ -10,6 +11,13 @@ class EditModuleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityEditModuleBinding.inflate(layoutInflater)
+        addNavigationListener()
         setContentView(binding.root)
+    }
+
+    private fun addNavigationListener(){
+        binding.tbEditModulePage.setNavigationOnClickListener {
+            finish()
+        }
     }
 }

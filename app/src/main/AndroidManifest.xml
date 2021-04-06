@@ -8,14 +8,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".EditModuleActivity"></activity>
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".EditModuleActivity"/>
         <activity
-            android:name=".AddModuleActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".AddModuleActivity" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main">
+            android:label="GradeTrak"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,8 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EnrolActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".EnrolActivity" />
         <activity android:name=".OtherActivity" />
 
         <meta-data

@@ -16,8 +16,8 @@
 
     <!-- Enrol Page Strings -->
     <string name="enrol_page_title">Enrol</string>
-    <string name="enrol_page_modules_recycler_title">Modules</string>
-    <string name="enrol_page_submit_button_text">Submit</string>
+    <string name="enrol_page_modules_recycler_title">Enrolled Modules</string>
+    <string name="enrol_page_delete_button_text">Delete</string>
     <string name="enrol_page_edit_button_text">Edit</string>
 
     <!-- Add a module Page Strings   -->
@@ -30,5 +30,9 @@
         <item>Level 6</item>
     </string-array>
     <string name="module_level_prompt">Module Level</string>
-    <string name="add_module_button_text">Submit</string>
+    <string name="add_module_button_text">Add</string>
+
+    <!-- Edit Module Page Strings -->
+    <string name="edit_module_page_title">Edit Module</string>
+    <string name="edit_module_button_text">Edit</string>
 </resources>
