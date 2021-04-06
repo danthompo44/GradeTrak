@@ -35,4 +35,11 @@
     <!-- Edit Module Page Strings -->
     <string name="edit_module_page_title">Edit Module</string>
     <string name="edit_module_button_text">Edit</string>
+
+    <!-- Settings Page Strings -->
+    <string name="settings_page_description">Universities grade their students differently using 2nd to 3rd year weightings, some will also discount your lowest module, adjust these below.</string>
+    <string name="settings_page_weighting_prompt_text">2nd : 3rd Year Weighting</string>
+    <string name="settings_page_lowest_module_prompt_text">Discount Lowest Module?</string>
+    <string name="settings_page_toggle_off_text">40% : 60%</string>
+    <string name="settings_page_toggle_on_text">30% : 70%</string>
 </resources>

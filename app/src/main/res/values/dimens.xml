@@ -15,4 +15,11 @@
     <dimen name="enrol_page_toolbar_margin_left">5dp</dimen>
     <dimen name="add_module_spinner_tv_margin_start">15dp</dimen>
     <dimen name="spinner_background_radius">10dp</dimen>
+
+    <!-- Edit Module Dimens -->
+    <dimen name="module_description_text_margin_bottom">25dp</dimen>
+
+    <!-- Settings Dimensions -->
+    <dimen name="settings_page_linear_layout_margin_top">40dp</dimen>
+    <dimen name="settings_page_linear_layout_margin_bottom">40dp</dimen>
 </resources>
