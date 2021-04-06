@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,7 +13,7 @@ import com.university.gradetrak.databinding.FragmentHomeBinding
 import com.university.gradetrak.models.Module
 import com.university.gradetrak.ui.adapters.ModuleRecyclerAdapter
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), ModuleRecyclerAdapter.OnItemClickListener {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
     private lateinit var linearLayoutManagerLevel5: LinearLayoutManager
@@ -44,8 +45,8 @@ class HomeFragment : Fragment() {
         binding.rvLevel5ModulesList.layoutManager = linearLayoutManagerLevel5
         binding.rvLevel6ModulesList.layoutManager = linearLayoutManagerLevel6
 
-        val adapterLevel5 = ModuleRecyclerAdapter(generateModuleList())
-        val adapterLevel6 = ModuleRecyclerAdapter(generateModuleList())
+        val adapterLevel5 = ModuleRecyclerAdapter(generateModuleList(), this)
+        val adapterLevel6 = ModuleRecyclerAdapter(generateModuleList(), this)
         binding.rvLevel5ModulesList.adapter = adapterLevel5
         binding.rvLevel5ModulesList.setHasFixedSize(true)
         binding.rvLevel6ModulesList.adapter = adapterLevel6
@@ -62,5 +63,10 @@ class HomeFragment : Fragment() {
         listOfDummyModules[2].result = null
 
         return listOfDummyModules
+    }
+
+//  Override function for recycler view interface
+    override fun onItemClick(position: Int) {
+        Toast.makeText(activity, "Clicked at position $position", Toast.LENGTH_LONG).show()
     }
 }

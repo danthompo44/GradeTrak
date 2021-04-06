@@ -3,17 +3,21 @@ package com.university.gradetrak
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.university.gradetrak.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.university.gradetrak.databinding.ActivityEnrolBinding
+import com.university.gradetrak.models.Module
+import com.university.gradetrak.ui.adapters.EnrolModuleRecyclerAdapter
 
 class EnrolActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEnrolBinding
+    private lateinit var linearLayoutManager: LinearLayoutManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityEnrolBinding.inflate(layoutInflater)
 
         addToolBarNavListeners()
+        setupRecyclerView()
         setContentView(binding.root)
     }
 
@@ -30,5 +34,22 @@ class EnrolActivity : AppCompatActivity() {
         binding.ivEnrolToolbarAddModule.setOnClickListener {
             startActivity(Intent(this, AddModuleActivity::class.java))
         }
+    }
+
+    private fun setupRecyclerView(){
+        linearLayoutManager = LinearLayoutManager(this)
+        binding.rvEnrolPageModules.layoutManager = linearLayoutManager
+        val adapter = EnrolModuleRecyclerAdapter(generateModuleList(10))
+        binding.rvEnrolPageModules.adapter = adapter
+        binding.rvEnrolPageModules.setHasFixedSize(true)
+    }
+
+    private fun generateModuleList(size: Int): List<Module>{
+        val listOfDummyModules: MutableList<Module> = ArrayList()
+        for(i in 0 until size){
+            listOfDummyModules.add(Module("description$i", i))
+        }
+
+        return listOfDummyModules
     }
 }

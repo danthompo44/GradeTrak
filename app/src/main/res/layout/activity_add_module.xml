@@ -33,6 +33,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,8 +102,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/add_module_button_text"
-            android:layout_marginTop="@dimen/et_margin_top"
-            android:layout_marginBottom="@dimen/et_margin_bottom"
             style="@style/Button.DuckEgg"/>
     </LinearLayout>
 

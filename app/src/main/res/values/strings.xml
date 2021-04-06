@@ -16,6 +16,9 @@
 
     <!-- Enrol Page Strings -->
     <string name="enrol_page_title">Enrol</string>
+    <string name="enrol_page_modules_recycler_title">Modules</string>
+    <string name="enrol_page_submit_button_text">Submit</string>
+    <string name="enrol_page_edit_button_text">Edit</string>
 
     <!-- Add a module Page Strings   -->
     <string name="add_module_page_title">Add a Module</string>

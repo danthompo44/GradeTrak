@@ -1,6 +1,5 @@
 package com.university.gradetrak.ui.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.university.gradetrak.R
 import com.university.gradetrak.models.Module
 
-class ModuleRecyclerAdapter (private val dataSet : List<Module>,
-                             private val listener: OnItemClickListener)
-    : RecyclerView.Adapter<ModuleRecyclerAdapter.ViewHolder>() {
+class EnrolModuleRecyclerAdapter (private val dataSet : List<Module>
+)
+    : RecyclerView.Adapter<EnrolModuleRecyclerAdapter.ViewHolder>()  {
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
      * an item.
@@ -35,10 +34,13 @@ class ModuleRecyclerAdapter (private val dataSet : List<Module>,
      * @see .getItemViewType
      * @see .onBindViewHolder
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): EnrolModuleRecyclerAdapter.ViewHolder {
         // Create a new view
         val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.home_page_recycler_layout, parent, false)
+            .inflate(R.layout.enrol_page_recycler_layout, parent, false)
 
         //Call the ViewHolder Constructor (inner class) to set up each Recycler view item
         return ViewHolder(adapterLayout)
@@ -65,16 +67,8 @@ class ModuleRecyclerAdapter (private val dataSet : List<Module>,
      * item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      */
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.descriptionTextView.text = dataSet[position].description
-        if(dataSet[position].result == null){
-            holder.resultTextView.text = "N/A"
-        }
-        else {
-            val result =  dataSet[position].result.toString()
-            holder.resultTextView.text =  "$result%"
-        }
     }
 
     /**
@@ -84,29 +78,9 @@ class ModuleRecyclerAdapter (private val dataSet : List<Module>,
      */
     override fun getItemCount(): Int = dataSet.size
 
-    inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view),
-    View.OnClickListener{
-        val descriptionTextView : TextView = view.findViewById(R.id.tv_module_description)
-        val resultTextView : TextView = view.findViewById(R.id.tv_module_result)
-
-        init {
-            view.setOnClickListener(this)
-        }
-
-        /**
-         * Called when a view has been clicked.
-         *
-         * @param v The view that was clicked.
-         */
-        override fun onClick(v: View?) {
-            val position = adapterPosition
-            if (position != RecyclerView.NO_POSITION){
-                listener.onItemClick(adapterPosition)
-            }
-        }
+    inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view){
+        val descriptionTextView: TextView = view.findViewById(R.id.tv_enrol_page_rv_module_description)
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(position: Int)
-    }
+
 }
