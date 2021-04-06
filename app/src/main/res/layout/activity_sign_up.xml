@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity"
+    android:elevation="0dp">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_edit_module_page"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_baseline_navigate_before_24"
+        android:background="?attr/colorPrimary">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_up_page_title"
+                android:textAppearance="@style/TextAppearance.MyTheme.Headline6"
+                android:textColor="?attr/colorOnPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_sign_up_page_first_name_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/et_margin_top"
+            android:layout_marginBottom="@dimen/et_margin_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tb_edit_module_page">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_sign_up_page_first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sign_up_page_first_name_edit_text_hint"
+                android:inputType="textPassword"
+                android:textAppearance="@style/TextAppearance.MyTheme.Body1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_sign_up_page_surname_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/et_margin_top"
+            android:layout_marginBottom="@dimen/et_margin_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tb_edit_module_page">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_sign_up_page_surname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sign_up_page_surname_edit_text_hint"
+                android:inputType="textPassword"
+                android:textAppearance="@style/TextAppearance.MyTheme.Body1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_sign_up_page_email_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/et_margin_top"
+            android:layout_marginBottom="@dimen/et_margin_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tb_edit_module_page">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_sign_up_page_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sign_up_page_email_edit_text_hint"
+                android:inputType="textPassword"
+                android:textAppearance="@style/TextAppearance.MyTheme.Body1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_sign_up_page_password_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/et_margin_top"
+            android:layout_marginBottom="@dimen/et_margin_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tb_edit_module_page">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_sign_up_page_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sign_up_page_password_edit_text_hint"
+                android:inputType="textPassword"
+                android:textAppearance="@style/TextAppearance.MyTheme.Body1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_sign_up_page_confirm_password_container"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/et_margin_top"
+            android:layout_marginBottom="@dimen/et_margin_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tb_edit_module_page">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_sign_up_page_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sign_up_page_confirm_password_edit_text_hint"
+                android:inputType="textPassword"
+                android:textAppearance="@style/TextAppearance.MyTheme.Body1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Button.DuckEgg"
+            android:text="@string/sign_up_page_sign_up_button_text"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/copyright"
+            android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/copyright_margin_bottom"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

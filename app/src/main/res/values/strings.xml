@@ -53,4 +53,19 @@
     <string name="login_page_login_button_text">Login</string>
     <string name="login_page_sign_up_button_text">Sign Up</string>
     <string name="login_page_forgot_password_button_text">Forgot Password?</string>
+
+    <!-- Sign Up Page Strings -->
+    <string name="sign_up_page_title">Sign Up</string>
+    <string name="sign_up_page_first_name_edit_text_hint">First Name</string>
+    <string name="sign_up_page_surname_edit_text_hint">Surname</string>
+    <string name="sign_up_page_email_edit_text_hint">Email Address</string>
+    <string name="sign_up_page_password_edit_text_hint">Password</string>
+    <string name="sign_up_page_confirm_password_edit_text_hint">Confirm Password</string>
+    <string name="sign_up_page_sign_up_button_text">Register</string>
+
+    <!-- Forgot Password Strings   -->
+    <string name="forgot_password_title_text">Forgot Password</string>
+    <string name="forgot_password_page_abstract">No problem, enter your email address below and we\'ll send you a link to reset it.</string>
+    <string name="forgot_password_email_address_tv_hint">Email Address</string>
+    <string name="forgot_password_submit_button_text">Submit</string>
 </resources>

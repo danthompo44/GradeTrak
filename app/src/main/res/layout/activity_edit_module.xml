@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/et_margin_top"
             android:layout_marginBottom="@dimen/et_margin_bottom">
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_module_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/et_margin_top"
             android:layout_marginBottom="@dimen/et_margin_bottom">
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_credits"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -18,4 +18,12 @@ class LoginActivity : AppCompatActivity() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
+
+    fun handleSignUpButtonClick(view: View){
+        startActivity(Intent(this, SignUpActivity::class.java))
+    }
+
+    fun handleForgottenPasswordButtonClick(view: View){
+        startActivity(Intent(this, ForgotPasswordActivity::class.java))
+    }
 }
