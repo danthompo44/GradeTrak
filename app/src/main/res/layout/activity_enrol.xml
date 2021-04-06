@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EnrolActivity">
+    tools:context=".EnrolActivity"
+    android:elevation="0dp">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_enrol_page"
@@ -12,6 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:elevation="8dp"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_baseline_navigate_before_24"
         android:background="?attr/colorPrimary">
@@ -78,6 +80,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_enrol_page_modules"
+                android:elevation="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/et_margin_top"

@@ -9,6 +9,7 @@
     android:background="@drawable/recycler_view_background"
     android:layout_marginTop="@dimen/recycler_view_layout_margin_top"
     android:layout_marginBottom="@dimen/recycler_view_layout_margin_bottom"
+    android:stateListAnimator="@animator/lift_up"
     >
 
     <TextView

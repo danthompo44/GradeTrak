@@ -2,8 +2,8 @@
     <string name="app_name">GradeTrak</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_insights">Insights</string>
+    <string name="title_settings">Settings</string>
 
     <!-- Home Page Strings -->
     <string name="enrol_button_text">Enrol</string>
