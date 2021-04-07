@@ -13,7 +13,7 @@ import kotlin.collections.ArrayList
 
 class ModuleRepository {
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-    private val modules = database.getReference("modules")
+    private val modules = database.getReference("modules").child("A users Id")
     val modulesLD = MutableLiveData<List<Module>>()
 
     init {
@@ -22,12 +22,14 @@ class ModuleRepository {
 
     fun addEditStudent(module: Module){
         Log.v(TAG, module.toString())
-        modules.child("A User Id").child(UUID.randomUUID().toString()).setValue(module)
+        modules.child(UUID.randomUUID().toString()).setValue(module)
     }
 
     fun delete(module: Module){
         modules.child(module.uuid.toString()).removeValue()
     }
+
+
 
     private fun getAll(){
         // Read from the database

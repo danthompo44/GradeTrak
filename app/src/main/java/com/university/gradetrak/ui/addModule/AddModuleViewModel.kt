@@ -28,5 +28,10 @@ class AddModuleViewModel (private val moduleService: ModuleService): ViewModel()
         val module = Module(moduleName.get().toString(), Credits.valueOf(moduleCredits.get()!!).value, Level.valueOf(moduleLevel.get()!!).value)
         error.value = module.toString()
         moduleService.addEditModule(module)
+        clearDetails()
+    }
+
+    private fun clearDetails(){
+        moduleName.set("")
     }
 }

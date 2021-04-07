@@ -23,5 +23,10 @@ class EditModuleViewModel: ViewModel() {
         val level = Level.valueOf(moduleLevel.get().toString()).value
         val module = Module(name, credits, level)
         error.value = module.toString()
+        clearDetails()
+    }
+
+    private fun clearDetails(){
+        moduleName.set("")
     }
 }
