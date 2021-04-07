@@ -7,6 +7,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.university.gradetrak.models.Module
+import com.university.gradetrak.utils.TAG
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -20,6 +21,7 @@ class ModuleRepository {
     }
 
     fun addEditStudent(module: Module){
+        Log.v(TAG, module.toString())
         modules.child("A User Id").child(UUID.randomUUID().toString()).setValue(module)
     }
 

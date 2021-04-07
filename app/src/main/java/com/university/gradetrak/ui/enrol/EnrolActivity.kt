@@ -50,7 +50,7 @@ class EnrolActivity : AppCompatActivity() {
     private fun generateModuleList(size: Int): List<Module>{
         val listOfDummyModules: MutableList<Module> = ArrayList()
         for(i in 0 until size){
-            listOfDummyModules.add(Module("description$i", i, i.toString()))
+            listOfDummyModules.add(Module("description$i", i, i))
         }
 
         return listOfDummyModules

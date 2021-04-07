@@ -4,6 +4,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.university.gradetrak.models.Credits
+import com.university.gradetrak.models.Level
 import com.university.gradetrak.models.Module
 
 class EditModuleViewModel: ViewModel() {
@@ -17,7 +18,10 @@ class EditModuleViewModel: ViewModel() {
     }
 
     fun handleEditButtonClick(){
-        val module = Module(moduleName.get().toString(), Credits.valueOf(moduleCredits.get().toString()).value, moduleLevel.get().toString())
+        val name = moduleName.get().toString().trim()
+        val credits = Credits.valueOf(moduleCredits.get().toString()).value
+        val level = Level.valueOf(moduleLevel.get().toString()).value
+        val module = Module(name, credits, level)
         error.value = module.toString()
     }
 }
