@@ -1,9 +1,12 @@
-package com.university.gradetrak
+package com.university.gradetrak.ui.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.university.gradetrak.BaseActivity
+import com.university.gradetrak.ui.forgotPassword.ForgotPasswordActivity
+import com.university.gradetrak.MainActivity
+import com.university.gradetrak.ui.signUp.SignUpActivity
 import com.university.gradetrak.databinding.ActivityLoginBinding
 
 class LoginActivity : BaseActivity() {

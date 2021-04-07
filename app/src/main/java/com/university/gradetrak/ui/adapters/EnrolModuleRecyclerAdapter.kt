@@ -68,7 +68,7 @@ class EnrolModuleRecyclerAdapter (private val dataSet : List<Module>
      * @param position The position of the item within the adapter's data set.
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.descriptionTextView.text = dataSet[position].description
+        holder.descriptionTextView.text = dataSet[position].name
     }
 
     /**

@@ -1,10 +1,11 @@
-package com.university.gradetrak
+package com.university.gradetrak.ui.splash
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.university.gradetrak.databinding.ActivitySplashBinding
+import com.university.gradetrak.ui.login.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding

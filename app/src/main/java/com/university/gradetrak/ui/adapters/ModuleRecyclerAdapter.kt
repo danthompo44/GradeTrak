@@ -67,12 +67,12 @@ class ModuleRecyclerAdapter (private val dataSet : List<Module>,
      */
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.descriptionTextView.text = dataSet[position].description
-        if(dataSet[position].result == null){
+        holder.descriptionTextView.text = dataSet[position].name
+        if(dataSet[position].credits == null){
             holder.resultTextView.text = "N/A"
         }
         else {
-            val result =  dataSet[position].result.toString()
+            val result =  dataSet[position].credits.toString()
             holder.resultTextView.text =  "$result%"
         }
     }

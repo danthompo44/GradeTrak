@@ -1,10 +1,12 @@
-package com.university.gradetrak
+package com.university.gradetrak.ui.enrol
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.university.gradetrak.ui.addModule.AddModuleActivity
+import com.university.gradetrak.ui.editModule.EditModuleActivity
 import com.university.gradetrak.databinding.ActivityEnrolBinding
 import com.university.gradetrak.models.Module
 import com.university.gradetrak.ui.adapters.EnrolModuleRecyclerAdapter
@@ -48,7 +50,7 @@ class EnrolActivity : AppCompatActivity() {
     private fun generateModuleList(size: Int): List<Module>{
         val listOfDummyModules: MutableList<Module> = ArrayList()
         for(i in 0 until size){
-            listOfDummyModules.add(Module("description$i", i))
+            listOfDummyModules.add(Module("description$i", i, i.toString()))
         }
 
         return listOfDummyModules

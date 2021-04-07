@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".BaseActivity"></activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.splash.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,21 +20,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ForgotPasswordActivity"
+            android:name=".ui.forgotPassword.ForgotPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".ui.signUp.SignUpActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.login.LoginActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".EditModuleActivity" />
-        <activity android:name=".AddModuleActivity" />
+        <activity android:name=".ui.editModule.EditModuleActivity" />
+        <activity android:name=".ui.addModule.AddModuleActivity" />
         <activity
             android:name=".MainActivity"
             android:label="GradeTrak"
             android:theme="@style/AppTheme" />
-        <activity android:name=".EnrolActivity" />
+        <activity android:name=".ui.enrol.EnrolActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

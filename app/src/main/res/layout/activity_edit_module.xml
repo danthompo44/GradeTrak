@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditModuleActivity"
+    tools:context=".ui.editModule.EditModuleActivity"
     android:elevation="0dp"
     android:background="?attr/colorSurface"
     >
@@ -74,21 +74,29 @@
                 android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_credits"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_marginTop="@dimen/et_margin_top"
             android:layout_marginBottom="@dimen/et_margin_bottom">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_credits"
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/module_credits_edit_text_hint"
-                android:inputType="text"
-                android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="@dimen/add_module_spinner_tv_margin_start"
+                android:text="@string/module_credits_edit_text_hint"
+                android:textAppearance="@style/TextAppearance.MyTheme.Subtitle1" />
+
+            <Spinner
+                android:id="@+id/module_credits_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/et_margin_top"
+                android:layout_marginBottom="@dimen/et_margin_bottom"
+
+                />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

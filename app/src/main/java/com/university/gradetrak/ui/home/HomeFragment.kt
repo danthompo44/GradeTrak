@@ -58,9 +58,9 @@ class HomeFragment : Fragment(), ModuleRecyclerAdapter.OnItemClickListener {
     private fun generateModuleList(): List<Module>{
         val listOfDummyModules: MutableList<Module> = ArrayList()
         for(i in 0..5){
-            listOfDummyModules.add(Module("description", i))
+            listOfDummyModules.add(Module("description", i, i.toString()))
         }
-        listOfDummyModules[2].result = null
+        listOfDummyModules[2].credits = null
 
         return listOfDummyModules
     }

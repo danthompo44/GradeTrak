@@ -1,4 +1,4 @@
-package com.university.gradetrak
+package com.university.gradetrak.ui.forgotPassword
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -1,9 +1,9 @@
-package com.university.gradetrak
+package com.university.gradetrak.ui.editModule
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
+import com.university.gradetrak.R
 import com.university.gradetrak.databinding.ActivityEditModuleBinding
 
 class EditModuleActivity : AppCompatActivity() {
@@ -13,7 +13,7 @@ class EditModuleActivity : AppCompatActivity() {
 
         binding = ActivityEditModuleBinding.inflate(layoutInflater)
         addNavigationListener()
-        setupModuleLevelSpinner()
+        setupSpinners()
         setContentView(binding.root)
     }
 
@@ -23,7 +23,7 @@ class EditModuleActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupModuleLevelSpinner(){
+    private fun setupSpinners(){
         ArrayAdapter.createFromResource(this, R.array.module_level_spinner_strings,
             R.layout.spinner_item
         ).also { adapter ->
@@ -31,6 +31,14 @@ class EditModuleActivity : AppCompatActivity() {
             adapter.setDropDownViewResource(R.layout.spinner_item)
             // Apply the adapter to the spinner
             binding.moduleLevelSpinner.adapter = adapter
+        }
+        ArrayAdapter.createFromResource(this, R.array.module_credits_spinner_strings,
+            R.layout.spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(R.layout.spinner_item)
+            // Apply the adapter to the spinner
+            binding.moduleCreditsSpinner.adapter = adapter
         }
     }
 }

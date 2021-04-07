@@ -17,4 +17,9 @@
         <item name="backgroundTint">?attr/colorError</item>
         <item name="android:textColor">?attr/colorOnError</item>
     </style>
+    <style name="Spinner" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        <item name="boxBackgroundColor">?attr/colorSurface</item>
+        <item name="boxStrokeColor">?attr/colorPrimary</item>
+        <item name="boxStrokeErrorColor">?attr/colorError</item>
+    </style>
 </resources>

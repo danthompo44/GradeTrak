@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.university.gradetrak.ui.enrol.EnrolActivity
 
 class MainActivity : AppCompatActivity() {
 
