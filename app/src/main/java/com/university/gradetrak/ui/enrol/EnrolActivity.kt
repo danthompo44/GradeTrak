@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.university.gradetrak.BaseActivity
 import com.university.gradetrak.ui.addModule.AddModuleActivity
 import com.university.gradetrak.ui.editModule.EditModuleActivity
 import com.university.gradetrak.databinding.ActivityEnrolBinding
@@ -14,7 +15,7 @@ import com.university.gradetrak.models.Module
 import com.university.gradetrak.services.Services
 import com.university.gradetrak.ui.adapters.EnrolModuleRecyclerAdapter
 
-class EnrolActivity : AppCompatActivity() {
+class EnrolActivity : BaseActivity() {
     private lateinit var binding: ActivityEnrolBinding
     private lateinit var linearLayoutManager: LinearLayoutManager
 
@@ -55,22 +56,22 @@ class EnrolActivity : AppCompatActivity() {
 
     private fun observeModuleTable(){
         viewModel.getAllUsersModules().observe(this, Observer { modules ->
-            val adapter = EnrolModuleRecyclerAdapter(modules)
+            val adapter = EnrolModuleRecyclerAdapter(modules, viewModel.selectedModule, resources)
             binding.rvEnrolPageModules.adapter = adapter
             binding.rvEnrolPageModules.setHasFixedSize(true)
         })
     }
 
-    private fun generateModuleList(size: Int): List<Module>{
-        val listOfDummyModules: MutableList<Module> = ArrayList()
-        for(i in 0 until size){
-            listOfDummyModules.add(Module("description$i", i, i))
-        }
-
-        return listOfDummyModules
-    }
-
     fun handleEditButtonClick(view: View){
         startActivity(Intent(this, EditModuleActivity::class.java))
     }
+
+//    private fun generateModuleList(size: Int): List<Module>{
+//        val listOfDummyModules: MutableList<Module> = ArrayList()
+//        for(i in 0 until size){
+//            listOfDummyModules.add(Module("description$i", i, i))
+//        }
+//
+//        return listOfDummyModules
+//    }
 }

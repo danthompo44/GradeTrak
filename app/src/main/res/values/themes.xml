@@ -16,6 +16,7 @@
         <!-- Surfaces and background -->
         <item name="backgroundColor">@color/brand_duck_egg_light</item>
         <item name="colorSurface">@color/brand_duck_egg_light</item>
+        <item name="colorControlActivated">@color/grey</item>
         <item name="colorOnBackground">?attr/colorPrimaryVariant</item>
         <item name="colorOnSurface">?attr/colorPrimaryVariant</item>
         <!-- Status bar color. -->
