@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'com.google.gms.google-services'
     id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
 }
 
 android {
@@ -35,6 +36,9 @@ android {
     buildFeatures{
         dataBinding = true
         viewBinding = true
+    }
+    androidExtensions {
+        features = ['parcelize']
     }
 }
 

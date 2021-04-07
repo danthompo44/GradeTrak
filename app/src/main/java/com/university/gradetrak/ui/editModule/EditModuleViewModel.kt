@@ -8,7 +8,7 @@ import com.university.gradetrak.models.Level
 import com.university.gradetrak.models.Module
 
 class EditModuleViewModel: ViewModel() {
-    val moduleName = ObservableField<String>()
+    var moduleName = ObservableField<String>()
     val moduleCredits = ObservableField<String>()
     val moduleLevel = ObservableField<String>()
 

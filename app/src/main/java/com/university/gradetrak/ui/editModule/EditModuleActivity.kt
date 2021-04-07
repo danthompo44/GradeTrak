@@ -11,9 +11,11 @@ import com.university.gradetrak.R
 import com.university.gradetrak.databinding.ActivityEditModuleBinding
 import com.university.gradetrak.models.Credits
 import com.university.gradetrak.models.Level
+import com.university.gradetrak.models.Module
 import com.university.gradetrak.services.Services
 import com.university.gradetrak.ui.addModule.AddModuleViewModel
 import com.university.gradetrak.ui.addModule.AddModuleViewModelFactory
+import com.university.gradetrak.utils.SELECTED_MODULE_KEY
 
 class EditModuleActivity : BaseActivity() {
     private lateinit var binding: ActivityEditModuleBinding
@@ -31,6 +33,9 @@ class EditModuleActivity : BaseActivity() {
         addNavigationListener()
         setupDropdownMenus()
         observeErrors()
+
+        val selectedModule = intent.getParcelableExtra<Module>(SELECTED_MODULE_KEY)
+        displayModule(selectedModule?.name)
     }
 
     private fun addNavigationListener(){
@@ -54,6 +59,10 @@ class EditModuleActivity : BaseActivity() {
         viewModel.error.observe(this, Observer { error ->
             showSnackBar(error, true)
         })
+    }
+
+    private fun displayModule(moduleName : String?){
+        viewModel.moduleName.set(moduleName)
     }
 
     private fun setupSpinners(){

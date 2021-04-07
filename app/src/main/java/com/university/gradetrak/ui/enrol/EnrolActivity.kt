@@ -14,6 +14,7 @@ import com.university.gradetrak.databinding.ActivityEnrolBinding
 import com.university.gradetrak.models.Module
 import com.university.gradetrak.services.Services
 import com.university.gradetrak.ui.adapters.EnrolModuleRecyclerAdapter
+import com.university.gradetrak.utils.SELECTED_MODULE_KEY
 
 class EnrolActivity : BaseActivity() {
     private lateinit var binding: ActivityEnrolBinding
@@ -63,7 +64,10 @@ class EnrolActivity : BaseActivity() {
     }
 
     fun handleEditButtonClick(view: View){
-        startActivity(Intent(this, EditModuleActivity::class.java))
+        val intent = Intent(this, EditModuleActivity::class.java).apply {
+            putExtra(SELECTED_MODULE_KEY, viewModel.selectedModule.value)
+        }
+        startActivity(intent)
     }
 
 //    private fun generateModuleList(size: Int): List<Module>{
