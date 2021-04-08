@@ -77,4 +77,9 @@
         <item name="fontFamily">@font/quicksand</item>
         <item name="android:textColor">?attr/colorOnSecondary</item>
     </style>
+
+    <style name="TextAppearance.MyTheme.Recycler.Subtitle" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="fontFamily">@font/quicksand_light</item>
+    </style>
 </resources>

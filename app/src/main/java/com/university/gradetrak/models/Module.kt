@@ -6,7 +6,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Module(var name: String? = null,
                   var credits: Int? = null,
-                  var level: Int? = null)
+                  var level: Int? = null,
+                  var result: Int? = null)
     : Parcelable{
 
     var uuid : String? = null
