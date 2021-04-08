@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.university.gradetrak.R
 import com.university.gradetrak.models.Module
 
-open class ModuleRecyclerAdapter (private val dataSet : List<Module>,
-                             private val selectedModule: MutableLiveData<Module>,
-                             private val listener: OnItemClickListener, private val resources: Resources)
+open class ModuleRecyclerAdapter(private val dataSet: List<Module>,
+                                 private val selectedModule: MutableLiveData<Module?>,
+                                 private val listener: OnItemClickListener, private val resources: Resources)
     : RecyclerView.Adapter<ModuleRecyclerAdapter.ViewHolder>() {
 
     var selectedIndex: Int = -1
@@ -85,6 +85,7 @@ open class ModuleRecyclerAdapter (private val dataSet : List<Module>,
         }
 
         holder.changeBackgroundColour(holder.itemView, position == selectedIndex)
+        holder.changeGradeColour(holder.itemView, dataSet[position].result)
     }
 
     /**
@@ -135,7 +136,35 @@ open class ModuleRecyclerAdapter (private val dataSet : List<Module>,
                 view.setBackgroundResource(R.drawable.recycler_view_background)
             }
         }
+
+        @SuppressLint("UseCompatLoadingForDrawables", "ResourceType")
+        fun changeGradeColour(view: View, mark: Int?){
+            val gradeView : TextView = view.findViewById(R.id.tv_rv_module_result)
+
+            if (mark != null) {
+                gradeView.setTextColor(resources.getColor(R.color.brand_duck_egg_light))
+                if(mark<40){
+                    gradeView.background = resources.getDrawable(R.drawable.grade_colour_scheme_fail)
+                }
+                if(mark in 40..44){
+                    gradeView.background = resources.getDrawable(R.drawable.grade_colour_scheme_pass)
+                }
+                if(mark in 45..49){
+                    gradeView.background = resources.getDrawable(R.drawable.grade_colour_scheme_third)
+                }
+                if(mark in 50..59){
+                    gradeView.background = resources.getDrawable(R.drawable.grade_colour_scheme_two_two)
+                }
+                if(mark in 60..69){
+                    gradeView.background = resources.getDrawable(R.drawable.grade_colour_scheme_two_one)
+                }
+                if(mark>=70){
+                    gradeView.background = resources.getDrawable(R.drawable.grade_colour_scheme_first)
+                }
+            }
+        }
     }
+
 
     interface OnItemClickListener {
         fun onItemClick(module: Module)

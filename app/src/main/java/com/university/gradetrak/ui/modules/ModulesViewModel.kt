@@ -6,7 +6,7 @@ import com.university.gradetrak.models.Module
 import com.university.gradetrak.services.ModuleService
 
 class ModulesViewModel (private val moduleService: ModuleService) : ViewModel() {
-    var selectedModule = MutableLiveData<Module>()
+    var selectedModule = MutableLiveData<Module?>()
     var moduleForEdit = MutableLiveData<Module>()
     var error = MutableLiveData<String>()
 
@@ -18,6 +18,7 @@ class ModulesViewModel (private val moduleService: ModuleService) : ViewModel() 
         if(moduleIsSelectedAndHandleErrors()){
             if(moduleExists()){
                 moduleForEdit.value = selectedModule.value
+                selectedModule.value = null
             }
         }
     }
@@ -26,6 +27,7 @@ class ModulesViewModel (private val moduleService: ModuleService) : ViewModel() 
         if(moduleIsSelectedAndHandleErrors()){
             val module = selectedModule.value
             moduleService.delete(module!!)
+            selectedModule.value = null
         }
     }
 

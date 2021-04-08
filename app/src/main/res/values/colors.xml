@@ -10,4 +10,11 @@
     <color name="red">#b00020</color>
     <color name="green">#6cc465</color>
     <color name="grey">#8AFBFFFC</color>
+
+    <!-- Grading Colour Scheme -->
+    <color name="pass">#D84315</color>
+    <color name="third">#FF8F00</color>
+    <color name="two_two">#F9A825</color>
+    <color name="two_one">#9E9D24</color>
+    <color name="first">#2E7D32</color>
 </resources>

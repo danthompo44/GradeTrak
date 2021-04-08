@@ -45,7 +45,7 @@
 
     <!-- Edit Module Page Strings -->
     <string name="edit_module_page_title">Add Result</string>
-    <string name="edit_module_button_text">Edit</string>
+    <string name="edit_module_button_text">Add</string>
     <string name="edit_module_result_hint">Result (0–100)</string>
 
     <!-- Settings Page Strings -->

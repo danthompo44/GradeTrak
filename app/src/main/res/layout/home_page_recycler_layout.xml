@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
+    android:elevation="0dp"
     android:background="@drawable/recycler_view_background"
     android:layout_marginTop="@dimen/recycler_view_layout_margin_top"
     android:layout_marginBottom="@dimen/recycler_view_layout_margin_bottom"
@@ -36,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:paddingEnd="20dp"
+        android:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout8"
         app:layout_constraintTop_toTopOf="parent"
@@ -47,6 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:elevation="2dp"
+            android:background="@drawable/grade_colour_scheme_blank"
             android:text="@string/test"
             android:textAppearance="@style/TextAppearance.MyTheme.Subtitle1" />
     </LinearLayout>
