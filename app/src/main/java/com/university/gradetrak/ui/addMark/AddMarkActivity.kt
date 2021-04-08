@@ -1,34 +1,24 @@
-package com.university.gradetrak.ui.editModule
+package com.university.gradetrak.ui.addMark
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.university.gradetrak.BaseActivity
-import com.university.gradetrak.R
-import com.university.gradetrak.databinding.ActivityEditModuleBinding
-import com.university.gradetrak.models.Credits
-import com.university.gradetrak.models.Level
+import com.university.gradetrak.databinding.ActivityAddMarkBinding
 import com.university.gradetrak.models.Module
 import com.university.gradetrak.services.Services
-import com.university.gradetrak.ui.addModule.AddModuleViewModel
-import com.university.gradetrak.ui.addModule.AddModuleViewModelFactory
 import com.university.gradetrak.utils.SELECTED_MODULE_ID_KEY
 import com.university.gradetrak.utils.SELECTED_MODULE_KEY
-import com.university.gradetrak.utils.TAG
 
-class EditModuleActivity : BaseActivity() {
-    private lateinit var binding: ActivityEditModuleBinding
+class AddMarkActivity : BaseActivity() {
+    private lateinit var binding: ActivityAddMarkBinding
 
-    private val viewModel: EditModuleViewModel by viewModels {
-        EditModuleViewModelFactory(Services.moduleService)
+    private val viewModel: AddMarkViewModel by viewModels {
+        AddMarkViewModelFactory(Services.moduleService)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityEditModuleBinding.inflate(layoutInflater)
+        binding = ActivityAddMarkBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.viewModel = viewModel

@@ -1,10 +1,10 @@
-package com.university.gradetrak.ui.editModule
+package com.university.gradetrak.ui.addMark
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.university.gradetrak.services.ModuleService
 
-class EditModuleViewModelFactory(private val moduleService: ModuleService) : ViewModelProvider.Factory {
+class AddMarkViewModelFactory(private val moduleService: ModuleService) : ViewModelProvider.Factory {
     /**
      * Creates a new instance of the given `Class`.
      *
@@ -16,8 +16,8 @@ class EditModuleViewModelFactory(private val moduleService: ModuleService) : Vie
     </T> */
     @Suppress("Unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(EditModuleViewModel::class.java)){
-            return EditModuleViewModel(moduleService) as T
+        if(modelClass.isAssignableFrom(AddMarkViewModel::class.java)){
+            return AddMarkViewModel(moduleService) as T
         }
         throw IllegalArgumentException("View model does not exist")
     }

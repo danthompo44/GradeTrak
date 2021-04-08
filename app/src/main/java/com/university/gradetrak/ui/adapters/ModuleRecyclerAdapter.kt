@@ -78,7 +78,7 @@ open class ModuleRecyclerAdapter (private val dataSet : List<Module>,
         holder.moduleCredits.text = "${dataSet[position].credits.toString()} Credits"
 
         if(dataSet[position].result != null){
-            holder.moduleResult.text = dataSet[position].result.toString()
+            holder.moduleResult.text = "${dataSet[position].result.toString()}%"
         }
         else {
             holder.moduleResult.text = resources.getString(R.string.recycler_view_not_available)

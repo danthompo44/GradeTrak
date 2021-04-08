@@ -1,4 +1,4 @@
-package com.university.gradetrak.ui.editModule
+package com.university.gradetrak.ui.addMark
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.university.gradetrak.models.Module
 import com.university.gradetrak.services.ModuleService
 
-class EditModuleViewModel(private val moduleService: ModuleService): ViewModel() {
+class AddMarkViewModel(private val moduleService: ModuleService): ViewModel() {
     var moduleName = ObservableField<String>()
     val moduleResult = ObservableField<String>()
     lateinit var selectedModule: Module

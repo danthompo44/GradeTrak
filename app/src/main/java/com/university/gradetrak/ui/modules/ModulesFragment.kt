@@ -2,7 +2,6 @@ package com.university.gradetrak.ui.modules
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,10 +14,9 @@ import com.university.gradetrak.models.Module
 import com.university.gradetrak.services.Services
 import com.university.gradetrak.ui.adapters.ModuleRecyclerAdapter
 import com.university.gradetrak.ui.addModule.AddModuleActivity
-import com.university.gradetrak.ui.editModule.EditModuleActivity
+import com.university.gradetrak.ui.addMark.AddMarkActivity
 import com.university.gradetrak.utils.SELECTED_MODULE_ID_KEY
 import com.university.gradetrak.utils.SELECTED_MODULE_KEY
-import com.university.gradetrak.utils.TAG
 
 class ModulesFragment : Fragment(), ModuleRecyclerAdapter.OnItemClickListener {
     private lateinit var binding: FragmentModulesBinding
@@ -74,7 +72,7 @@ class ModulesFragment : Fragment(), ModuleRecyclerAdapter.OnItemClickListener {
 
     private fun observeModuleForEdit(){
         viewModel.moduleForEdit.observe(viewLifecycleOwner, { module ->
-            val intent = Intent(activity, EditModuleActivity::class.java).apply {
+            val intent = Intent(activity, AddMarkActivity::class.java).apply {
                 putExtra(SELECTED_MODULE_KEY, module)
                 putExtra(SELECTED_MODULE_ID_KEY, module.uuid)
             }

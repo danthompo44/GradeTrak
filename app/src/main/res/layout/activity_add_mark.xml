@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.university.gradetrak.ui.editModule.EditModuleViewModel" />
+            type="com.university.gradetrak.ui.addMark.AddMarkViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.editModule.EditModuleActivity"
+        tools:context=".ui.addMark.AddMarkActivity"
         android:elevation="0dp"
         android:background="?attr/colorSurface">
 
