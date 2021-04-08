@@ -1,4 +1,4 @@
-package com.university.gradetrak.ui.home
+package com.university.gradetrak.ui.modules
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,14 +8,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.university.gradetrak.R
-import com.university.gradetrak.databinding.FragmentHomeBinding
+import com.university.gradetrak.databinding.FragmentModulesBinding
 import com.university.gradetrak.models.Module
 import com.university.gradetrak.ui.adapters.ModuleRecyclerAdapter
 
-class HomeFragment : Fragment(), ModuleRecyclerAdapter.OnItemClickListener {
-    private lateinit var binding: FragmentHomeBinding
-    private lateinit var viewModel: HomeViewModel
+class ModulesFragment : Fragment(), ModuleRecyclerAdapter.OnItemClickListener {
+    private lateinit var binding: FragmentModulesBinding
+    private lateinit var viewModel: ModulesViewModel
     private lateinit var linearLayoutManagerLevel5: LinearLayoutManager
     private lateinit var linearLayoutManagerLevel6: LinearLayoutManager
 
@@ -24,7 +23,7 @@ class HomeFragment : Fragment(), ModuleRecyclerAdapter.OnItemClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentModulesBinding.inflate(inflater, container, false)
 
         setupViewModelBinding()
         setupRecyclerViews()
@@ -33,8 +32,8 @@ class HomeFragment : Fragment(), ModuleRecyclerAdapter.OnItemClickListener {
     }
 
     private fun setupViewModelBinding(){
-        val viewModelFactory = HomeViewModelFactory()
-        viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
+        val viewModelFactory = ModulesViewModelFactory()
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ModulesViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
     }

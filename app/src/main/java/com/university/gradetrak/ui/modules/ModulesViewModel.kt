@@ -1,10 +1,10 @@
-package com.university.gradetrak.ui.home
+package com.university.gradetrak.ui.modules
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class ModulesViewModel : ViewModel() {
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
     }
