@@ -1,22 +1,26 @@
 package com.university.gradetrak.ui.modules
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.university.gradetrak.MainActivity
 import com.university.gradetrak.databinding.FragmentModulesBinding
 import com.university.gradetrak.models.Module
+import com.university.gradetrak.services.Services
 import com.university.gradetrak.ui.adapters.ModuleRecyclerAdapter
+import com.university.gradetrak.ui.addModule.AddModuleActivity
 
 class ModulesFragment : Fragment(), ModuleRecyclerAdapter.OnItemClickListener {
     private lateinit var binding: FragmentModulesBinding
     private lateinit var viewModel: ModulesViewModel
-    private lateinit var linearLayoutManagerLevel5: LinearLayoutManager
-    private lateinit var linearLayoutManagerLevel6: LinearLayoutManager
+    private lateinit var linearLayoutManager: LinearLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,29 +31,36 @@ class ModulesFragment : Fragment(), ModuleRecyclerAdapter.OnItemClickListener {
 
         setupViewModelBinding()
         setupRecyclerViews()
+        setupNavigationListener()
+        observeUsersModules()
 
         return binding.root
     }
 
     private fun setupViewModelBinding(){
-        val viewModelFactory = ModulesViewModelFactory()
+        val viewModelFactory = ModulesViewModelFactory(Services.moduleService)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ModulesViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
     }
 
     private fun setupRecyclerViews(){
-        linearLayoutManagerLevel5 = LinearLayoutManager(activity)
-        linearLayoutManagerLevel6 = LinearLayoutManager(activity)
-        binding.rvLevel5ModulesList.layoutManager = linearLayoutManagerLevel5
-        binding.rvLevel6ModulesList.layoutManager = linearLayoutManagerLevel6
+        linearLayoutManager = LinearLayoutManager(activity)
+        binding.rvModulesPageModules.layoutManager = linearLayoutManager
+    }
 
-        val adapterLevel5 = ModuleRecyclerAdapter(generateModuleList(), this)
-        val adapterLevel6 = ModuleRecyclerAdapter(generateModuleList(), this)
-        binding.rvLevel5ModulesList.adapter = adapterLevel5
-        binding.rvLevel5ModulesList.setHasFixedSize(true)
-        binding.rvLevel6ModulesList.adapter = adapterLevel6
-        binding.rvLevel6ModulesList.setHasFixedSize(true)
+    private fun observeUsersModules(){
+        viewModel.getUsersModules().observe(viewLifecycleOwner, { modules ->
+            val adapter = ModuleRecyclerAdapter(modules, viewModel.selectedModule, this)
+            binding.rvModulesPageModules.adapter = adapter
+            binding.rvModulesPageModules.setHasFixedSize(true)
+        })
+    }
+
+    private fun setupNavigationListener(){
+        binding.ivAddModuleToolbarAddModule.setOnClickListener {
+            startActivity(Intent(activity, AddModuleActivity::class.java))
+        }
     }
 
 
@@ -65,7 +76,7 @@ class ModulesFragment : Fragment(), ModuleRecyclerAdapter.OnItemClickListener {
     }
 
 //  Override function for recycler view interface
-    override fun onItemClick(position: Int) {
-        Toast.makeText(activity, "Clicked at position $position", Toast.LENGTH_LONG).show()
+    override fun onItemClick(module: Module) {
+        (activity as? MainActivity)?.showSnackBar(module.toString(), false)
     }
 }

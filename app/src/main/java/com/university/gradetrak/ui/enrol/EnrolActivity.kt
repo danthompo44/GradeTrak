@@ -57,7 +57,7 @@ class EnrolActivity : BaseActivity() {
 
     private fun observeModuleTable(){
         viewModel.getAllUsersModules().observe(this, Observer { modules ->
-            val adapter = EnrolModuleRecyclerAdapter(modules, viewModel.selectedModule, resources)
+            val adapter = EnrolModuleRecyclerAdapter(modules, viewModel.selectedModule)
             binding.rvEnrolPageModules.adapter = adapter
             binding.rvEnrolPageModules.setHasFixedSize(true)
         })

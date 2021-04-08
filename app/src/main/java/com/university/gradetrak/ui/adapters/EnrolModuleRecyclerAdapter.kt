@@ -2,7 +2,6 @@ package com.university.gradetrak.ui.adapters
 
 import android.annotation.SuppressLint
 import android.content.res.Resources
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +12,7 @@ import com.university.gradetrak.R
 import com.university.gradetrak.models.Module
 
 class EnrolModuleRecyclerAdapter (private val dataSet : List<Module>,
-                                  private val selectedModule: MutableLiveData<Module>,
-                                    private val resources: Resources)
+                                  private val selectedModule: MutableLiveData<Module>)
     : RecyclerView.Adapter<EnrolModuleRecyclerAdapter.ViewHolder>()  {
 
     var selectedIndex: Int = -1
@@ -48,7 +46,7 @@ class EnrolModuleRecyclerAdapter (private val dataSet : List<Module>,
     ): EnrolModuleRecyclerAdapter.ViewHolder {
         // Create a new view
         val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.enrol_page_recycler_layout, parent, false)
+            .inflate(R.layout.home_page_recycler_layout, parent, false)
 
         //Call the ViewHolder Constructor (inner class) to set up each Recycler view item
         return ViewHolder(adapterLayout)
@@ -76,7 +74,7 @@ class EnrolModuleRecyclerAdapter (private val dataSet : List<Module>,
      * @param position The position of the item within the adapter's data set.
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.descriptionTextView.text = dataSet[position].name
+//        holder.descriptionTextView.text = dataSet[position].name
 
         holder.changeBackgroundColour(holder.itemView, position == selectedIndex)
     }
@@ -93,7 +91,7 @@ class EnrolModuleRecyclerAdapter (private val dataSet : List<Module>,
     }
 
     inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view), View.OnClickListener{
-        val descriptionTextView: TextView = view.findViewById(R.id.tv_enrol_page_rv_module_description)
+//        val descriptionTextView: TextView = view.findViewById(R.id.tv_enrol_page_rv_module_description)
 
         init {
             itemView.setOnClickListener(this)

@@ -24,6 +24,7 @@
 
     <!-- Add a module Page Strings   -->
     <string name="add_module_page_title">Add a Module</string>
+    <string name="add_module_page_add_button_description">Add a Module</string>
     <string name="module_name_edit_text_hint">Module Name</string>
     <string name="module_credits_edit_text_hint">Module Credits</string>
     <string name="test">Test</string>

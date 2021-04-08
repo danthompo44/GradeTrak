@@ -13,7 +13,7 @@
     >
 
     <TextView
-        android:id="@+id/tv_module_description"
+        android:id="@+id/tv_rv_module_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/recycler_view_description_placeholder"
@@ -21,24 +21,4 @@
         app:layout_constraintStart_toStartOf="parent"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_module_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/recycler_view_result_placeholder"
-        android:gravity="center"
-        android:layout_marginEnd="40dp"
-        android:textAppearance="@style/TextAppearance.MyTheme.Subtitle1"
-        app:layout_constraintEnd_toStartOf="@+id/iv_edit"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/iv_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_edit_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/recycler_view_image_view_description" />
 </androidx.constraintlayout.widget.ConstraintLayout>

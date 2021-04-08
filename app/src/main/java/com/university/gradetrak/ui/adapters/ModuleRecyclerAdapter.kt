@@ -5,13 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.university.gradetrak.R
 import com.university.gradetrak.models.Module
 
-class ModuleRecyclerAdapter (private val dataSet : List<Module>,
+open class ModuleRecyclerAdapter (private val dataSet : List<Module>,
+                             private val selectedModule: MutableLiveData<Module>,
                              private val listener: OnItemClickListener)
     : RecyclerView.Adapter<ModuleRecyclerAdapter.ViewHolder>() {
+
+    var selectedIndex: Int = -1
+    var selectedView: View? = null
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
      * an item.
@@ -68,13 +73,8 @@ class ModuleRecyclerAdapter (private val dataSet : List<Module>,
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.descriptionTextView.text = dataSet[position].name
-        if(dataSet[position].credits == null){
-            holder.resultTextView.text = "N/A"
-        }
-        else {
-            val result =  dataSet[position].credits.toString()
-            holder.resultTextView.text =  "$result%"
-        }
+
+        holder.changeBackgroundColour(holder.itemView, position == selectedIndex)
     }
 
     /**
@@ -84,10 +84,13 @@ class ModuleRecyclerAdapter (private val dataSet : List<Module>,
      */
     override fun getItemCount(): Int = dataSet.size
 
+    fun getModuleAtPosition(position: Int): Module{
+        return dataSet[position]
+    }
+
     inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view),
     View.OnClickListener{
-        val descriptionTextView : TextView = view.findViewById(R.id.tv_module_description)
-        val resultTextView : TextView = view.findViewById(R.id.tv_module_result)
+        val descriptionTextView : TextView = view.findViewById(R.id.tv_rv_module_description)
 
         init {
             view.setOnClickListener(this)
@@ -98,15 +101,30 @@ class ModuleRecyclerAdapter (private val dataSet : List<Module>,
          *
          * @param v The view that was clicked.
          */
-        override fun onClick(v: View?) {
-            val position = adapterPosition
-            if (position != RecyclerView.NO_POSITION){
-                listener.onItemClick(adapterPosition)
+        override fun onClick(v: View) {
+            selectedModule.value = dataSet[adapterPosition]
+
+            if(selectedView!=null){
+                changeBackgroundColour(selectedView!!, false)
+            }
+            changeBackgroundColour(v, true)
+
+            selectedView = v
+            selectedIndex = adapterPosition
+            listener.onItemClick(getModuleAtPosition(adapterPosition))
+        }
+
+        @SuppressLint("UseCompatLoadingForDrawables")
+        fun changeBackgroundColour(view: View, isSelected: Boolean){
+            if(isSelected){
+                view.setBackgroundResource(R.drawable.recycler_view_background_selected)
+            } else {
+                view.setBackgroundResource(R.drawable.recycler_view_background)
             }
         }
     }
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int)
+        fun onItemClick(module: Module)
     }
 }
