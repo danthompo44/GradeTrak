@@ -113,7 +113,7 @@
                     android:layout_marginBottom="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/enrol_page_edit_button_text"
-                    android:onClick="handleEditButtonClick" />
+                    android:onClick="@{() -> viewModel.handleEditClick()}" />
 
                 <Button
                     style="@style/Button.Error"

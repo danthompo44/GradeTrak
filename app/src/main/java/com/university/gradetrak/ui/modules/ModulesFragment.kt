@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.university.gradetrak.MainActivity
@@ -16,6 +14,8 @@ import com.university.gradetrak.models.Module
 import com.university.gradetrak.services.Services
 import com.university.gradetrak.ui.adapters.ModuleRecyclerAdapter
 import com.university.gradetrak.ui.addModule.AddModuleActivity
+import com.university.gradetrak.ui.editModule.EditModuleActivity
+import com.university.gradetrak.utils.SELECTED_MODULE_KEY
 
 class ModulesFragment : Fragment(), ModuleRecyclerAdapter.OnItemClickListener {
     private lateinit var binding: FragmentModulesBinding
@@ -32,7 +32,8 @@ class ModulesFragment : Fragment(), ModuleRecyclerAdapter.OnItemClickListener {
         setupViewModelBinding()
         setupRecyclerViews()
         setupNavigationListener()
-        observeUsersModules()
+        setupViewModelObservers()
+
 
         return binding.root
     }
@@ -49,6 +50,18 @@ class ModulesFragment : Fragment(), ModuleRecyclerAdapter.OnItemClickListener {
         binding.rvModulesPageModules.layoutManager = linearLayoutManager
     }
 
+    private fun setupNavigationListener(){
+        binding.ivAddModuleToolbarAddModule.setOnClickListener {
+            startActivity(Intent(activity, AddModuleActivity::class.java))
+        }
+    }
+
+    private fun setupViewModelObservers(){
+        observeUsersModules()
+        observeModuleForEdit()
+        observeErrors()
+    }
+
     private fun observeUsersModules(){
         viewModel.getUsersModules().observe(viewLifecycleOwner, { modules ->
             val adapter = ModuleRecyclerAdapter(modules, viewModel.selectedModule, this)
@@ -57,13 +70,20 @@ class ModulesFragment : Fragment(), ModuleRecyclerAdapter.OnItemClickListener {
         })
     }
 
-    private fun setupNavigationListener(){
-        binding.ivAddModuleToolbarAddModule.setOnClickListener {
-            startActivity(Intent(activity, AddModuleActivity::class.java))
-        }
+    private fun observeModuleForEdit(){
+        viewModel.moduleForEdit.observe(viewLifecycleOwner, { module ->
+            val intent = Intent(activity, EditModuleActivity::class.java).apply {
+                putExtra(SELECTED_MODULE_KEY, module)
+            }
+            startActivity(intent)
+        })
     }
 
-
+    private fun observeErrors(){
+        viewModel.error.observe(viewLifecycleOwner, { error ->
+            (activity as? MainActivity)?.showSnackBar(error, true)
+        })
+    }
 
     private fun generateModuleList(): List<Module>{
         val listOfDummyModules: MutableList<Module> = ArrayList()

@@ -2,6 +2,7 @@ package com.university.gradetrak.ui.editModule
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.activity.viewModels
@@ -16,6 +17,7 @@ import com.university.gradetrak.services.Services
 import com.university.gradetrak.ui.addModule.AddModuleViewModel
 import com.university.gradetrak.ui.addModule.AddModuleViewModelFactory
 import com.university.gradetrak.utils.SELECTED_MODULE_KEY
+import com.university.gradetrak.utils.TAG
 
 class EditModuleActivity : BaseActivity() {
     private lateinit var binding: ActivityEditModuleBinding
@@ -35,6 +37,8 @@ class EditModuleActivity : BaseActivity() {
         observeErrors()
 
         val selectedModule = intent.getParcelableExtra<Module>(SELECTED_MODULE_KEY)
+        Log.v(TAG, selectedModule.toString())
+        Log.v(TAG, "Edit Activity On Create")
         displayModule(selectedModule?.name)
     }
 
