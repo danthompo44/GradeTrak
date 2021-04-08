@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="@dimen/progress_bar_container_padding"
+    >
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/AppTheme.ProgressBar"
+        android:layout_width= "@dimen/progress_wheel_radius"
+        android:layout_height="@dimen/progress_wheel_radius"/>
+
+    <TextView
+        android:id="@+id/tv_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/please_wait"
+        android:textAppearance="@style/TextAppearance.MyTheme.Subtitle1"
+        android:layout_marginStart="@dimen/progress_bar_text_margin_start"/>
+</LinearLayout>

@@ -33,8 +33,6 @@ class ModulesFragment : Fragment(), ModuleRecyclerAdapter.OnItemClickListener {
         setupRecyclerViews()
         setupNavigationListener()
         setupViewModelObservers()
-
-
         return binding.root
     }
 

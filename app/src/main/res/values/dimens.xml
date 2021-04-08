@@ -27,4 +27,9 @@
 
     <!-- Login Dimensions -->
     <dimen name="auth_header_image_height">200dp</dimen>
+
+    <!-- Progress Bar Dimens -->
+    <dimen name="progress_bar_container_padding">5dp</dimen>
+    <dimen name="progress_wheel_radius">60dp</dimen>
+    <dimen name="progress_bar_text_margin_start">10dp</dimen>
 </resources>

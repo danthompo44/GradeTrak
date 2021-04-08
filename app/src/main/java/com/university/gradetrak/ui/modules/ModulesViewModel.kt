@@ -1,6 +1,5 @@
 package com.university.gradetrak.ui.modules
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.university.gradetrak.models.Module
@@ -16,18 +15,21 @@ class ModulesViewModel (private val moduleService: ModuleService) : ViewModel() 
     }
 
     fun handleEditClick(){
-        if(checkIfModuleIsSelectedAndHandleErrors()){
-            moduleForEdit.value = selectedModule.value
+        if(moduleIsSelectedAndHandleErrors()){
+            if(moduleExists()){
+                moduleForEdit.value = selectedModule.value
+            }
         }
     }
 
     fun handleDeleteClick(){
-        if(checkIfModuleIsSelectedAndHandleErrors()){
-            moduleService.delete(selectedModule.value!!)
+        if(moduleIsSelectedAndHandleErrors()){
+            val module = selectedModule.value
+            moduleService.delete(module!!)
         }
     }
 
-    private fun checkIfModuleIsSelectedAndHandleErrors(): Boolean {
+    private fun moduleIsSelectedAndHandleErrors(): Boolean {
         return if(selectedModule.value != null){
             true
         }
@@ -37,9 +39,13 @@ class ModulesViewModel (private val moduleService: ModuleService) : ViewModel() 
         }
     }
 
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    private fun moduleExists() : Boolean{
+        for(module in getUsersModules().value!!){
+            if(selectedModule.value?.uuid == module.uuid){
+                return true
+            }
+        }
+        error.value = "Please select a module"
+        return false
     }
-    val text: LiveData<String> = _text
 }
