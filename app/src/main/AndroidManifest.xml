@@ -27,14 +27,13 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.login.LoginActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity android:name=".ui.editModule.EditModuleActivity" />
         <activity android:name=".ui.addModule.AddModuleActivity" />
         <activity
             android:name=".MainActivity"
             android:label="GradeTrak"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ui.enrol.EnrolActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

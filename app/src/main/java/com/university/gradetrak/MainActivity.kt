@@ -1,17 +1,11 @@
 package com.university.gradetrak
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.university.gradetrak.ui.editModule.EditModuleActivity
-import com.university.gradetrak.ui.enrol.EnrolActivity
-import com.university.gradetrak.utils.SELECTED_MODULE_KEY
 
 class MainActivity : BaseActivity() {
 
