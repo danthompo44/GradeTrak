@@ -121,6 +121,7 @@
                     android:layout_marginTop="0dp"
                     android:layout_marginBottom="0dp"
                     android:layout_height="wrap_content"
+                    android:onClick="@{() -> viewModel.handleDeleteClick()}"
                     android:text="@string/enrol_page_delete_button_text" />
             </LinearLayout>
         </LinearLayout>

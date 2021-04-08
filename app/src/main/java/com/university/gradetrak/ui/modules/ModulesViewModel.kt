@@ -16,13 +16,27 @@ class ModulesViewModel (private val moduleService: ModuleService) : ViewModel() 
     }
 
     fun handleEditClick(){
-        if(selectedModule.value != null){
+        if(checkIfModuleIsSelectedAndHandleErrors()){
             moduleForEdit.value = selectedModule.value
+        }
+    }
+
+    fun handleDeleteClick(){
+        if(checkIfModuleIsSelectedAndHandleErrors()){
+            moduleService.delete(selectedModule.value!!)
+        }
+    }
+
+    private fun checkIfModuleIsSelectedAndHandleErrors(): Boolean {
+        return if(selectedModule.value != null){
+            true
         }
         else{
             error.value = "Please select a module"
+            false
         }
     }
+
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
