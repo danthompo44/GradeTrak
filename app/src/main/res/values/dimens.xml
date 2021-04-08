@@ -11,6 +11,7 @@
     <dimen name="recycler_view_layout_margin_top">3dp</dimen>
     <dimen name="recycler_view_layout_margin_bottom">3dp</dimen>
     <dimen name="recycler_view_height">250dp</dimen>
+    <dimen name="recycler_view_image_view_padding_right">10dp</dimen>
 
     <!-- Enrol page dimens -->
     <dimen name="enrol_page_toolbar_margin_left">5dp</dimen>

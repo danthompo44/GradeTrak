@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.university.gradetrak.R
 import com.university.gradetrak.models.Module
+import org.w3c.dom.Text
 
 open class ModuleRecyclerAdapter (private val dataSet : List<Module>,
                              private val selectedModule: MutableLiveData<Module>,
@@ -73,6 +74,7 @@ open class ModuleRecyclerAdapter (private val dataSet : List<Module>,
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.descriptionTextView.text = dataSet[position].name
+        holder.moduleResult.text = dataSet[position].credits.toString()
 
         holder.changeBackgroundColour(holder.itemView, position == selectedIndex)
     }
@@ -91,6 +93,7 @@ open class ModuleRecyclerAdapter (private val dataSet : List<Module>,
     inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view),
     View.OnClickListener{
         val descriptionTextView : TextView = view.findViewById(R.id.tv_rv_module_description)
+        val moduleResult : TextView = view.findViewById(R.id.tv_rv_module_result)
 
         init {
             view.setOnClickListener(this)

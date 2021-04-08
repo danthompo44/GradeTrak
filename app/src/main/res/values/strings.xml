@@ -8,19 +8,22 @@
     <string name="splash_hook_line">Tracking Your Future</string>
 
     <!-- Home Page Strings -->
-    <string name="enrol_button_text">Enrol</string>
     <string name="recycler_view_level_five_title">Level 5 Modules</string>
     <string name="recycler_view_level_six_title">Level 6 Modules</string>
     <string name="recycler_view_description_placeholder">Module Description</string>
     <string name="recycler_view_result_placeholder">96%</string>
     <string name="recycler_view_percentage">%</string>
     <string name="recycler_view_image_view_description">Edit</string>
+    <string name="recycler_view_layout_image_view_description">Module Image</string>
+    <string name="recycler_view_module_credits">Credits:</string>
+    <string name="recycler_view_module_level">Level:</string>
+    <string name="recycler_view_module_result">Result:</string>
 
     <!-- Enrol Page Strings -->
-    <string name="enrol_page_title">Enrol</string>
     <string name="enrol_page_modules_recycler_title">Enrolled Modules</string>
     <string name="enrol_page_delete_button_text">Delete</string>
     <string name="enrol_page_edit_button_text">Edit</string>
+
 
     <!-- Add a module Page Strings   -->
     <string name="add_module_page_title">Add a Module</string>
