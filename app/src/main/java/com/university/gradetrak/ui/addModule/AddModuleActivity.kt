@@ -28,6 +28,7 @@ class AddModuleActivity : BaseActivity() {
         addNavigationListener()
         setupDropdownMenus()
         observeErrors()
+        observeSuccess()
     }
 
     private fun addNavigationListener(){
@@ -50,6 +51,14 @@ class AddModuleActivity : BaseActivity() {
     private fun observeErrors(){
         viewModel.error.observe(this, Observer { error ->
             showSnackBar(error, true)
+        })
+    }
+
+    private fun observeSuccess(){
+        viewModel.success.observe(this, { success ->
+            if(success){
+                finish()
+            }
         })
     }
 }

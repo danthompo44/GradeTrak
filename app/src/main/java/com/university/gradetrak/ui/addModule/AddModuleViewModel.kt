@@ -15,9 +15,7 @@ class AddModuleViewModel (private val moduleService: ModuleService): ViewModel()
     var moduleLevel = ObservableField<String>()
 
     //Set up success Live Data for the Login Activity to observe and update the UI, snack bars etc.
-    val success: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
+    val success = MutableLiveData(false)
 
     //Set up error Live Data for the Login Activity to observe and update the UI, snack bars etc.
     val error: MutableLiveData<String> by lazy {
@@ -27,11 +25,8 @@ class AddModuleViewModel (private val moduleService: ModuleService): ViewModel()
     fun handleAddClick(){
         val module = Module(moduleName.get().toString(), Credits.valueOf(moduleCredits.get()!!).value, Level.valueOf(moduleLevel.get()!!).value)
         error.value = module.toString()
-        moduleService.addEditModule(module)
-        clearDetails()
-    }
+        moduleService.addModule(module)
 
-    private fun clearDetails(){
-        moduleName.set("")
+        success.value = true
     }
 }

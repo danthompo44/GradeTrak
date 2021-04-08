@@ -16,6 +16,7 @@ import com.university.gradetrak.models.Module
 import com.university.gradetrak.services.Services
 import com.university.gradetrak.ui.addModule.AddModuleViewModel
 import com.university.gradetrak.ui.addModule.AddModuleViewModelFactory
+import com.university.gradetrak.utils.SELECTED_MODULE_ID_KEY
 import com.university.gradetrak.utils.SELECTED_MODULE_KEY
 import com.university.gradetrak.utils.TAG
 
@@ -23,7 +24,7 @@ class EditModuleActivity : BaseActivity() {
     private lateinit var binding: ActivityEditModuleBinding
 
     private val viewModel: EditModuleViewModel by viewModels {
-        EditModuleViewModelFactory()
+        EditModuleViewModelFactory(Services.moduleService)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,13 +34,16 @@ class EditModuleActivity : BaseActivity() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         addNavigationListener()
-        setupDropdownMenus()
         observeErrors()
+        observeSuccess()
 
         val selectedModule = intent.getParcelableExtra<Module>(SELECTED_MODULE_KEY)
-        Log.v(TAG, selectedModule.toString())
-        Log.v(TAG, "Edit Activity On Create")
-        displayModule(selectedModule?.name)
+        val selectedModuleId = intent.getStringExtra(SELECTED_MODULE_ID_KEY)
+        if (selectedModule != null) {
+            viewModel.selectedModule = selectedModule
+            viewModel.selectedModule.uuid = selectedModuleId
+            displayModule(selectedModule)
+        }
     }
 
     private fun addNavigationListener(){
@@ -48,43 +52,24 @@ class EditModuleActivity : BaseActivity() {
         }
     }
 
-    private fun setupDropdownMenus(){
-        val credits = Credits.values()
-        val creditsAdapter = ArrayAdapter(this, R.layout.spinner_item, credits)
-        (binding.moduleCreditsLayout.editText as? AutoCompleteTextView)?.setAdapter(creditsAdapter)
-
-        val level = Level.values()
-        val levelAdapter = ArrayAdapter(this, R.layout.spinner_item, level)
-        (binding.moduleLevelLayout.editText as? AutoCompleteTextView)?.setAdapter(levelAdapter)
-
-    }
-
     private fun observeErrors(){
         viewModel.error.observe(this, Observer { error ->
             showSnackBar(error, true)
         })
     }
 
-    private fun displayModule(moduleName : String?){
-        viewModel.moduleName.set(moduleName)
+    private fun observeSuccess(){
+        viewModel.success.observe(this, { success ->
+            if(success){
+                finish()
+            }
+        })
     }
 
-    private fun setupSpinners(){
-//        ArrayAdapter.createFromResource(this, R.array.module_level_spinner_strings,
-//            R.layout.spinner_item
-//        ).also { adapter ->
-//            // Specify the layout to use when the list of choices appears
-//            adapter.setDropDownViewResource(R.layout.spinner_item)
-//            // Apply the adapter to the spinner
-//            binding.moduleLevelSpinner.adapter = adapter
-//        }
-//        ArrayAdapter.createFromResource(this, R.array.module_credits_spinner_strings,
-//            R.layout.spinner_item
-//        ).also { adapter ->
-//            // Specify the layout to use when the list of choices appears
-//            adapter.setDropDownViewResource(R.layout.spinner_item)
-//            // Apply the adapter to the spinner
-//            binding.moduleCreditsSpinner.adapter = adapter
-//        }
+    private fun displayModule(module : Module){
+        viewModel.moduleName.set(module.name)
+        if(module.result != null){
+            viewModel.moduleResult.set(module.result.toString())
+        }
     }
 }

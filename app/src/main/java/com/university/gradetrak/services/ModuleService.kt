@@ -11,9 +11,12 @@ class ModuleService (private val repository: ModuleRepository){
         return repository.modulesLD
     }
 
-    fun addEditModule(module: Module){
-        Log.v(TAG, module.toString())
-        repository.addEditStudent(module)
+    fun addModule(module: Module){
+        repository.addStudent(module)
+    }
+
+    fun editModule(module: Module){
+        repository.editStudent(module)
     }
 
     fun delete(module: Module){

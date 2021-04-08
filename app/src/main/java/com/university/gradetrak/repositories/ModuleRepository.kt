@@ -20,9 +20,14 @@ class ModuleRepository {
         getAll()
     }
 
-    fun addEditStudent(module: Module){
-        Log.v(TAG, module.toString())
+    fun addStudent(module: Module){
         modules.child(UUID.randomUUID().toString()).setValue(module)
+    }
+
+    fun editStudent(module: Module){
+        if(module.uuid != null){
+            modules.child(module.uuid!!).setValue(module)
+        }
     }
 
     fun delete(module: Module){

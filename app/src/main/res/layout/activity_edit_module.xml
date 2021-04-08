@@ -54,9 +54,23 @@
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginEnd="@dimen/activity_horizontal_margin">
 
+            <TextView
+                android:id="@+id/tv_add_result_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/et_margin_top"
+                android:layout_marginBottom="@dimen/et_margin_bottom"
+                android:paddingTop="20dp"
+                android:textAllCaps="true"
+                android:paddingBottom="20dp"
+                android:textColor="?attr/colorOnPrimary"
+                android:text="@={viewModel.moduleName}"
+                style="@style/TextAppearance.MyTheme.Headline5"
+                android:gravity="center"
+                android:background="@drawable/brand_image"/>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_module_name"
+                android:id="@+id/til_module_result"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,48 +78,15 @@
                 android:layout_marginBottom="@dimen/et_margin_bottom">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_module_name"
+                    android:id="@+id/et_module_result"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/module_name_edit_text_hint"
+                    android:hint="@string/edit_module_result_hint"
                     android:inputType="text"
-                    android:text="@={viewModel.moduleName}"
+                    android:text="@={viewModel.moduleResult}"
                     android:textAppearance="@style/TextAppearance.MyTheme.Body1" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/module_credits_layout"
-                style="@style/Spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/module_credits_edit_text_hint"
-                android:layout_marginTop="@dimen/et_margin_top"
-                android:layout_marginBottom="@dimen/et_margin_bottom">
-                <AutoCompleteTextView
-                    android:id="@+id/tv_module_credits"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none"
-                    tools:ignore="LabelFor"
-                    android:text="@={viewModel.moduleCredits}"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/module_level_layout"
-                style="@style/Spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/module_level_prompt"
-                android:layout_marginTop="@dimen/et_margin_top"
-                android:layout_marginBottom="@dimen/et_margin_bottom">
-                <AutoCompleteTextView
-                    android:id="@+id/tv_module_level"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none"
-                    tools:ignore="LabelFor"
-                    android:text="@={viewModel.moduleLevel}"/>
-            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:layout_width="match_parent"
@@ -113,6 +94,8 @@
                 android:text="@string/edit_module_button_text"
                 style="@style/Button.DuckEgg"
                 android:onClick="@{() -> viewModel.handleEditButtonClick()}"/>
+
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

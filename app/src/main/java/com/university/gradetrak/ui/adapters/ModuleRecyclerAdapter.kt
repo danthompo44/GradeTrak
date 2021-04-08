@@ -1,6 +1,7 @@
 package com.university.gradetrak.ui.adapters
 
 import android.annotation.SuppressLint
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,11 +10,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.university.gradetrak.R
 import com.university.gradetrak.models.Module
-import org.w3c.dom.Text
 
 open class ModuleRecyclerAdapter (private val dataSet : List<Module>,
                              private val selectedModule: MutableLiveData<Module>,
-                             private val listener: OnItemClickListener)
+                             private val listener: OnItemClickListener, private val resources: Resources)
     : RecyclerView.Adapter<ModuleRecyclerAdapter.ViewHolder>() {
 
     var selectedIndex: Int = -1
@@ -76,7 +76,13 @@ open class ModuleRecyclerAdapter (private val dataSet : List<Module>,
         holder.descriptionTextView.text = dataSet[position].name
         holder.moduleLevel.text = "Level ${dataSet[position].level.toString()}"
         holder.moduleCredits.text = "${dataSet[position].credits.toString()} Credits"
-        holder.moduleResult.text = dataSet[position].credits.toString()
+
+        if(dataSet[position].result != null){
+            holder.moduleResult.text = dataSet[position].result.toString()
+        }
+        else {
+            holder.moduleResult.text = resources.getString(R.string.recycler_view_not_available)
+        }
 
         holder.changeBackgroundColour(holder.itemView, position == selectedIndex)
     }
