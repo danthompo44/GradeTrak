@@ -81,6 +81,11 @@
     <string name="forgot_password_email_address_tv_hint">Email Address</string>
     <string name="forgot_password_submit_button_text">Submit</string>
 
+    <!-- Insights Page Strings -->
+    <string name="insights_page_title">Insights</string>
+    <string name="current_progress">Current Progress</string>
+    <string name="overall_progress">Overall Progress</string>
+
     <!-- Progress Wheel Strings -->
     <string name="please_wait">Please Wait…</string>
     <string name="retrieving_modules">Fetching Modules…</string>

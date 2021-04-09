@@ -4,28 +4,33 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.university.gradetrak.R
+import com.university.gradetrak.databinding.FragmentInsightsBinding
+import com.university.gradetrak.services.Services
 
 class InsightsFragment : Fragment() {
-
-    private lateinit var insightsViewModel: InsightsViewModel
+    private lateinit var binding: FragmentInsightsBinding
+    private lateinit var viewModel: InsightsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        insightsViewModel =
-            ViewModelProvider(this).get(InsightsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_insights, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        insightsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+    ): View {
+        binding = FragmentInsightsBinding.inflate(inflater, container, false)
+
+        setupViewModelBinding()
+        return binding.root
+    }
+
+    private fun setupViewModelBinding() {
+        val viewModelFactory = InsightsViewModelFactory(Services.moduleService,
+            Services.settingsService)
+        viewModel = ViewModelProvider(this, viewModelFactory)
+            .get(InsightsViewModel::class.java)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
     }
 }
