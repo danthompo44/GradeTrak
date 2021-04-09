@@ -13,7 +13,7 @@ import com.university.gradetrak.models.Module
 
 open class ModuleRecyclerAdapter(private val dataSet: List<Module>,
                                  private val selectedModule: MutableLiveData<Module?>,
-                                 private val listener: OnItemClickListener, private val resources: Resources)
+                                  private val resources: Resources)
     : RecyclerView.Adapter<ModuleRecyclerAdapter.ViewHolder>() {
 
     var selectedIndex: Int = -1
@@ -125,7 +125,7 @@ open class ModuleRecyclerAdapter(private val dataSet: List<Module>,
 
             selectedView = v
             selectedIndex = adapterPosition
-            listener.onItemClick(getModuleAtPosition(adapterPosition))
+//            listener.onItemClick(getModuleAtPosition(adapterPosition))
         }
 
         @SuppressLint("UseCompatLoadingForDrawables")
@@ -166,7 +166,7 @@ open class ModuleRecyclerAdapter(private val dataSet: List<Module>,
     }
 
 
-    interface OnItemClickListener {
-        fun onItemClick(module: Module)
-    }
+//    interface OnItemClickListener {
+//        fun onItemClick(module: Module)
+//    }
 }

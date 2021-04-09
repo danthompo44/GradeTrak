@@ -18,7 +18,7 @@ import com.university.gradetrak.ui.addMark.AddMarkActivity
 import com.university.gradetrak.utils.SELECTED_MODULE_ID_KEY
 import com.university.gradetrak.utils.SELECTED_MODULE_KEY
 
-class ModulesFragment : Fragment(), ModuleRecyclerAdapter.OnItemClickListener {
+class ModulesFragment : Fragment() {
     private lateinit var binding: FragmentModulesBinding
     private lateinit var viewModel: ModulesViewModel
     private lateinit var linearLayoutManager: LinearLayoutManager
@@ -64,7 +64,7 @@ class ModulesFragment : Fragment(), ModuleRecyclerAdapter.OnItemClickListener {
     private fun observeUsersModules(){
         viewModel.getUsersModules().observe(viewLifecycleOwner, { modules ->
             val adapter = ModuleRecyclerAdapter(modules, viewModel.selectedModule,
-                this, resources)
+                resources)
             binding.rvModulesPageModules.adapter = adapter
             binding.rvModulesPageModules.setHasFixedSize(true)
         })
@@ -84,20 +84,5 @@ class ModulesFragment : Fragment(), ModuleRecyclerAdapter.OnItemClickListener {
         viewModel.error.observe(viewLifecycleOwner, { error ->
             (activity as? MainActivity)?.showSnackBar(error, true)
         })
-    }
-
-    private fun generateModuleList(): List<Module>{
-        val listOfDummyModules: MutableList<Module> = ArrayList()
-        for(i in 0..5){
-            listOfDummyModules.add(Module("description", i, i))
-        }
-        listOfDummyModules[2].credits = null
-
-        return listOfDummyModules
-    }
-
-//  Override function for recycler view interface
-    override fun onItemClick(module: Module) {
-        (activity as? MainActivity)?.showSnackBar(module.toString(), false)
     }
 }
