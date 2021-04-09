@@ -1,114 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.settings.SettingsFragment"
-    android:background="?attr/colorSurface">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb_edit_module_page"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:elevation="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="?attr/colorPrimary">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/title_settings"
-                android:textAppearance="@style/TextAppearance.MyTheme.Headline6"
-                android:textColor="?attr/colorOnPrimary"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.appcompat.widget.Toolbar>
-    <LinearLayout
+    <data>
+        <variable
+            name="viewModel"
+            type="com.university.gradetrak.ui.settings.SettingsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:orientation="vertical"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        >
+        tools:context=".ui.settings.SettingsFragment"
+        android:background="?attr/colorSurface">
 
-        <TextView
-            android:id="@+id/textView2"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tb_edit_module_page"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:gravity="center"
-            android:text="@string/settings_page_description"
-            android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+            android:layout_height="?attr/actionBarSize"
             app:layout_constraintEnd_toEndOf="parent"
+            android:elevation="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginBottom="@dimen/settings_page_linear_layout_margin_bottom"/>
+            android:background="?attr/colorPrimary">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_settings"
+                    android:textAppearance="@style/TextAppearance.MyTheme.Headline6"
+                    android:textColor="?attr/colorOnPrimary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
-            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            android:elevation="0dp"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/settings_page_linear_layout_margin_top"
-            android:layout_marginBottom="@dimen/settings_page_linear_layout_margin_bottom">
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/settings_page_weighting_prompt_text"
-                android:layout_margin="20dp"
-                android:textAppearance="@style/TextAppearance.MyTheme.Subtitle1"/>
-            <ToggleButton
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:textOff="@string/settings_page_toggle_off_text"
-                android:textOn="@string/settings_page_toggle_on_text"
-                android:textAppearance="@style/TextAppearance.MyTheme.Button"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:gravity="center"
-                android:elevation="8dp"
-                style="@style/AppTheme"
-                />
+                android:text="@string/settings_page_description"
+                android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginBottom="@dimen/settings_page_linear_layout_margin_bottom" />
 
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                android:elevation="0dp"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/settings_page_linear_layout_margin_top"
+                android:layout_marginBottom="@dimen/settings_page_linear_layout_margin_bottom">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_page_weighting_prompt_text"
+                    android:layout_margin="20dp"
+                    android:textAppearance="@style/TextAppearance.MyTheme.Subtitle1" />
+
+                <ToggleButton
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:onClick="@{() -> viewModel.handleWeightingButtonPress()}"
+                    android:textOff="@string/settings_page_toggle_off_text"
+                    android:textOn="@string/settings_page_toggle_on_text"
+                    android:textAppearance="@style/TextAppearance.MyTheme.Button"
+                    android:gravity="center"
+                    android:elevation="8dp"
+                    android:checked="@={viewModel.thirtySeventyWeighting}"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/settings_page_linear_layout_margin_top"
+                android:layout_marginBottom="@dimen/settings_page_linear_layout_margin_bottom">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_page_lowest_module_prompt_text"
+                    android:layout_margin="25dp"
+                    android:textAppearance="@style/TextAppearance.MyTheme.Subtitle1" />
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:ignore="UseSwitchCompatOrMaterialXml"
+                    android:layout_margin="25dp"
+                    android:checked="@={viewModel.removeLowestModule}"
+                    android:onClick="@{() -> viewModel.handleLowestModuleClick()}"
+                    style="@style/MySwitch"
+
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/settings_page_linear_layout_margin_top"
+                android:layout_marginBottom="@dimen/settings_page_linear_layout_margin_bottom"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/apply_changes_button_text"
+                    style="@style/Button.DuckEgg"
+                    android:visibility="@{viewModel.applyChangesButtonVisibility}"
+                    android:onClick="@{() -> viewModel.handleApplyChangesClick()}"/>
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/settings_page_linear_layout_margin_top"
-            android:layout_marginBottom="@dimen/settings_page_linear_layout_margin_bottom">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/settings_page_lowest_module_prompt_text"
-                android:layout_margin="25dp"
-                android:textAppearance="@style/TextAppearance.MyTheme.Subtitle1"/>
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:ignore="UseSwitchCompatOrMaterialXml"
-                android:layout_margin="25dp"/>
-        </LinearLayout>
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

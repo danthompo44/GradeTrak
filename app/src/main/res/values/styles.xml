@@ -25,4 +25,11 @@
     <style name="AppTheme.ProgressBar" parent="Widget.AppCompat.ProgressBar">
         <item name="android:indeterminateTint">?attr/colorAccent</item>
     </style>
+
+    <style name="MySwitch" parent="@style/Widget.AppCompat.CompoundButton.Switch">
+        android:trackTint="@color/first"
+        android:thumbTint="@color/third"
+        <item name="android:thumbTint">?attr/colorPrimary</item>
+        <item name="android:trackTint">?attr/colorPrimaryVariant</item>
+    </style>
 </resources>

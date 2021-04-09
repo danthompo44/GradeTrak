@@ -9,19 +9,36 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.university.gradetrak.R
+import com.university.gradetrak.databinding.FragmentSettingsBinding
+import com.university.gradetrak.services.Services
 
 class SettingsFragment : Fragment() {
-
-    private lateinit var settingsViewModel: SettingsViewModel
+    private lateinit var binding: FragmentSettingsBinding
+    private lateinit var viewModel: SettingsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        settingsViewModel =
-            ViewModelProvider(this).get(SettingsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_settings, container, false)
-        return root
+    ): View {
+        binding = FragmentSettingsBinding.inflate(inflater, container, false)
+
+        setupViewModelBinding()
+        observeSettingsData()
+
+        return binding.root
+    }
+
+    private fun setupViewModelBinding(){
+        val viewModelFactory = SettingsViewModelFactory(Services.settingsService)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(SettingsViewModel::class.java)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+    }
+
+    private fun observeSettingsData(){
+        viewModel.getUserSettings().observe(viewLifecycleOwner, { settings ->
+            viewModel.setSettings(settings)
+        })
     }
 }

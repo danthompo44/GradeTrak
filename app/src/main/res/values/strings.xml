@@ -54,6 +54,7 @@
     <string name="settings_page_lowest_module_prompt_text">Discount Lowest Module?</string>
     <string name="settings_page_toggle_off_text">40% : 60%</string>
     <string name="settings_page_toggle_on_text">30% : 70%</string>
+    <string name="apply_changes_button_text">Apply Changes</string>
 
     <!-- Login Page Strings -->
     <string name="login_page_image_view_description">Brand Image</string>

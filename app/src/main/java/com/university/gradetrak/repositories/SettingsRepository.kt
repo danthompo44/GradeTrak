@@ -6,50 +6,45 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.university.gradetrak.models.Module
+import com.university.gradetrak.models.Settings
 import com.university.gradetrak.utils.TAG
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ModuleRepository {
+class SettingsRepository {
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-    private val modules = database.getReference("modules").child("A users Id")
-    val modulesLD = MutableLiveData<List<Module>>()
+    private val settings = database.getReference("settings").child("A user ID")
+    val settingsLD = MutableLiveData<Settings>()
 
     init {
         getAll()
     }
 
-    fun addModule(module: Module){
-        modules.child(UUID.randomUUID().toString()).setValue(module)
+    fun addSettings(settings: Settings){
+        this.settings.setValue(settings)
     }
 
-    fun editModule(module: Module){
-        if(module.uuid != null){
-            modules.child(module.uuid!!).setValue(module)
-        }
+    fun editSettings(settings: Settings){
+        this.settings.child(settings.uuid.toString()).setValue(settings)
     }
 
-    fun delete(module: Module){
-        modules.child(module.uuid.toString()).removeValue()
+    fun delete(settings: Settings){
+        this.settings.child(settings.uuid.toString()).removeValue()
     }
-
 
 
     private fun getAll(){
         // Read from the database
-        modules.addValueEventListener(object : ValueEventListener {
-            val modulesArray = ArrayList<Module>()
+        settings.addValueEventListener(object : ValueEventListener {
+            var settingsValue: Settings? = null
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                modulesArray.clear()
                 for(child in dataSnapshot.children){
-                    val module = child.getValue(Module::class.java)
-                    module!!.uuid = child.key.toString()
-                    modulesArray.add(module)
+                    settingsValue = child.getValue(Settings::class.java)
+                    settingsValue!!.uuid = child.key.toString()
                 }
-                modulesLD.value = modulesArray
+                settingsLD.value = settingsValue
             }
 
             override fun onCancelled(error: DatabaseError) {
