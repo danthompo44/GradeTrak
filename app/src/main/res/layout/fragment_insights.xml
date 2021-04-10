@@ -86,7 +86,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:layout_height="wrap_content"
-                    android:text="@string/test"
+                    android:text="@={viewModel.overallProgress}"
                     android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
             </LinearLayout>
         </LinearLayout>
