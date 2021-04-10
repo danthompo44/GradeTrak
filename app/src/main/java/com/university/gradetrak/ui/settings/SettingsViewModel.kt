@@ -52,9 +52,11 @@ class SettingsViewModel(private val settingsService: SettingsService) : ViewMode
         }
     }
 
+
     fun handleApplyChangesClick(){
         val settings = Settings(thirtySeventyWeighting.get(), removeLowestModule.get())
         settings.uuid = getUserSettings().value!!.uuid
         settingsService.editSettings(settings)
+        applyChangesButtonVisibility.set(Button.INVISIBLE)
     }
 }

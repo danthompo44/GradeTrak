@@ -5,22 +5,25 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.university.gradetrak.models.Module
+import com.university.gradetrak.models.Settings
 import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.services.SettingsService
+import com.university.gradetrak.utils.Calculator
 import com.university.gradetrak.utils.InsightsCalculator
 import com.university.gradetrak.utils.TAG
 
 class InsightsViewModel (private val moduleService: ModuleService,
                          private val settingsService: SettingsService) : ViewModel() {
-    var currentLevel5Progress = ObservableField<String>()
+    val currentLevel5Progress = ObservableField<String>()
+    val overallProgress = ObservableField<String>()
 
-    private var calculator = InsightsCalculator(moduleService.getAll(), settingsService.getAll())
-
-    fun setCurrentLevel5Progress(){
-        currentLevel5Progress.set(calculator.getLevel5CurrentProgress().toString())
+    fun getAllModules(): MutableLiveData<List<Module>>{
+        return moduleService.getAll()
     }
 
-    init {
-        Log.v(TAG, calculator.getLevel5CurrentProgress().toString())
+    fun calculate(){
+        currentLevel5Progress.set("${Calculator.calculateCurrentLevel5Percentage(
+                getAllModules().value!!, settingsService.getAll().value!!)}%")
     }
 }

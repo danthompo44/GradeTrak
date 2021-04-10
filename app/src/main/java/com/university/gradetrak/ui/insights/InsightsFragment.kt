@@ -1,6 +1,7 @@
 package com.university.gradetrak.ui.insights
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.university.gradetrak.R
 import com.university.gradetrak.databinding.FragmentInsightsBinding
 import com.university.gradetrak.services.Services
+import com.university.gradetrak.utils.TAG
 
 class InsightsFragment : Fragment() {
     private lateinit var binding: FragmentInsightsBinding
@@ -22,6 +24,7 @@ class InsightsFragment : Fragment() {
         binding = FragmentInsightsBinding.inflate(inflater, container, false)
 
         setupViewModelBinding()
+        observeDatabase()
         return binding.root
     }
 
@@ -32,5 +35,15 @@ class InsightsFragment : Fragment() {
             .get(InsightsViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+    }
+
+    private fun observeDatabase(){
+        viewModel.getAllModules().observe(viewLifecycleOwner, {
+            viewModel.calculate()
+        })
+//        viewModel.getSettings().observe(viewLifecycleOwner, {
+//            Log.v(TAG, "Get Settings Calculate")
+//            viewModel.calculate()
+//        })
     }
 }

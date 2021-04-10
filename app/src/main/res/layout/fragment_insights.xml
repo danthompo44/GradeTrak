@@ -57,14 +57,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/current_progress"
+                    android:text="@string/current_level_5_progress"
                     android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
                 <TextView
                     android:id="@+id/tv_insights_page_current_progress"
                     android:layout_width="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:layout_height="wrap_content"
-                    android:text="@string/test"
+                    android:text="@={viewModel.currentLevel5Progress}"
                     android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
             </LinearLayout>
             <LinearLayout
@@ -77,12 +78,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/overall_progress"
+                    android:text="@string/overall_level_5_progress"
                     android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
                 <TextView
                     android:id="@+id/tv_insights_page_overall_progress"
                     android:layout_width="match_parent"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:layout_height="wrap_content"
                     android:text="@string/test"
                     android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
