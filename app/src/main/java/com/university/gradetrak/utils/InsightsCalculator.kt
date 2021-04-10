@@ -14,13 +14,13 @@ object InsightsCalculator {
 
     private val level5ModulesWithResults = ArrayList<Module>()
     private val level6ModulesWithResults = ArrayList<Module>()
-    var level5CreditsWithResults: Int = 0
-    var level6CreditsWithResults: Int = 0
+    private var level5CreditsWithResults: Int = 0
+    private var level6CreditsWithResults: Int = 0
 
     /**
      * Ensure all arrays and values are reset
      */
-    private fun clearUp(){
+    private fun resetData(){
         allLevel5Modules.clear()
         allLevel6Modules.clear()
         level5ModulesWithResults.clear()
@@ -57,34 +57,61 @@ object InsightsCalculator {
      * @param modules A list of all modules attributed to the user
      * @param settings A settings object containing the users settings
      */
-    fun calculateCurrentLevel5Percentage(modules: List<Module>, settings: Settings): Double{
-        clearUp()
+    fun calculateCurrentLevel5Percentage(modules: List<Module>): Double{
+        resetData()
         organiseData(modules)
-        //Calculate the results
-        var totalGradeXCredits: Double = 0.0
+        if(level5ModulesWithResults.size != 0){
+            //Calculate the results
+            var totalGradeXCredits: Double = 0.0
 //        Log.v(TAG, level5ModulesWithResults.size.toString())
-        for(module in level5ModulesWithResults){
+            for(module in level5ModulesWithResults){
 //            Log.v(TAG, "${module.name}: Result: ${module.result} Credits: ${module.credits}")
-            val gradeXCredits = module.result?.times(module.credits!!)
+                val gradeXCredits = module.result?.times(module.credits!!)
 //            Log.v(TAG, "Grade X Credits: ${gradeXCredits.toString()}")
-            totalGradeXCredits += gradeXCredits!!
-        }
+                totalGradeXCredits += gradeXCredits!!
+            }
 //        Log.v(TAG, "Total Grade X Credits: $totalGradeXCredits")
 //        Log.v(TAG, "Total Level 5 Credits With Results: $level5CreditsWithResults")
 //        Log.v(TAG, "Returns: ${totalGradeXCredits/ level5CreditsWithResults}")
-        return (totalGradeXCredits / level5CreditsWithResults).round()
+            return (totalGradeXCredits / level5CreditsWithResults).round()
+        }
+        return 0.0
+    }
+
+    fun calculateCurrentLevel6Percentage(modules: List<Module>): Double{
+        resetData()
+        organiseData(modules)
+        if(level6ModulesWithResults.size != 0){
+            var totalGradeXCredits: Double = 0.0
+            for(module in level6ModulesWithResults){
+                val gradeXCredits = module.result?.times(module.credits!!)
+                totalGradeXCredits += gradeXCredits!!
+            }
+            return (totalGradeXCredits / level6CreditsWithResults).round()
+        }
+        return 0.0
     }
 
     /**
      * Calculates the overall percentage achieved across level 5 using the results they have received
      * in all their level 5 modules
      * @param modules A list of all modules attributed to the user
-     * @param settings A settings object containing the users settings
      */
     fun calculateOverallLevel5Percentage(modules: List<Module>): Double{
-        clearUp()
+        resetData()
         organiseData(modules)
         return calculateOverallLevel5Result().round()
+    }
+
+    /**
+     * Calculates the overall percentage achieved across level 6 using the results they have received
+     * in all their level 6 modules
+     * @param modules A list of all modules attributed to the user
+     */
+    fun calculateOverallLevel6Percentage(modules: List<Module>): Double{
+        resetData()
+        organiseData(modules)
+        return calculateOverallLevel6Result().round()
     }
 
     /**
@@ -113,25 +140,31 @@ object InsightsCalculator {
      * Calculate the Overall Result for level 5 modules with a result, does not include a weighting
      */
     private fun calculateOverallLevel5Result(): Double{
-        var creditsXResult: Double = 0.0
-        for(module in level5ModulesWithResults){
-            Log.v(TAG, "${module.name}: Credits: ${module.credits} Result: ${module.result}")
-            creditsXResult += module.credits?.times(module.result!!)!!
-            Log.v(TAG, "Credits X Result: $creditsXResult")
+        var creditsXResult = 0.0
+        if(level5ModulesWithResults.size != 0) {
+            for(module in level5ModulesWithResults){
+//            Log.v(TAG, "${module.name}: Credits: ${module.credits} Result: ${module.result}")
+                creditsXResult += module.credits?.times(module.result!!)!!
+//            Log.v(TAG, "Credits X Result: $creditsXResult")
+            }
+//        Log.v(TAG, "Overall Level 5 Result: ${creditsXResult / totalLevel5Credits}")
+            return creditsXResult / totalLevel5Credits
         }
-        Log.v(TAG, "Overall Level 5 Result: ${creditsXResult / totalLevel5Credits}")
-        return creditsXResult / totalLevel5Credits
+        return 0.0
     }
 
     /**
      * Calculate the Overall Result for level 6 modules with a result, does not include a weighting
      */
     private fun calculateOverallLevel6Result(): Double{
-        var creditsXResult: Double = 0.0
-        for(module in level6ModulesWithResults){
-            creditsXResult += module.credits?.times(module.result!!)!!
+        if(level6ModulesWithResults.size != 0){
+            var creditsXResult = 0.0
+            for(module in level6ModulesWithResults){
+                creditsXResult += module.credits?.times(module.result!!)!!
+            }
+            return creditsXResult / totalLevel6Credits
         }
-        return creditsXResult / totalLevel6Credits
+        return 0.0
     }
 
     /**

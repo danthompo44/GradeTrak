@@ -85,6 +85,8 @@
     <string name="insights_page_title">Insights</string>
     <string name="current_level_5_progress">Current Level 5 Progress</string>
     <string name="overall_level_5_progress">Overall Level 5 Progress</string>
+    <string name="current_level_6_progress">Current Level 6 Progress</string>
+    <string name="overall_level_6_progress">Overall Level 6 Progress</string>
 
     <!-- Progress Wheel Strings -->
     <string name="please_wait">Please Wait…</string>
