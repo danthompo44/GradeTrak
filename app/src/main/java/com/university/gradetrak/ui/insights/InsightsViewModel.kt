@@ -29,19 +29,18 @@ class InsightsViewModel (private val moduleService: ModuleService,
     }
 
     fun calculate(){
-        currentLevel5Progress.set("${InsightsCalculator.calculateCurrentLevel5Percentage(
-                getAllModules().value!!, getSettings().value!!)}%")
-        overallLevel5Progress.set("${InsightsCalculator.calculateOverallLevel5Percentage(
-                getAllModules().value!!, getSettings().value!!)}%")
-        weightedLevel5Progress.set("${InsightsCalculator.calculateWeightedLevel5Percentage(
-                getAllModules().value!!, getSettings().value!!)}%")
-        currentLevel6Progress.set("${InsightsCalculator.calculateCurrentLevel6Percentage(
-                getAllModules().value!!, getSettings().value!!)}%")
-        overallLevel6Progress.set("${InsightsCalculator.calculateOverallLevel6Percentage(
-                getAllModules().value!!, getSettings().value!!)}%")
-        weightedLevel6Progress.set("${InsightsCalculator.calculateWeightedLevel6Percentage(
-                getAllModules().value!!, getSettings().value!!)}%")
-        overallProgress.set("${InsightsCalculator.calculateOverall(
-                getAllModules().value!!, getSettings().value!!)}%")
+        val percentages = InsightsCalculator.calculatePercentages(
+                getAllModules().value!!, getSettings().value!!)
+        currentLevel5Progress.set(addPercentToString(percentages[0]))
+        overallLevel5Progress.set(addPercentToString(percentages[1]))
+        weightedLevel5Progress.set(addPercentToString(percentages[2]))
+        currentLevel6Progress.set(addPercentToString(percentages[3]))
+        overallLevel6Progress.set(addPercentToString(percentages[4]))
+        weightedLevel6Progress.set(addPercentToString(percentages[5]))
+        overallProgress.set(addPercentToString(percentages[6]))
+    }
+
+    private fun addPercentToString(value: Double): String{
+        return "$value%"
     }
 }

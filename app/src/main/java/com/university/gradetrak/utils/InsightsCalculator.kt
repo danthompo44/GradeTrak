@@ -17,6 +17,7 @@ object InsightsCalculator {
     private var level5CreditsWithResults: Int = 0
     private var level6CreditsWithResults: Int = 0
     private lateinit var lowestScoringModule: Module
+    private lateinit var settings: Settings
 
     /**
      * Ensure all arrays and values are reset
@@ -33,7 +34,7 @@ object InsightsCalculator {
     /**
      * Organise the data into appropriate Array lists and Integers
      */
-    private fun organiseData(modules: List<Module>, settings: Settings){
+    private fun organiseData(modules: List<Module>){
         lowestScoringModule= modules [0]
         //Assign modules and credits to their appropriate variables
         for(module in modules){
@@ -71,8 +72,28 @@ object InsightsCalculator {
         }
     }
 
-    fun calculatePercentages(modules: List<Module>, settings: Settings){
+    fun calculatePercentages(modules: List<Module>, settings: Settings): ArrayList<Double>{
+        resetData()
+        organiseData(modules)
+        this.settings = settings
+        val currentLevel5 = calculateCurrentLevel5Percentage()
+        val overallLevel5 = calculateOverallLevel5Percentage()
+        val weightedLevel5 = calculateWeightedLevel5Percentage()
+        val currentLevel6 = calculateCurrentLevel6Percentage()
+        val overallLevel6 = calculateOverallLevel6Percentage()
+        val weightedLevel6 = calculateWeightedLevel6Percentage()
+        val overall = calculateOverall()
 
+        val percentages: ArrayList<Double> = ArrayList()
+        percentages.add(currentLevel5)
+        percentages.add(overallLevel5)
+        percentages.add(weightedLevel5)
+        percentages.add(currentLevel6)
+        percentages.add(overallLevel6)
+        percentages.add(weightedLevel6)
+        percentages.add(overall)
+
+        return percentages
     }
 
     private fun doLowestModuleChecks(module: Module, settings: Settings){
@@ -88,32 +109,22 @@ object InsightsCalculator {
      * @param modules A list of all modules attributed to the user
      * @param settings A settings object containing the users settings
      */
-    fun calculateCurrentLevel5Percentage(modules: List<Module>, settings: Settings): Double{
-        resetData()
-        organiseData(modules, settings)
+    private fun calculateCurrentLevel5Percentage(): Double{
         if(level5ModulesWithResults.size != 0){
             //Calculate the results
-            var totalGradeXCredits: Double = 0.0
-//        Log.v(TAG, level5ModulesWithResults.size.toString())
+            var totalGradeXCredits = 0.0
             for(module in level5ModulesWithResults){
-//            Log.v(TAG, "${module.name}: Result: ${module.result} Credits: ${module.credits}")
                 val gradeXCredits = module.result?.times(module.credits!!)
-//            Log.v(TAG, "Grade X Credits: ${gradeXCredits.toString()}")
                 totalGradeXCredits += gradeXCredits!!
             }
-//        Log.v(TAG, "Total Grade X Credits: $totalGradeXCredits")
-//        Log.v(TAG, "Total Level 5 Credits With Results: $level5CreditsWithResults")
-//        Log.v(TAG, "Returns: ${totalGradeXCredits/ level5CreditsWithResults}")
             return (totalGradeXCredits / level5CreditsWithResults).round()
         }
         return 0.0
     }
 
-    fun calculateCurrentLevel6Percentage(modules: List<Module>, settings: Settings): Double{
-        resetData()
-        organiseData(modules, settings)
+    private fun calculateCurrentLevel6Percentage(): Double{
         if(level6ModulesWithResults.size != 0){
-            var totalGradeXCredits: Double = 0.0
+            var totalGradeXCredits = 0.0
             for(module in level6ModulesWithResults){
                 val gradeXCredits = module.result?.times(module.credits!!)
                 totalGradeXCredits += gradeXCredits!!
@@ -124,36 +135,12 @@ object InsightsCalculator {
     }
 
     /**
-     * Calculates the overall percentage achieved across level 5 using the results they have received
-     * in all their level 5 modules
-     * @param modules A list of all modules attributed to the user
-     */
-    fun calculateOverallLevel5Percentage(modules: List<Module>, settings: Settings): Double{
-        resetData()
-        organiseData(modules, settings)
-        return calculateOverallLevel5Result().round()
-    }
-
-    /**
-     * Calculates the overall percentage achieved across level 6 using the results they have received
-     * in all their level 6 modules
-     * @param modules A list of all modules attributed to the user
-     */
-    fun calculateOverallLevel6Percentage(modules: List<Module>, settings: Settings): Double{
-        resetData()
-        organiseData(modules, settings)
-        return calculateOverallLevel6Result().round()
-    }
-
-    /**
      * Calculates the weighted percentage achieved across level 5 using the results they have received
      * in all their level 5 modules
      * @param modules A list of all modules attributed to the user
      */
-    fun calculateWeightedLevel5Percentage(modules: List<Module>, settings: Settings): Double{
-        resetData()
-        organiseData(modules, settings)
-        return addLevel5Weighting(calculateOverallLevel5Result(), settings).round()
+    private fun calculateWeightedLevel5Percentage(): Double{
+        return addLevel5Weighting(calculateOverallLevel5Percentage()).round()
     }
 
     /**
@@ -161,15 +148,41 @@ object InsightsCalculator {
      * in all their level 6 modules
      * @param modules A list of all modules attributed to the user
      */
-    fun calculateWeightedLevel6Percentage(modules: List<Module>, settings: Settings): Double{
-        resetData()
-        organiseData(modules, settings)
-        return addLevel6Weighting(calculateOverallLevel6Result(), settings).round()
+    private fun calculateWeightedLevel6Percentage(): Double{
+        return addLevel6Weighting(calculateOverallLevel6Percentage()).round()
     }
 
-    fun calculateOverall(modules: List<Module>, settings: Settings): Double{
-        return calculateWeightedLevel5Percentage(modules, settings) +
-                calculateWeightedLevel6Percentage(modules, settings)
+    private fun calculateOverall(): Double{
+        return calculateWeightedLevel5Percentage() +
+                calculateWeightedLevel6Percentage()
+    }
+
+    /**
+     * Calculate the Overall Result for level 5 modules with a result, does not include a weighting
+     */
+    private fun calculateOverallLevel5Percentage(): Double{
+        var creditsXResult = 0.0
+        if(level5ModulesWithResults.size != 0) {
+            for(module in level5ModulesWithResults){
+                creditsXResult += module.credits?.times(module.result!!)!!
+            }
+            return creditsXResult / totalLevel5Credits
+        }
+        return 0.0
+    }
+
+    /**
+     * Calculate the Overall Result for level 6 modules with a result, does not include a weighting
+     */
+    private fun calculateOverallLevel6Percentage(): Double{
+        if(level6ModulesWithResults.size != 0){
+            var creditsXResult = 0.0
+            for(module in level6ModulesWithResults){
+                creditsXResult += module.credits?.times(module.result!!)!!
+            }
+            return creditsXResult / totalLevel6Credits
+        }
+        return 0.0
     }
 
     /**
@@ -177,7 +190,7 @@ object InsightsCalculator {
      * @param value A double to be weighted
      * @param settings A settings object that contains the users grading ratio
      */
-    private fun addLevel5Weighting(value: Double, settings: Settings) : Double{
+    private fun addLevel5Weighting(value: Double) : Double{
         return if(settings.thirtySeventyRatio == true){
             value * 0.3
         } else value * 0.4
@@ -188,41 +201,10 @@ object InsightsCalculator {
      * @param value A double to be weighted
      * @param settings A settings object that contains the users grading ratio
      */
-    private fun addLevel6Weighting(value: Double, settings: Settings) : Double{
+    private fun addLevel6Weighting(value: Double) : Double{
         return if(settings.thirtySeventyRatio == true){
             value * 0.7
         } else value * 0.6
-    }
-
-    /**
-     * Calculate the Overall Result for level 5 modules with a result, does not include a weighting
-     */
-    private fun calculateOverallLevel5Result(): Double{
-        var creditsXResult = 0.0
-        if(level5ModulesWithResults.size != 0) {
-            for(module in level5ModulesWithResults){
-//            Log.v(TAG, "${module.name}: Credits: ${module.credits} Result: ${module.result}")
-                creditsXResult += module.credits?.times(module.result!!)!!
-//            Log.v(TAG, "Credits X Result: $creditsXResult")
-            }
-//        Log.v(TAG, "Overall Level 5 Result: ${creditsXResult / totalLevel5Credits}")
-            return creditsXResult / totalLevel5Credits
-        }
-        return 0.0
-    }
-
-    /**
-     * Calculate the Overall Result for level 6 modules with a result, does not include a weighting
-     */
-    private fun calculateOverallLevel6Result(): Double{
-        if(level6ModulesWithResults.size != 0){
-            var creditsXResult = 0.0
-            for(module in level6ModulesWithResults){
-                creditsXResult += module.credits?.times(module.result!!)!!
-            }
-            return creditsXResult / totalLevel6Credits
-        }
-        return 0.0
     }
 
     /**
