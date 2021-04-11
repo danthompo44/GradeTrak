@@ -55,6 +55,8 @@
     <string name="settings_page_toggle_off_text">40% : 60%</string>
     <string name="settings_page_toggle_on_text">30% : 70%</string>
     <string name="apply_changes_button_text">Apply Changes</string>
+    <string name="level_5_text_hint">Level 5 Total Credits</string>
+    <string name="level_6_text_hint">Level 6 Total Credits</string>
 
     <!-- Login Page Strings -->
     <string name="login_page_image_view_description">Brand Image</string>

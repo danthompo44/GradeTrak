@@ -1,6 +1,7 @@
 package com.university.gradetrak.models
 
-data class Settings(var thirtySeventyRatio: Boolean? = null, var removeLowestModule: Boolean? = null) {
+data class Settings(var thirtySeventyRatio: Boolean? = null, var removeLowestModule: Boolean? = null,
+var level5Credits: Int? = null, var level6Credits: Int? = null) {
     var uuid: String? = null
 
     override fun toString(): String {

@@ -21,7 +21,7 @@ class SettingsRepository {
     }
 
     fun addSettings(settings: Settings){
-        this.settings.setValue(settings)
+        this.settings.child(UUID.randomUUID().toString()).setValue(settings)
     }
 
     fun editSettings(settings: Settings){
