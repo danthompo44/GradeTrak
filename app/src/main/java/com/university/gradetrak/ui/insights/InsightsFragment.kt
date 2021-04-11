@@ -41,9 +41,9 @@ class InsightsFragment : Fragment() {
         viewModel.getAllModules().observe(viewLifecycleOwner, {
             viewModel.calculate()
         })
-//        viewModel.getSettings().observe(viewLifecycleOwner, {
-//            Log.v(TAG, "Get Settings Calculate")
-//            viewModel.calculate()
-//        })
+        viewModel.getSettings().observe(viewLifecycleOwner, {
+            Log.v(TAG, "Get Settings Calculate")
+            viewModel.calculate()
+        })
     }
 }
