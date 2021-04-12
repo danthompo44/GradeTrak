@@ -93,6 +93,7 @@
     <string name="weighted_level_6_progress">Weighted Level 6 Mark</string>
     <string name="overall_progress">Overall Mark</string>
     <string name="overall_progress_removal">Overall Mark (Lowest Module Removed)</string>
+    <string name="lowest_scoring_module">Lowest Module</string>
 
     <!-- Progress Wheel Strings -->
     <string name="please_wait">Please Wait…</string>

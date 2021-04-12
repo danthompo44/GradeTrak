@@ -1,16 +1,15 @@
 package com.university.gradetrak.utils
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import com.university.gradetrak.models.Module
 import com.university.gradetrak.models.Settings
 
 object InsightsCalculator {
     private val allLevel5Modules =  ArrayList<Module>()
     private val allLevel6Modules = ArrayList<Module>()
-    private const val totalLevel5Credits: Int = 120
-    private const val totalLevel6Credits: Int = 120
-    private const val totalCredits: Int = 240
+    private var totalLevel5Credits: Int = 0
+    private var totalLevel6Credits: Int = 0
+    private var totalCredits: Int = 0
 
     private val level5ModulesWithResults = ArrayList<Module>()
     private val level6ModulesWithResults = ArrayList<Module>()
@@ -35,7 +34,9 @@ object InsightsCalculator {
      * Organise the data into appropriate Array lists and Integers
      */
     private fun organiseData(modules: List<Module>){
-        lowestScoringModule= modules [0]
+        totalLevel5Credits = settings.level5Credits!!
+        totalLevel6Credits = settings.level6Credits!!
+        totalCredits = totalLevel5Credits + totalLevel6Credits
         //Assign modules and credits to their appropriate variables
         for(module in modules){
             if(module.level == 5) {
@@ -54,12 +55,26 @@ object InsightsCalculator {
         }
     }
 
-    private fun removeLowestModuleResult(settings: Settings){
+    private fun getLowestModuleResult(): Double{
+        removeLowestModuleResult()
+        return calculateOverall()
+    }
+
+    private fun removeLowestModuleResult(){
+        lowestScoringModule = if(level5ModulesWithResults.isEmpty()){
+            if(level6ModulesWithResults.isEmpty()){
+                return
+            } else{
+                level6ModulesWithResults[0]
+            }
+        } else {
+            level5ModulesWithResults[0]
+        }
         for (module in level5ModulesWithResults){
-            doLowestModuleChecks(module, settings)
+            doLowestModuleChecks(module)
         }
         for (module in level6ModulesWithResults){
-            doLowestModuleChecks(module, settings)
+            doLowestModuleChecks(module)
         }
 
         if(lowestScoringModule.level == 5){
@@ -74,8 +89,8 @@ object InsightsCalculator {
 
     fun calculatePercentages(modules: List<Module>, settings: Settings): ArrayList<Double>{
         resetData()
-        organiseData(modules)
         this.settings = settings
+        organiseData(modules)
         val currentLevel5 = calculateCurrentLevel5Percentage()
         val overallLevel5 = calculateOverallLevel5Percentage()
         val weightedLevel5 = calculateWeightedLevel5Percentage()
@@ -83,6 +98,7 @@ object InsightsCalculator {
         val overallLevel6 = calculateOverallLevel6Percentage()
         val weightedLevel6 = calculateWeightedLevel6Percentage()
         val overall = calculateOverall()
+        val overallWithLowestRemoved = getLowestModuleResult()
 
         val percentages: ArrayList<Double> = ArrayList()
         percentages.add(currentLevel5)
@@ -92,14 +108,26 @@ object InsightsCalculator {
         percentages.add(overallLevel6)
         percentages.add(weightedLevel6)
         percentages.add(overall)
+        percentages.add(overallWithLowestRemoved)
 
         return percentages
     }
 
-    private fun doLowestModuleChecks(module: Module, settings: Settings){
-        if(settings.removeLowestModule!! && module.result!! <= lowestScoringModule.result!!
-                && module.credits!! < lowestScoringModule.credits!!){
-            lowestScoringModule = module
+    fun getLowestModuleString(): String{
+        return lowestScoringModule.name!!
+    }
+
+    private fun doLowestModuleChecks(module: Module){
+        Log.v(TAG, "Current Lowest Module: ${lowestScoringModule.name}")
+
+        if(settings.removeLowestModule!!){
+            if(module.result!! < lowestScoringModule.result!!){
+                lowestScoringModule = module
+            } else if (module.result!! == lowestScoringModule.result!!){
+                if(calculateModuleWeightedMark(module) > calculateModuleWeightedMark(lowestScoringModule)){
+                    lowestScoringModule = module
+                }
+            }
         }
     }
 
@@ -155,6 +183,22 @@ object InsightsCalculator {
     private fun calculateOverall(): Double{
         return calculateWeightedLevel5Percentage() +
                 calculateWeightedLevel6Percentage()
+    }
+
+    private fun calculateModuleWeightedMark(module: Module): Double{
+        var overallYearCredits = 0.0
+        overallYearCredits = if(module.level == 5){
+            totalLevel5Credits.toDouble()
+        } else {
+            totalLevel6Credits.toDouble()
+        }
+        val creditsXResult = module.result?.times(module.credits!!)
+        val yearWeightedResult: Double? = creditsXResult?.div(overallYearCredits)
+        return if(module.level == 5){
+            addLevel5Weighting(yearWeightedResult!!)
+        } else {
+            addLevel6Weighting(yearWeightedResult!!)
+        }
     }
 
     /**

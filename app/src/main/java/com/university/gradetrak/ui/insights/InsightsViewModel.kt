@@ -19,6 +19,7 @@ class InsightsViewModel (private val moduleService: ModuleService,
     val weightedLevel6Progress = ObservableField<String>()
     val overallProgress = ObservableField<String>()
     val overallProgressWithModuleRemoval = ObservableField<String>()
+    val lowestModule = ObservableField<String>()
 
     fun getAllModules(): MutableLiveData<List<Module>>{
         return moduleService.getAll()
@@ -38,6 +39,8 @@ class InsightsViewModel (private val moduleService: ModuleService,
         overallLevel6Progress.set(addPercentToString(percentages[4]))
         weightedLevel6Progress.set(addPercentToString(percentages[5]))
         overallProgress.set(addPercentToString(percentages[6]))
+        overallProgressWithModuleRemoval.set(addPercentToString(percentages[7]))
+        lowestModule.set(InsightsCalculator.getLowestModuleString())
     }
 
     private fun addPercentToString(value: Double): String{
