@@ -66,7 +66,6 @@ object InsightsCalculator {
         val overallLevel6 = calculateOverallLevel6Percentage()
         val weightedLevel6 = calculateWeightedLevel6Percentage()
         val overall = calculateOverall()
-        Log.v(TAG, "Fetching Lowest Module")
         val overallWithLowestRemoved = getLowestModuleResult()
 
         val percentages: ArrayList<Double> = ArrayList()
@@ -118,7 +117,6 @@ object InsightsCalculator {
     }
 
     private fun calculateOverall(): Double{
-        Log.v(TAG, calculateWeightedLevel6Percentage().toString())
         return (calculateWeightedLevel5Percentage() +
                 calculateWeightedLevel6Percentage()).round()
     }
@@ -174,8 +172,6 @@ object InsightsCalculator {
             for(module in level6ModulesWithResults){
                 creditsXResult += module.credits?.times(module.result!!)!!
             }
-            Log.v(TAG, "Total Credits X Result: $creditsXResult")
-            Log.v(TAG, "Total Level 6 Credits: $totalLevel6Credits")
             return creditsXResult / totalLevel6Credits
         }
         return 0.0

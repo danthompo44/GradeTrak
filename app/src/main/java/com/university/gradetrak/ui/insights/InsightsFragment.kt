@@ -25,6 +25,7 @@ class InsightsFragment : Fragment() {
 
         setupViewModelBinding()
         observeDatabase()
+        observeModulePromptTextIntegerValue()
         return binding.root
     }
 
@@ -44,6 +45,13 @@ class InsightsFragment : Fragment() {
         viewModel.getSettings().observe(viewLifecycleOwner, {
             Log.v(TAG, "Get Settings Calculate")
             viewModel.calculate()
+        })
+    }
+
+    private fun observeModulePromptTextIntegerValue(){
+        viewModel.modulePromptStringIntegerValue.observe(viewLifecycleOwner, {
+            Log.v(TAG, "integer value has changed to $it")
+            binding.lowestModulePromptText.setText(it)
         })
     }
 }

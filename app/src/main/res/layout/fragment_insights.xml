@@ -174,39 +174,21 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/et_margin_top"
                 android:layout_marginBottom="@dimen/et_margin_bottom">
+
                 <TextView
+                    android:id="@+id/lowest_module_prompt_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/overall_progress"
-                    android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
+                    android:text="@string/test"
+                    android:textAppearance="@style/TextAppearance.MyTheme.Body1" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:layout_height="wrap_content"
                     android:text="@={viewModel.overallProgress}"
-                    android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/et_margin_top"
-                android:layout_marginBottom="@dimen/et_margin_bottom"
-                android:visibility="@{viewModel.lowestModuleRemovedVisibility}">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/overall_progress_removal"
-                    android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:layout_height="wrap_content"
-                    android:text="@={viewModel.overallProgressWithModuleRemoval}"
                     android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
             </LinearLayout>
             <LinearLayout
