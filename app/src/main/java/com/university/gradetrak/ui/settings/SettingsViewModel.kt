@@ -63,10 +63,23 @@ class SettingsViewModel(private val settingsService: SettingsService) : ViewMode
     private fun updateApplyChangesButtonVisibility(){
         val databaseSettings = getUserSettings().value
 
+        val level5 = if(level5Credits.get() == ""){
+            0
+        } else {
+                level5Credits.get()?.toInt()
+        }
+
+        val level6 = if(level6Credits.get() == ""){
+            0
+        } else {
+            level6Credits.get()?.toInt()
+        }
+
+
         if(databaseSettings?.removeLowestModule != removeLowestModule.get() ||
                 databaseSettings.thirtySeventyRatio != thirtySeventyWeighting.get() ||
-                databaseSettings.level5Credits != level5Credits.get()?.toInt() ||
-                databaseSettings.level6Credits != level6Credits.get()?.toInt())
+                databaseSettings.level5Credits != level5 ||
+                databaseSettings.level6Credits != level6)
         {
                     applyChangesButtonVisibility.set(Button.VISIBLE)
                 }

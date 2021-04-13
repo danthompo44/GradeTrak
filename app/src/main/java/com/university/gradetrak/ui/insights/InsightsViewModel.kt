@@ -20,7 +20,11 @@ class InsightsViewModel (private val moduleService: ModuleService,
                          private val settingsService: SettingsService) : ViewModel() {
     val modulePromptStringIntegerValue = MutableLiveData<Int>()
     val totalLevel5Credits = ObservableField<String>()
+    val totalLevel5CreditsInt = ObservableField<Int>()
     val receivedLevel5Credits = ObservableField<Int>()
+    val totalLevel6Credits = ObservableField<String>()
+    val totalLevel6CreditsInt = ObservableField<Int>()
+    val receivedLevel6Credits = ObservableField<Int>()
 
     val currentLevel5Progress = ObservableField<String>()
     val overallLevel5Progress = ObservableField<String>()
@@ -41,10 +45,15 @@ class InsightsViewModel (private val moduleService: ModuleService,
 
     fun refreshUI(){
         calculate()
-        totalLevel5Credits.set(settingsService.getAll().value!!.level5Credits.toString())
+        val settings = settingsService.getAll().value
+        totalLevel5Credits.set(settings!!.level5Credits.toString())
+        totalLevel5CreditsInt.set(settings.level5Credits)
+        totalLevel6Credits.set(settings.level6Credits.toString())
+        totalLevel6CreditsInt.set(settings.level6Credits)
         val receivedCredits = InsightsCalculator.getReceivedCredits()
 
         receivedLevel5Credits.set(receivedCredits[0])
+        receivedLevel6Credits.set(receivedCredits[1])
     }
 
     private fun calculate(){

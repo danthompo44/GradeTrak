@@ -47,41 +47,49 @@
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginTop="?attr/actionBarSize"
             android:orientation="vertical">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/et_margin_top"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/et_margin_bottom"
                 android:layout_marginBottom="@dimen/et_margin_bottom">
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/credits_zero_progress"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
-                <ProgressBar
-                    android:id="@+id/progressBarLevel5"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="0dp"
+                    android:textAppearance="@style/TextAppearance.MyTheme.Body1"
+                    android:text="@string/level_5_credit_progress"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:max="120"
+                    android:orientation="horizontal"
                     android:layout_gravity="center"
-                    android:layout_weight="7"
-                    android:progress="@{viewModel.receivedLevel5Credits}"
-                    android:progressTint="#CD2222"
-                    />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@={viewModel.totalLevel5Credits}"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
+                    android:layout_marginTop="@dimen/et_margin_top">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/credits_zero_progress"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
+                    <ProgressBar
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:max="@{viewModel.totalLevel5CreditsInt}"
+                        android:layout_gravity="center"
+                        android:layout_weight="7"
+                        android:progress="@{viewModel.receivedLevel5Credits}"
+                        android:progressTint="?attr/colorSecondaryVariant"
+                        />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@={viewModel.totalLevel5Credits}"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
+                </LinearLayout>
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -145,11 +153,50 @@
                     android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
             </LinearLayout>
 
-            <ProgressBar
-                android:id="@+id/progressBar3"
-                style="?android:attr/progressBarStyleHorizontal"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/et_margin_bottom"
+                android:layout_marginBottom="@dimen/et_margin_bottom">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MyTheme.Body1"
+                    android:text="@string/level_6_credit_progress"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/et_margin_top">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/credits_zero_progress"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
+
+                    <ProgressBar
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="7"
+                        android:max="@{viewModel.totalLevel6CreditsInt}"
+                        android:progress="@{viewModel.receivedLevel6Credits}"
+                        android:progressTint="?attr/colorSecondaryVariant" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@={viewModel.totalLevel6Credits}"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
+                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

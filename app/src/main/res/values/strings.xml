@@ -95,6 +95,8 @@
     <string name="overall_progress_removal">Overall Mark (Lowest Module Removed)</string>
     <string name="lowest_scoring_module">Lowest Module</string>
     <string name="credits_zero_progress">0</string>
+    <string name="level_5_credit_progress">Level 5 Credit Progress</string>
+    <string name="level_6_credit_progress">Level 6 Credit Progress</string>
 
     <!-- Progress Wheel Strings -->
     <string name="please_wait">Please Wait…</string>
