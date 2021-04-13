@@ -15,6 +15,9 @@ object InsightsCalculator {
     private val level6ModulesWithResults = ArrayList<Module>()
     private var level5CreditsWithResults: Int = 0
     private var level6CreditsWithResults: Int = 0
+
+    private var receivedLevel5Credits: Int = 0
+    private var receivedLevel6Credits: Int = 0
     private lateinit var lowestScoringModule: Module
     private lateinit var settings: Settings
 
@@ -59,6 +62,9 @@ object InsightsCalculator {
         resetData()
         this.settings = settings
         organiseData(modules)
+        receivedLevel5Credits = level5CreditsWithResults
+        receivedLevel6Credits = level6CreditsWithResults
+
         val currentLevel5 = calculateCurrentLevel5Percentage()
         val overallLevel5 = calculateOverallLevel5Percentage()
         val weightedLevel5 = calculateWeightedLevel5Percentage()
@@ -79,6 +85,14 @@ object InsightsCalculator {
         percentages.add(overallWithLowestRemoved)
 
         return percentages
+    }
+
+    fun getReceivedCredits(): ArrayList<Int>{
+        val credits: ArrayList<Int> = ArrayList()
+        credits.add(receivedLevel5Credits)
+        credits.add(receivedLevel6Credits)
+
+        return credits
     }
 
 
@@ -158,7 +172,7 @@ object InsightsCalculator {
             for(module in level5ModulesWithResults){
                 creditsXResult += module.credits?.times(module.result!!)!!
             }
-            return creditsXResult / totalLevel5Credits
+            return (creditsXResult / totalLevel5Credits).round()
         }
         return 0.0
     }
@@ -172,7 +186,7 @@ object InsightsCalculator {
             for(module in level6ModulesWithResults){
                 creditsXResult += module.credits?.times(module.result!!)!!
             }
-            return creditsXResult / totalLevel6Credits
+            return (creditsXResult / totalLevel6Credits).round()
         }
         return 0.0
     }

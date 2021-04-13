@@ -40,17 +40,15 @@ class InsightsFragment : Fragment() {
 
     private fun observeDatabase(){
         viewModel.getAllModules().observe(viewLifecycleOwner, {
-            viewModel.calculate()
+            viewModel.refreshUI()
         })
         viewModel.getSettings().observe(viewLifecycleOwner, {
-            Log.v(TAG, "Get Settings Calculate")
-            viewModel.calculate()
+            viewModel.refreshUI()
         })
     }
 
     private fun observeModulePromptTextIntegerValue(){
         viewModel.modulePromptStringIntegerValue.observe(viewLifecycleOwner, {
-            Log.v(TAG, "integer value has changed to $it")
             binding.lowestModulePromptText.setText(it)
         })
     }

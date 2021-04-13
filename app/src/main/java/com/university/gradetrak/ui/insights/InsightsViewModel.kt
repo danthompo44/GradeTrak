@@ -19,6 +19,8 @@ import com.university.gradetrak.utils.TAG
 class InsightsViewModel (private val moduleService: ModuleService,
                          private val settingsService: SettingsService) : ViewModel() {
     val modulePromptStringIntegerValue = MutableLiveData<Int>()
+    val totalLevel5Credits = ObservableField<String>()
+    val receivedLevel5Credits = ObservableField<Int>()
 
     val currentLevel5Progress = ObservableField<String>()
     val overallLevel5Progress = ObservableField<String>()
@@ -37,8 +39,15 @@ class InsightsViewModel (private val moduleService: ModuleService,
         return settingsService.getAll()
     }
 
-    fun calculate(){
-        Log.v(TAG, "Calculate")
+    fun refreshUI(){
+        calculate()
+        totalLevel5Credits.set(settingsService.getAll().value!!.level5Credits.toString())
+        val receivedCredits = InsightsCalculator.getReceivedCredits()
+
+        receivedLevel5Credits.set(receivedCredits[0])
+    }
+
+    private fun calculate(){
         val percentages = InsightsCalculator.calculatePercentages(
                 getAllModules().value!!, getSettings().value!!)
         currentLevel5Progress.set(addPercentToString(percentages[0]))

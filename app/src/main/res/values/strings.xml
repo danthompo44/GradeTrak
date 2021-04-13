@@ -94,6 +94,7 @@
     <string name="overall_progress">Overall Mark</string>
     <string name="overall_progress_removal">Overall Mark (Lowest Module Removed)</string>
     <string name="lowest_scoring_module">Lowest Module</string>
+    <string name="credits_zero_progress">0</string>
 
     <!-- Progress Wheel Strings -->
     <string name="please_wait">Please Wait…</string>
