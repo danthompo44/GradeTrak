@@ -49,7 +49,7 @@
     <string name="edit_module_result_hint">Result (0–100)</string>
 
     <!-- Settings Page Strings -->
-    <string name="settings_page_description">Universities grade their students differently using 2nd to 3rd year weightings, some will also discount your lowest module, adjust these below.</string>
+    <string name="settings_page_description">Universities grade their students differently using 2nd to 3rd year weightings, some will also discount your lowest module if your grade will benefit because of this, adjust these below.</string>
     <string name="settings_page_weighting_prompt_text">2nd : 3rd Year Weighting</string>
     <string name="settings_page_lowest_module_prompt_text">Discount Lowest Module?</string>
     <string name="settings_page_toggle_off_text">40% : 60%</string>

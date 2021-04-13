@@ -193,7 +193,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/et_margin_top"
-                android:layout_marginBottom="@dimen/et_margin_bottom">
+                android:layout_marginBottom="@dimen/et_margin_bottom"
+                android:visibility="@{viewModel.lowestModuleRemovedVisibility}">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
