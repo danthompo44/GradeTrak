@@ -42,6 +42,8 @@
     </string-array>
     <string name="module_level_prompt">Module Level</string>
     <string name="add_module_button_text">Add</string>
+    <string name="error_too_many_level_5_modules">You are already registered for the maximum number of level 5 credits.</string>
+    <string name="error_too_many_level_6_modules">You are already registered for the maximum number of level 6 credits.</string>
 
     <!-- Edit Module Page Strings -->
     <string name="edit_module_page_title">Edit Mark</string>

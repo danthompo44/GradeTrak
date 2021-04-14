@@ -15,7 +15,7 @@ import com.university.gradetrak.services.Services
 class AddModuleActivity : BaseActivity() {
     private lateinit var binding: ActivityAddModuleBinding
     private val viewModel: AddModuleViewModel by viewModels {
-        AddModuleViewModelFactory(Services.moduleService)
+        AddModuleViewModelFactory(Services.moduleService, Services.settingsService)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,8 +49,8 @@ class AddModuleActivity : BaseActivity() {
     }
 
     private fun observeErrors(){
-        viewModel.error.observe(this, Observer { error ->
-            showSnackBar(error, true)
+        viewModel.errorStringInt.observe(this, Observer {
+            showSnackBar(resources.getString(it), true)
         })
     }
 
