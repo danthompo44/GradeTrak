@@ -59,6 +59,10 @@
     <string name="apply_changes_button_text">Apply Changes</string>
     <string name="level_5_text_hint">Level 5 Total Credits</string>
     <string name="level_6_text_hint">Level 6 Total Credits</string>
+    <string name="level_5_is_not_a_number">Level 5 credits is not a number.</string>
+    <string name="level_6_is_not_a_number">Level 6 credits is not a number.</string>
+    <string name="level_5_credits_too_low">Level 5 credits is lower than the total credits of your enrolled modules.</string>
+    <string name="level_6_credits_too_low">Level 6 credits is lower than the total credits of your enrolled modules.</string>
 
     <!-- Login Page Strings -->
     <string name="login_page_image_view_description">Brand Image</string>

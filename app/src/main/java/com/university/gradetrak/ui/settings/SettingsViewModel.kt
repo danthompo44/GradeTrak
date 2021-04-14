@@ -9,17 +9,21 @@ import androidx.databinding.ObservableInt
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.university.gradetrak.R
 import com.university.gradetrak.models.Settings
+import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.services.SettingsService
 import com.university.gradetrak.utils.TAG
 
-class SettingsViewModel(private val settingsService: SettingsService) : ViewModel() {
+class SettingsViewModel(private val moduleService: ModuleService, private val settingsService: SettingsService) : ViewModel() {
     val thirtySeventyWeighting = ObservableBoolean()
     val removeLowestModule = ObservableBoolean()
     val level5Credits = ObservableField<String>()
     val level6Credits = ObservableField<String>()
 
     var applyChangesButtonVisibility = ObservableInt(Button.INVISIBLE)
+
+    val errorStringIntNumber = MutableLiveData<Int>()
 
     private val callback = object : Observable.OnPropertyChangedCallback(){
         /**
@@ -90,10 +94,47 @@ class SettingsViewModel(private val settingsService: SettingsService) : ViewMode
 
 
     fun handleApplyChangesClick(){
+        var inputtedLevel5Credits: Int
+        var inputtedLevel6Credits: Int
+
+        try{
+            inputtedLevel5Credits = level5Credits.get()?.toInt()!!
+        } catch (e: Exception){
+            errorStringIntNumber.value = R.string.level_5_is_not_a_number
+            return
+        }
+        try{
+            inputtedLevel6Credits = level6Credits.get()?.toInt()!!
+        } catch (e: Exception){
+            errorStringIntNumber.value = R.string.level_5_is_not_a_number
+            return
+        }
+        if (getUsersCredits(5) > inputtedLevel5Credits){
+            errorStringIntNumber.value = R.string.level_5_credits_too_low
+            return
+        }
+        if (getUsersCredits(6) > inputtedLevel6Credits){
+            errorStringIntNumber.value = R.string.level_6_credits_too_low
+            return
+        }
+
         val settings = Settings(thirtySeventyWeighting.get(), removeLowestModule.get(),
                 level5Credits.get()?.toInt(), level6Credits.get()?.toInt())
         settings.uuid = getUserSettings().value!!.uuid
         settingsService.editSettings(settings)
         applyChangesButtonVisibility.set(Button.INVISIBLE)
+    }
+
+    private fun getUsersCredits(level: Int): Int{
+        val modules = moduleService.getAll().value
+        var credits = 0
+        if (modules != null) {
+            for (module in modules){
+                if(module.level == level){
+                    credits += module.credits!!
+                }
+            }
+        }
+        return credits
     }
 }
