@@ -19,7 +19,9 @@ class SettingsViewModel(private val moduleService: ModuleService, private val se
     val thirtySeventyWeighting = ObservableBoolean()
     val removeLowestModule = ObservableBoolean()
     val level5Credits = ObservableField<String>()
+    var level5CreditsComparison = ""
     val level6Credits = ObservableField<String>()
+    var level6CreditsComparison = ""
 
     var applyChangesButtonVisibility = ObservableInt(Button.INVISIBLE)
 
@@ -48,7 +50,9 @@ class SettingsViewModel(private val moduleService: ModuleService, private val se
             thirtySeventyWeighting.set(settings.thirtySeventyRatio!!)
             removeLowestModule.set(settings.removeLowestModule!!)
             level5Credits.set(settings.level5Credits.toString())
+            level5CreditsComparison = settings.level5Credits.toString()
             level6Credits.set(settings.level6Credits.toString())
+            level6CreditsComparison = settings.level6Credits.toString()
         }
     }
 
@@ -67,23 +71,10 @@ class SettingsViewModel(private val moduleService: ModuleService, private val se
     private fun updateApplyChangesButtonVisibility(){
         val databaseSettings = getUserSettings().value
 
-        val level5 = if(level5Credits.get() == ""){
-            0
-        } else {
-                level5Credits.get()?.toInt()
-        }
-
-        val level6 = if(level6Credits.get() == ""){
-            0
-        } else {
-            level6Credits.get()?.toInt()
-        }
-
-
         if(databaseSettings?.removeLowestModule != removeLowestModule.get() ||
                 databaseSettings.thirtySeventyRatio != thirtySeventyWeighting.get() ||
-                databaseSettings.level5Credits != level5 ||
-                databaseSettings.level6Credits != level6)
+                level5Credits.get().toString() != level5CreditsComparison ||
+                level6Credits.get().toString() != level6CreditsComparison)
         {
                     applyChangesButtonVisibility.set(Button.VISIBLE)
                 }
