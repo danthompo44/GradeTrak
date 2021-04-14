@@ -97,6 +97,13 @@
     <string name="credits_zero_progress">0</string>
     <string name="level_5_credit_progress">Level 5 Credit Progress</string>
     <string name="level_6_credit_progress">Level 6 Credit Progress</string>
+    <string name="insights_page_grading_text">Grade</string>
+    <string name="fail">Fail</string>
+    <string name="pass">Pass</string>
+    <string name="third">3rd</string>
+    <string name="two_two">2 : 2</string>
+    <string name="two_one">2 : 1</string>
+    <string name="first">1st</string>
 
     <!-- Progress Wheel Strings -->
     <string name="please_wait">Please Wait…</string>

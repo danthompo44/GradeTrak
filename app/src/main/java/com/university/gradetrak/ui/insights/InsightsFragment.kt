@@ -1,10 +1,12 @@
 package com.university.gradetrak.ui.insights
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.university.gradetrak.R
@@ -24,8 +26,7 @@ class InsightsFragment : Fragment() {
         binding = FragmentInsightsBinding.inflate(inflater, container, false)
 
         setupViewModelBinding()
-        observeDatabase()
-        observeModulePromptTextIntegerValue()
+        observeViewModel()
         return binding.root
     }
 
@@ -36,6 +37,12 @@ class InsightsFragment : Fragment() {
             .get(InsightsViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+    }
+
+    private fun observeViewModel(){
+        observeDatabase()
+        observeModulePromptTextIntegerValue()
+        observerOverallGradeTextIntegerValue()
     }
 
     private fun observeDatabase(){
@@ -50,6 +57,33 @@ class InsightsFragment : Fragment() {
     private fun observeModulePromptTextIntegerValue(){
         viewModel.modulePromptStringIntegerValue.observe(viewLifecycleOwner, {
             binding.lowestModulePromptText.setText(it)
+        })
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun observerOverallGradeTextIntegerValue(){
+        viewModel.overallGradeResourceId.observe(viewLifecycleOwner, {
+            when (it){
+                R.string.fail -> {
+                    binding.tvGrade.background = resources.getDrawable(R.drawable.grade_colour_scheme_fail)
+                }
+                R.string.pass -> {
+                    binding.tvGrade.background = resources.getDrawable(R.drawable.grade_colour_scheme_pass)
+                }
+                R.string.third -> {
+                    binding.tvGrade.background = resources.getDrawable(R.drawable.grade_colour_scheme_third)
+                }
+                R.string.two_two -> {
+                    binding.tvGrade.background = resources.getDrawable(R.drawable.grade_colour_scheme_two_two)
+                }
+                R.string.two_one -> {
+                    binding.tvGrade.background = resources.getDrawable(R.drawable.grade_colour_scheme_two_one)
+                }
+                R.string.first -> {
+                    binding.tvGrade.background = resources.getDrawable(R.drawable.grade_colour_scheme_first)
+                }
+            }
+            binding.tvGrade.setText(it)
         })
     }
 }

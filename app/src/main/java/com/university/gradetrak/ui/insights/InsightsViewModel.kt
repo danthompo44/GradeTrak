@@ -35,6 +35,9 @@ class InsightsViewModel (private val moduleService: ModuleService,
     val overallProgress = ObservableField<String>()
     val lowestModule = ObservableField<String>()
 
+    var overallProgressDouble = 0.0
+    var overallGradeResourceId = MutableLiveData<Int>()
+
     fun getAllModules(): MutableLiveData<List<Module>>{
         return moduleService.getAll()
     }
@@ -68,14 +71,38 @@ class InsightsViewModel (private val moduleService: ModuleService,
         if(percentages[6] < percentages[7]){
             modulePromptStringIntegerValue.value = R.string.overall_progress_removal
             overallProgress.set(addPercentToString(percentages[7]))
+            overallProgressDouble = percentages[7]
         } else {
             modulePromptStringIntegerValue.value = R.string.overall_progress
             overallProgress.set(addPercentToString(percentages[6]))
+            overallProgressDouble = percentages[6]
         }
         lowestModule.set(InsightsCalculator.getLowestModuleString())
+        runGradeAssignment()
     }
 
     private fun addPercentToString(value: Double): String{
         return "$value%"
+    }
+
+    private fun runGradeAssignment(){
+        if(overallProgressDouble < 35){
+            overallGradeResourceId.value = R.string.fail
+        }
+        else if (overallProgressDouble >=35 && overallProgressDouble <40){
+            overallGradeResourceId.value = R.string.pass
+        }
+        else if(overallProgressDouble >=40 && overallProgressDouble <49){
+            overallGradeResourceId.value = R.string.third
+        }
+        else if(overallProgressDouble >=50 && overallProgressDouble <59){
+            overallGradeResourceId.value = R.string.two_two
+        }
+        else if(overallProgressDouble >=60 && overallProgressDouble <69){
+            overallGradeResourceId.value = R.string.two_one
+        }
+        else if(overallProgressDouble >=70) {
+            overallGradeResourceId.value = R.string.first
+        }
     }
 }
