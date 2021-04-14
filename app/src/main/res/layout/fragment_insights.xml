@@ -45,7 +45,7 @@
             android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="?attr/actionBarSize"
@@ -53,109 +53,119 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/et_margin_bottom"
-                    android:layout_marginBottom="@dimen/et_margin_bottom">
-                    <TextView
-                        android:layout_width="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.MyTheme.Body1"
-                        android:text="@string/level_5_credit_progress"/>
+                        android:orientation="vertical"
+                        android:layout_marginTop="@dimen/et_margin_bottom"
+                        android:layout_marginBottom="@dimen/et_margin_bottom">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.MyTheme.Body1"
+                            android:text="@string/level_5_credit_progress"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/et_margin_top">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/credits_zero_progress"
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
+                            <ProgressBar
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:max="@{viewModel.totalLevel5CreditsInt}"
+                                android:layout_gravity="center"
+                                android:layout_weight="7"
+                                android:progress="@{viewModel.receivedLevel5Credits}"
+                                android:progressTint="?attr/colorSecondaryVariant"
+                                />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="@={viewModel.totalLevel5Credits}"
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/current_level_5_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/et_margin_top"
+                        android:layout_marginBottom="@dimen/et_margin_bottom">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/current_level_5_progress"
+                            android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
+                        <TextView
+                            android:id="@+id/tv_insights_page_current_progress"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:text="@={viewModel.currentLevel5Progress}"
+                            android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
+                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/et_margin_top">
+                        android:layout_marginTop="@dimen/et_margin_top"
+                        android:layout_marginBottom="@dimen/et_margin_bottom">
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/credits_zero_progress"
-                            android:gravity="center"
                             android:layout_weight="1"
+                            android:text="@string/overall_level_5_progress"
                             android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
-                        <ProgressBar
-                            style="?android:attr/progressBarStyleHorizontal"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:max="@{viewModel.totalLevel5CreditsInt}"
-                            android:layout_gravity="center"
-                            android:layout_weight="7"
-                            android:progress="@{viewModel.receivedLevel5Credits}"
-                            android:progressTint="?attr/colorSecondaryVariant"
-                            />
                         <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="@={viewModel.totalLevel5Credits}"
-                            android:gravity="center"
+                            android:layout_width="match_parent"
                             android:layout_weight="1"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:text="@={viewModel.overallLevel5Progress}"
+                            android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/et_margin_top"
+                        android:layout_marginBottom="@dimen/et_margin_bottom">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/weighted_level_5_progress"
+                            android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:text="@={viewModel.weightedLevel5Progress}"
                             android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
                     </LinearLayout>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/et_margin_top"
-                    android:layout_marginBottom="@dimen/et_margin_bottom">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/current_level_5_progress"
-                        android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
-                    <TextView
-                        android:id="@+id/tv_insights_page_current_progress"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:layout_height="wrap_content"
-                        android:text="@={viewModel.currentLevel5Progress}"
-                        android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/et_margin_top"
-                    android:layout_marginBottom="@dimen/et_margin_bottom">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/overall_level_5_progress"
-                        android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:layout_height="wrap_content"
-                        android:text="@={viewModel.overallLevel5Progress}"
-                        android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/et_margin_top"
-                    android:layout_marginBottom="@dimen/et_margin_bottom">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/weighted_level_5_progress"
-                        android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:layout_height="wrap_content"
-                        android:text="@={viewModel.weightedLevel5Progress}"
-                        android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
-                </LinearLayout>
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -202,6 +212,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/current_level_6_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -261,6 +272,9 @@
                         android:text="@={viewModel.weightedLevel6Progress}"
                         android:textAppearance="@style/TextAppearance.MyTheme.Body1"/>
                 </LinearLayout>
+            </LinearLayout>
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

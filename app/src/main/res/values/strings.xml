@@ -95,8 +95,8 @@
     <string name="overall_progress_removal">Overall Mark (Lowest Module Removed)</string>
     <string name="lowest_scoring_module">Lowest Module</string>
     <string name="credits_zero_progress">0</string>
-    <string name="level_5_credit_progress">Level 5 Credit Progress</string>
-    <string name="level_6_credit_progress">Level 6 Credit Progress</string>
+    <string name="level_5_credit_progress">Level 5 Credits Received</string>
+    <string name="level_6_credit_progress">Level 6 Credits Received</string>
     <string name="insights_page_grading_text">Grade</string>
     <string name="fail">Fail</string>
     <string name="pass">Pass</string>

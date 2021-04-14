@@ -164,9 +164,4 @@ open class ModuleRecyclerAdapter(private val dataSet: List<Module>,
             }
         }
     }
-
-
-//    interface OnItemClickListener {
-//        fun onItemClick(module: Module)
-//    }
 }

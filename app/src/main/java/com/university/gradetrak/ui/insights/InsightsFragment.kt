@@ -6,13 +6,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.marginTop
+import androidx.core.view.setMargins
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.university.gradetrak.R
 import com.university.gradetrak.databinding.FragmentInsightsBinding
 import com.university.gradetrak.services.Services
 import com.university.gradetrak.utils.TAG
+import kotlin.math.absoluteValue
 
 class InsightsFragment : Fragment() {
     private lateinit var binding: FragmentInsightsBinding
@@ -43,6 +47,7 @@ class InsightsFragment : Fragment() {
         observeDatabase()
         observeModulePromptTextIntegerValue()
         observerOverallGradeTextIntegerValue()
+        observeLevelsComplete()
     }
 
     private fun observeDatabase(){
@@ -85,5 +90,26 @@ class InsightsFragment : Fragment() {
             }
             binding.tvGrade.setText(it)
         })
+    }
+
+    private fun observeLevelsComplete(){
+        viewModel.level5Complete.observe(viewLifecycleOwner, {
+            hideLayout(binding.currentLevel5Container)
+        })
+        viewModel.level6Complete.observe(viewLifecycleOwner, {
+            hideLayout(binding.currentLevel6Container)
+        })
+    }
+
+    private fun hideLayout(layout: LinearLayout){
+        val param = layout.layoutParams as ViewGroup.MarginLayoutParams
+        param.setMargins(0,0,0,0)
+        param.height = 0
+//        val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+//                LinearLayout.LayoutParams.WRAP_CONTENT)
+//        layoutParams.setMargins(0,0,0,0)
+//        layoutParams.height = 0
+//
+//        layout.addView(layout, layoutParams)
     }
 }

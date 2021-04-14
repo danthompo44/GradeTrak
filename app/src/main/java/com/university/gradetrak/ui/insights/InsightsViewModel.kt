@@ -38,6 +38,9 @@ class InsightsViewModel (private val moduleService: ModuleService,
     var overallProgressDouble = 0.0
     var overallGradeResourceId = MutableLiveData<Int>()
 
+    val level5Complete = MutableLiveData<Boolean>()
+    val level6Complete = MutableLiveData<Boolean>()
+
     fun getAllModules(): MutableLiveData<List<Module>>{
         return moduleService.getAll()
     }
@@ -57,6 +60,13 @@ class InsightsViewModel (private val moduleService: ModuleService,
 
         receivedLevel5Credits.set(receivedCredits[0])
         receivedLevel6Credits.set(receivedCredits[1])
+
+        if(receivedCredits[0] >= settings.level5Credits!!){
+            level5Complete.value = true
+        }
+        if(receivedCredits[1] >= settings.level6Credits!!){
+            level6Complete.value = true
+        }
     }
 
     private fun calculate(){
