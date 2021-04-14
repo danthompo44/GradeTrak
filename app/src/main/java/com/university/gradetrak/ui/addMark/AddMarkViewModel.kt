@@ -3,6 +3,7 @@ package com.university.gradetrak.ui.addMark
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.university.gradetrak.R
 import com.university.gradetrak.models.Module
 import com.university.gradetrak.services.ModuleService
 
@@ -13,20 +14,30 @@ class AddMarkViewModel(private val moduleService: ModuleService): ViewModel() {
     val success = MutableLiveData(false)
 
     //Set up error Live Data for the Login Activity to observe and update the UI, snack bars etc.
-    val error: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
+    val errorStringIntValue = MutableLiveData<Int>()
 
     fun handleEditButtonClick(){
+        var mark = -1
+
+        try{
+            mark = moduleResult.get().toString().trim().toInt()
+        } catch (e: Exception){
+            errorStringIntValue.value = R.string.mark_is_not_a_number
+            return
+        }
+
+        if(mark < 0 || mark > 100){
+            errorStringIntValue.value = R.string.mark_is_invalid
+            return
+        }
+
         val name = moduleName.get().toString().trim()
         val credits = selectedModule.credits
         val level = selectedModule.level
-        val result = moduleResult.get().toString().trim().toInt()
-        val module = Module(name, credits, level, result)
+        val module = Module(name, credits, level, mark)
         module.uuid = selectedModule.uuid
         moduleService.editModule(module)
 
-        error.value = module.toString()
         success.value = true
         clearDetails()
     }

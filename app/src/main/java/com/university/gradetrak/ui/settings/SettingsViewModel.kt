@@ -1,27 +1,24 @@
 package com.university.gradetrak.ui.settings
 
-import android.util.Log
 import android.widget.Button
 import androidx.databinding.Observable
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.university.gradetrak.R
 import com.university.gradetrak.models.Settings
 import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.services.SettingsService
-import com.university.gradetrak.utils.TAG
 
 class SettingsViewModel(private val moduleService: ModuleService, private val settingsService: SettingsService) : ViewModel() {
     val thirtySeventyWeighting = ObservableBoolean()
     val removeLowestModule = ObservableBoolean()
     val level5Credits = ObservableField<String>()
-    var level5CreditsComparison = ""
+    private var level5CreditsComparison = ""
     val level6Credits = ObservableField<String>()
-    var level6CreditsComparison = ""
+    private var level6CreditsComparison = ""
 
     var applyChangesButtonVisibility = ObservableInt(Button.INVISIBLE)
 

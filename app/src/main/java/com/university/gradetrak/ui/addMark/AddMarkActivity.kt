@@ -43,8 +43,8 @@ class AddMarkActivity : BaseActivity() {
     }
 
     private fun observeErrors(){
-        viewModel.error.observe(this, Observer { error ->
-            showSnackBar(error, true)
+        viewModel.errorStringIntValue.observe(this, Observer {
+            showSnackBar(resources.getString(it), true)
         })
     }
 
