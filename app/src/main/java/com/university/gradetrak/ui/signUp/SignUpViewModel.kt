@@ -5,8 +5,10 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.university.gradetrak.R
+import com.university.gradetrak.models.Student
+import com.university.gradetrak.services.StudentService
 
-class SignUpViewModel : ViewModel() {
+class SignUpViewModel (private val studentService: StudentService) : ViewModel() {
     val firstName = ObservableField<String>()
     val surname = ObservableField<String>()
     val emailAddress = ObservableField<String>()
@@ -14,6 +16,15 @@ class SignUpViewModel : ViewModel() {
     val confirmPassword = ObservableField<String>()
 
     val error = MutableLiveData<Int>()
+
+    fun addStudent(currentUserId: String?){
+        val nameString = firstName.get().toString().trim()
+        val surnameString = surname.get().toString().trim()
+        val emailString = emailAddress.get().toString().trim()
+        val student = Student(currentUserId, nameString, surnameString, emailString)
+
+        studentService.addStudent(student)
+    }
 
     /**
      * A function that returns a false if the user has not entered required information.
@@ -66,6 +77,5 @@ class SignUpViewModel : ViewModel() {
                 true
             }
         }
-
     }
 }

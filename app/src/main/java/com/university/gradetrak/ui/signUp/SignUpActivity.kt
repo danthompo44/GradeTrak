@@ -9,11 +9,12 @@ import com.google.firebase.ktx.Firebase
 import com.university.gradetrak.BaseActivity
 import com.university.gradetrak.R
 import com.university.gradetrak.databinding.ActivitySignUpBinding
+import com.university.gradetrak.services.Services
 
 class SignUpActivity : BaseActivity() {
     private lateinit var binding: ActivitySignUpBinding
     private val viewModel: SignUpViewModel by viewModels {
-        SignUpViewModelFactory()
+        SignUpViewModelFactory(Services.studentService)
     }
     private lateinit var auth: FirebaseAuth
 
@@ -54,7 +55,6 @@ class SignUpActivity : BaseActivity() {
 
     fun handleSignUpButtonPress(view: View){
         if(viewModel.validateUserCredentials()){
-            showSnackBar("Successful Log In", false)
             createUser()
         } else {
             return
@@ -67,6 +67,8 @@ class SignUpActivity : BaseActivity() {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
+                        val currentUser = auth.currentUser?.uid
+                        viewModel.addStudent(currentUser)
                         showSnackBar(resources.getString(R.string.sign_up_successful), false)
                         finish()
                     } else {
