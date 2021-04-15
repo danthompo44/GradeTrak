@@ -1,140 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.login.LoginActivity"
-    android:elevation="0dp"
-    android:background="?attr/colorSurface">
-    <FrameLayout
-        android:id="@+id/fl_login_header_image"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/auth_header_image_height"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:elevation="8dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-        <ImageView
+    <data>
+        <variable
+            name="viewModel"
+            type="com.university.gradetrak.ui.login.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.login.LoginActivity"
+        android:elevation="0dp"
+        android:background="?attr/colorSurface">
+
+        <FrameLayout
+            android:id="@+id/fl_login_header_image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/login_page_image_view_description"
-            android:scaleType="fitXY"
-            android:src="@drawable/brand_image" />
+            android:layout_height="@dimen/auth_header_image_height"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:elevation="8dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/login_page_image_view_description"
+                android:scaleType="fitXY"
+                android:src="@drawable/brand_image" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:elevation="8dp">
+
+                <TextView
+                    android:id="@+id/tv_app_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dancing_script_bold"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:text="@string/app_name"
+                    android:textAppearance="@style/TextAppearance.MyTheme.Headline3" />
+
+            </LinearLayout>
+        </FrameLayout>
+        `
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/et_margin_top"
+            android:layout_marginEnd="@dimen/activity_vertical_margin"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fl_login_header_image">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/login_page_title"
+                android:textAppearance="@style/TextAppearance.MyTheme.Headline6" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_login_page_email_container"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/et_margin_top"
+                android:layout_marginBottom="@dimen/et_margin_bottom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fl_login_header_image">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_login_page_email_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/login_page_email_address_edit_text_hint"
+                    android:text="@={viewModel.emailAddress}"
+                    android:inputType="textEmailAddress"
+                    android:textAppearance="@style/TextAppearance.MyTheme.Body1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_login_page_password_container"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/et_margin_top"
+                android:layout_marginBottom="@dimen/et_margin_bottom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fl_login_header_image">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_login_page_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/login_page_password_edit_text_hint"
+                    android:text="@={viewModel.password}"
+                    android:inputType="textPassword"
+                    android:textAppearance="@style/TextAppearance.MyTheme.Body1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                style="@style/Button.DuckEgg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login_page_login_button_text"
+                android:onClick="handleLoginButtonClick" />
+
+            <Button
+                style="@style/Button.DuckEgg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login_page_sign_up_button_text"
+                android:onClick="handleSignUpButtonClick" />
+
+            <Button
+                style="@style/Button.Cobalt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login_page_forgot_password_button_text"
+                android:onClick="handleForgottenPasswordButtonClick" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:elevation="8dp">
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/tv_app_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/dancing_script_bold"
-                android:textColor="?attr/colorOnPrimary"
-                android:text="@string/app_name"
-                android:textAppearance="@style/TextAppearance.MyTheme.Headline3" />
-
+                android:text="@string/copyright"
+                android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/copyright_margin_bottom" />
         </LinearLayout>
-    </FrameLayout>`
-
-    <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_vertical_margin"
-        android:layout_marginTop="@dimen/et_margin_top"
-        android:layout_marginEnd="@dimen/activity_vertical_margin"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fl_login_header_image">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/login_page_title"
-            android:textAppearance="@style/TextAppearance.MyTheme.Headline6" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_login_page_email_container"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/et_margin_top"
-            android:layout_marginBottom="@dimen/et_margin_bottom"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fl_login_header_image">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_login_page_email_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/login_page_email_address_edit_text_hint"
-                android:inputType="textEmailAddress"
-                android:textAppearance="@style/TextAppearance.MyTheme.Body1" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_login_page_password_container"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/et_margin_top"
-            android:layout_marginBottom="@dimen/et_margin_bottom"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fl_login_header_image">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_login_page_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/login_page_password_edit_text_hint"
-                android:inputType="textPassword"
-                android:textAppearance="@style/TextAppearance.MyTheme.Body1" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            style="@style/Button.DuckEgg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login_page_login_button_text"
-            android:onClick="handleLoginButtonClick"/>
-
-        <Button
-            style="@style/Button.DuckEgg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login_page_sign_up_button_text"
-            android:onClick="handleSignUpButtonClick"/>
-
-        <Button
-            style="@style/Button.Cobalt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login_page_forgot_password_button_text"
-            android:onClick="handleForgottenPasswordButtonClick"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/copyright"
-            android:textAppearance="@style/TextAppearance.MyTheme.Body2"
-            android:gravity="center"
-            android:layout_marginBottom="@dimen/copyright_margin_bottom"/>
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
