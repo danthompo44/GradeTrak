@@ -3,7 +3,6 @@ package com.university.gradetrak.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.google.firebase.database.FirebaseDatabase
 import com.university.gradetrak.BaseActivity
 import com.university.gradetrak.MainActivity
 import com.university.gradetrak.databinding.ActivityLoginBinding

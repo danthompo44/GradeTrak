@@ -85,6 +85,17 @@
     <string name="sign_up_page_confirm_password_edit_text_hint">Confirm Password</string>
     <string name="sign_up_page_sign_up_button_text">Register</string>
 
+    <!--  Auth Login Errors-->
+    <string name="err_msg_enter_first_name">Enter your first name.</string>
+    <string name="err_msg_enter_surname">Enter your surname.</string>
+    <string name="err_msg_enter_email_address">Enter an email address.</string>
+    <string name="err_msg_invalid_email_address">Enter a valid email address.</string>
+    <string name="err_msg_enter_password">Enter a password.</string>
+    <string name="err_msg_confirm_password">Confirm your password.</string>
+    <string name="err_msg_password_do_not_match">Passwords don\'t match.</string>
+    <string name="success_msg_details_valid">Your details are valid.</string>
+    <string name="sign_up_successful">Congrats, account created successfully.</string>
+
     <!-- Forgot Password Strings   -->
     <string name="forgot_password_title_text">Forgot Password</string>
     <string name="forgot_password_page_abstract">No problem, enter your email address below and we\'ll send you a link to reset it.</string>
