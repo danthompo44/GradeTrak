@@ -14,7 +14,7 @@ import com.university.gradetrak.services.Services
 class SignUpActivity : BaseActivity() {
     private lateinit var binding: ActivitySignUpBinding
     private val viewModel: SignUpViewModel by viewModels {
-        SignUpViewModelFactory(Services.studentService)
+        SignUpViewModelFactory(Services.studentService, Services.settingsService)
     }
     private lateinit var auth: FirebaseAuth
 
@@ -67,7 +67,7 @@ class SignUpActivity : BaseActivity() {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        val currentUser = auth.currentUser?.uid
+                        val currentUser = auth.uid
                         viewModel.addStudent(currentUser)
                         showSnackBar(resources.getString(R.string.sign_up_successful), false)
                         finish()

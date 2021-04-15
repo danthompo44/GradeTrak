@@ -6,9 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.university.gradetrak.R
 import com.university.gradetrak.models.Student
+import com.university.gradetrak.services.SettingsService
 import com.university.gradetrak.services.StudentService
+import com.university.gradetrak.utils.DefaultSettingsFactory
 
-class SignUpViewModel (private val studentService: StudentService) : ViewModel() {
+class SignUpViewModel (private val studentService: StudentService,
+                       private val settingsService: SettingsService) : ViewModel() {
+
     val firstName = ObservableField<String>()
     val surname = ObservableField<String>()
     val emailAddress = ObservableField<String>()
@@ -20,10 +24,11 @@ class SignUpViewModel (private val studentService: StudentService) : ViewModel()
     fun addStudent(currentUserId: String?){
         val nameString = firstName.get().toString().trim()
         val surnameString = surname.get().toString().trim()
-        val emailString = emailAddress.get().toString().trim()
-        val student = Student(currentUserId, nameString, surnameString, emailString)
+        val student = Student(currentUserId, nameString, surnameString)
 
         studentService.addStudent(student)
+//        Use a factory to reduce ViewModel Coupling to the Settings Class
+        settingsService.addEditSettings(DefaultSettingsFactory.getSettings(currentUserId))
     }
 
     /**

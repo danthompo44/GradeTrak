@@ -7,12 +7,15 @@ import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.university.gradetrak.R
 import com.university.gradetrak.models.Settings
 import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.services.SettingsService
 
 class SettingsViewModel(private val moduleService: ModuleService, private val settingsService: SettingsService) : ViewModel() {
+    var auth = Firebase.auth
     val thirtySeventyWeighting = ObservableBoolean()
     val removeLowestModule = ObservableBoolean()
     val level5Credits = ObservableField<String>()
@@ -108,8 +111,8 @@ class SettingsViewModel(private val moduleService: ModuleService, private val se
 
         val settings = Settings(thirtySeventyWeighting.get(), removeLowestModule.get(),
                 level5Credits.get()?.toInt(), level6Credits.get()?.toInt())
-        settings.uuid = getUserSettings().value!!.uuid
-        settingsService.editSettings(settings)
+        settings.userId = auth.uid
+        settingsService.addEditSettings(settings)
         applyChangesButtonVisibility.set(Button.INVISIBLE)
     }
 

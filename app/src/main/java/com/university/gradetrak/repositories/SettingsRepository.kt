@@ -7,31 +7,19 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.university.gradetrak.models.Settings
-import com.university.gradetrak.utils.TAG
-import java.util.*
-import kotlin.collections.ArrayList
 
 class SettingsRepository {
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-    private val settings = database.getReference("settings").child("A user ID")
+    private val settings = database.getReference("settings")
     val settingsLD = MutableLiveData<Settings>()
 
     init {
         getAll()
     }
 
-    fun addSettings(settings: Settings){
-        this.settings.child(UUID.randomUUID().toString()).setValue(settings)
+    fun addEditSettings(settings: Settings){
+        this.settings.child(settings.userId!!).setValue(settings)
     }
-
-    fun editSettings(settings: Settings){
-        this.settings.child(settings.uuid.toString()).setValue(settings)
-    }
-
-    fun delete(settings: Settings){
-        this.settings.child(settings.uuid.toString()).removeValue()
-    }
-
 
     private fun getAll(){
         // Read from the database
@@ -42,7 +30,7 @@ class SettingsRepository {
                 // whenever data at this location is updated.
                 for(child in dataSnapshot.children){
                     settingsValue = child.getValue(Settings::class.java)
-                    settingsValue!!.uuid = child.key.toString()
+                    settingsValue!!.userId = child.key.toString()
                 }
                 settingsLD.value = settingsValue
             }
