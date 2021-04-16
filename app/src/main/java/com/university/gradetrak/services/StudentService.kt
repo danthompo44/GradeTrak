@@ -12,4 +12,8 @@ class StudentService (private val repository: StudentRepository) {
     fun addStudent(student: Student){
         repository.addStudent(student)
     }
+
+    fun getStudent(userId: String): MutableLiveData<Student>{
+        return repository.getStudent(userId)
+    }
 }

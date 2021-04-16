@@ -21,6 +21,16 @@ class StudentRepository {
         students.child(student.uuid!!).setValue(student)
     }
 
+    fun getStudent(userId: String) : MutableLiveData<Student> {
+        val student = MutableLiveData<Student>()
+        for(s in studentsLD.value!!){
+            if(s.uuid == userId){
+                student.value = s
+            }
+        }
+        return student
+    }
+
     private fun getAll(){
         // Read from the database
         students.addValueEventListener(object : ValueEventListener {

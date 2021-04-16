@@ -8,12 +8,15 @@ import androidx.lifecycle.ViewModel
 import com.university.gradetrak.R
 import com.university.gradetrak.models.Module
 import com.university.gradetrak.models.Settings
+import com.university.gradetrak.models.Student
 import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.services.SettingsService
+import com.university.gradetrak.services.StudentService
 import com.university.gradetrak.utils.InsightsCalculator
 
 class InsightsViewModel (private val moduleService: ModuleService,
-                         private val settingsService: SettingsService) : ViewModel() {
+                         private val settingsService: SettingsService,
+                         private val studentService: StudentService) : ViewModel() {
 
     val modulePromptStringIntegerValue = MutableLiveData<Int>()
     val totalLevel5Credits = ObservableField<String>()
@@ -39,7 +42,7 @@ class InsightsViewModel (private val moduleService: ModuleService,
     val level6Complete = MutableLiveData<Boolean>()
 
     val displayInsights = ObservableInt(LinearLayout.VISIBLE)
-    val noInsightsText = MutableLiveData<Int>()
+    val showInsights = MutableLiveData<Boolean>()
 
     fun getAllModules(): MutableLiveData<List<Module>>{
         return moduleService.getAll()
@@ -76,11 +79,21 @@ class InsightsViewModel (private val moduleService: ModuleService,
         for(module in getAllModules().value!!){
             if(module.result != null){
                 displayInsights.set(LinearLayout.VISIBLE)
+                showInsights.value =  true
                 return true
             }
         }
         displayInsights.set(LinearLayout.INVISIBLE)
+        showInsights.value =  false
         return false
+    }
+
+    private fun getStudent(userId: String): MutableLiveData<Student>{
+        return studentService.getStudent(userId)
+    }
+
+    fun getStudentName(userId: String): String{
+        return getStudent(userId).value?.firstName!!
     }
 
     private fun calculate(){

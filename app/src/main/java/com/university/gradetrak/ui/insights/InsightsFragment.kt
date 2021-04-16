@@ -33,7 +33,7 @@ class InsightsFragment : Fragment() {
 
     private fun setupViewModelBinding() {
         val viewModelFactory = InsightsViewModelFactory(Services.getModuleService(auth.uid!!),
-            Services.settingsService)
+            Services.settingsService, Services.studentService)
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(InsightsViewModel::class.java)
         binding.viewModel = viewModel
@@ -100,21 +100,22 @@ class InsightsFragment : Fragment() {
     }
 
     private fun observeShowInsights(){
-
-        viewModel.noInsightsText.observe(viewLifecycleOwner, {
-            binding.noInsightsText.text = getString(it)
+        viewModel.showInsights.observe(viewLifecycleOwner, { showInsights ->
+            if(showInsights){
+                binding.noInsightsText.text = createUserString(viewModel.getStudentName(auth.uid!!))
+            } else {
+                binding.noInsightsText.text = getString(R.string.no_insights_text)
+            }
         })
+    }
+
+    private fun createUserString(name: String): String{
+        return name + getString(R.string.users_insights)
     }
 
     private fun hideLayout(layout: LinearLayout){
         val param = layout.layoutParams as ViewGroup.MarginLayoutParams
         param.setMargins(0,0,0,0)
         param.height = 0
-//        val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-//                LinearLayout.LayoutParams.WRAP_CONTENT)
-//        layoutParams.setMargins(0,0,0,0)
-//        layoutParams.height = 0
-//
-//        layout.addView(layout, layoutParams)
     }
 }
