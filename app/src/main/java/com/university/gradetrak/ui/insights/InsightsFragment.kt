@@ -2,25 +2,22 @@ package com.university.gradetrak.ui.insights
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.core.view.marginTop
-import androidx.core.view.setMargins
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.university.gradetrak.R
 import com.university.gradetrak.databinding.FragmentInsightsBinding
 import com.university.gradetrak.services.Services
-import com.university.gradetrak.utils.TAG
-import kotlin.math.absoluteValue
 
 class InsightsFragment : Fragment() {
     private lateinit var binding: FragmentInsightsBinding
     private lateinit var viewModel: InsightsViewModel
+    private val auth = Firebase.auth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +32,7 @@ class InsightsFragment : Fragment() {
     }
 
     private fun setupViewModelBinding() {
-        val viewModelFactory = InsightsViewModelFactory(Services.moduleService,
+        val viewModelFactory = InsightsViewModelFactory(Services.getModuleService(auth.uid!!),
             Services.settingsService)
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(InsightsViewModel::class.java)
@@ -48,6 +45,7 @@ class InsightsFragment : Fragment() {
         observeModulePromptTextIntegerValue()
         observerOverallGradeTextIntegerValue()
         observeLevelsComplete()
+        observeShowInsights()
     }
 
     private fun observeDatabase(){
@@ -98,6 +96,13 @@ class InsightsFragment : Fragment() {
         })
         viewModel.level6Complete.observe(viewLifecycleOwner, {
             hideLayout(binding.currentLevel6Container)
+        })
+    }
+
+    private fun observeShowInsights(){
+
+        viewModel.noInsightsText.observe(viewLifecycleOwner, {
+            binding.noInsightsText.text = getString(it)
         })
     }
 

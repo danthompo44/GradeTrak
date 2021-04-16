@@ -5,6 +5,8 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.university.gradetrak.BaseActivity
 import com.university.gradetrak.R
 import com.university.gradetrak.databinding.ActivityAddModuleBinding
@@ -14,8 +16,9 @@ import com.university.gradetrak.services.Services
 
 class AddModuleActivity : BaseActivity() {
     private lateinit var binding: ActivityAddModuleBinding
+    private val auth = Firebase.auth
     private val viewModel: AddModuleViewModel by viewModels {
-        AddModuleViewModelFactory(Services.moduleService, Services.settingsService)
+        AddModuleViewModelFactory(Services.getModuleService(auth.uid!!), Services.settingsService)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

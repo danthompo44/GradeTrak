@@ -8,13 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.university.gradetrak.MainActivity
 import com.university.gradetrak.databinding.FragmentModulesBinding
-import com.university.gradetrak.models.Module
 import com.university.gradetrak.services.Services
 import com.university.gradetrak.ui.adapters.ModuleRecyclerAdapter
-import com.university.gradetrak.ui.addModule.AddModuleActivity
 import com.university.gradetrak.ui.addMark.AddMarkActivity
+import com.university.gradetrak.ui.addModule.AddModuleActivity
 import com.university.gradetrak.utils.SELECTED_MODULE_ID_KEY
 import com.university.gradetrak.utils.SELECTED_MODULE_KEY
 
@@ -22,6 +23,7 @@ class ModulesFragment : Fragment() {
     private lateinit var binding: FragmentModulesBinding
     private lateinit var viewModel: ModulesViewModel
     private lateinit var linearLayoutManager: LinearLayoutManager
+    private val auth = Firebase.auth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +40,7 @@ class ModulesFragment : Fragment() {
     }
 
     private fun setupViewModelBinding(){
-        val viewModelFactory = ModulesViewModelFactory(Services.moduleService)
+        val viewModelFactory = ModulesViewModelFactory(Services.getModuleService(auth.uid!!))
         viewModel = ViewModelProvider(this, viewModelFactory).get(ModulesViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this

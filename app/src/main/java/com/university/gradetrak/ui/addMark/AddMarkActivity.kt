@@ -3,6 +3,8 @@ package com.university.gradetrak.ui.addMark
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.university.gradetrak.BaseActivity
 import com.university.gradetrak.databinding.ActivityAddMarkBinding
 import com.university.gradetrak.models.Module
@@ -12,9 +14,10 @@ import com.university.gradetrak.utils.SELECTED_MODULE_KEY
 
 class AddMarkActivity : BaseActivity() {
     private lateinit var binding: ActivityAddMarkBinding
+    private val auth = Firebase.auth
 
     private val viewModel: AddMarkViewModel by viewModels {
-        AddMarkViewModelFactory(Services.moduleService)
+        AddMarkViewModelFactory(Services.getModuleService(auth.uid!!))
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

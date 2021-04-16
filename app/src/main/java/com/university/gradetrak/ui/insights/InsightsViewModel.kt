@@ -1,11 +1,8 @@
 package com.university.gradetrak.ui.insights
 
-import android.util.Log
-import android.view.ViewGroup
-import android.widget.Button
+import android.widget.LinearLayout
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.university.gradetrak.R
@@ -14,10 +11,10 @@ import com.university.gradetrak.models.Settings
 import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.services.SettingsService
 import com.university.gradetrak.utils.InsightsCalculator
-import com.university.gradetrak.utils.TAG
 
 class InsightsViewModel (private val moduleService: ModuleService,
                          private val settingsService: SettingsService) : ViewModel() {
+
     val modulePromptStringIntegerValue = MutableLiveData<Int>()
     val totalLevel5Credits = ObservableField<String>()
     val totalLevel5CreditsInt = ObservableField<Int>()
@@ -41,6 +38,9 @@ class InsightsViewModel (private val moduleService: ModuleService,
     val level5Complete = MutableLiveData<Boolean>()
     val level6Complete = MutableLiveData<Boolean>()
 
+    val displayInsights = ObservableInt(LinearLayout.VISIBLE)
+    val noInsightsText = MutableLiveData<Int>()
+
     fun getAllModules(): MutableLiveData<List<Module>>{
         return moduleService.getAll()
     }
@@ -50,23 +50,37 @@ class InsightsViewModel (private val moduleService: ModuleService,
     }
 
     fun refreshUI(){
-        calculate()
         val settings = settingsService.getAll().value
         totalLevel5Credits.set(settings!!.level5Credits.toString())
         totalLevel5CreditsInt.set(settings.level5Credits)
         totalLevel6Credits.set(settings.level6Credits.toString())
         totalLevel6CreditsInt.set(settings.level6Credits)
-        val receivedCredits = InsightsCalculator.getReceivedCredits()
 
-        receivedLevel5Credits.set(receivedCredits[0])
-        receivedLevel6Credits.set(receivedCredits[1])
+        if(hasMarks()){
+            calculate()
+            val receivedCredits = InsightsCalculator.getReceivedCredits()
 
-        if(receivedCredits[0] >= settings.level5Credits!!){
-            level5Complete.value = true
+            receivedLevel5Credits.set(receivedCredits[0])
+            receivedLevel6Credits.set(receivedCredits[1])
+
+            if(receivedCredits[0] >= settings.level5Credits!!){
+                level5Complete.value = true
+            }
+            if(receivedCredits[1] >= settings.level6Credits!!){
+                level6Complete.value = true
+            }
         }
-        if(receivedCredits[1] >= settings.level6Credits!!){
-            level6Complete.value = true
+    }
+
+    private fun hasMarks(): Boolean{
+        for(module in getAllModules().value!!){
+            if(module.result != null){
+                displayInsights.set(LinearLayout.VISIBLE)
+                return true
+            }
         }
+        displayInsights.set(LinearLayout.INVISIBLE)
+        return false
     }
 
     private fun calculate(){

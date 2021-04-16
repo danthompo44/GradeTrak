@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.university.gradetrak.MainActivity
 import com.university.gradetrak.databinding.FragmentSettingsBinding
 import com.university.gradetrak.services.Services
@@ -13,6 +15,7 @@ import com.university.gradetrak.services.Services
 class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingsBinding
     private lateinit var viewModel: SettingsViewModel
+    private val auth = Firebase.auth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +32,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setupViewModelBinding(){
-        val viewModelFactory = SettingsViewModelFactory(Services.moduleService, Services.settingsService)
+        val viewModelFactory = SettingsViewModelFactory(Services.getModuleService(auth.uid!!), Services.settingsService)
         viewModel = ViewModelProvider(this, viewModelFactory).get(SettingsViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this

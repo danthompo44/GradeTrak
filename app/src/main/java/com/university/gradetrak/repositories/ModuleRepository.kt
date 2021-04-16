@@ -7,13 +7,12 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.university.gradetrak.models.Module
-import com.university.gradetrak.utils.TAG
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ModuleRepository {
+class ModuleRepository (userId: String) {
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-    private val modules = database.getReference("modules").child("A users Id")
+    private val modules = database.getReference("modules").child(userId)
     val modulesLD = MutableLiveData<List<Module>>()
 
     init {
