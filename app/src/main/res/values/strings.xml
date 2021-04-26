@@ -44,6 +44,9 @@
     <string name="add_module_button_text">Add</string>
     <string name="error_too_many_level_5_modules">You are already registered for the maximum number of level 5 credits.</string>
     <string name="error_too_many_level_6_modules">You are already registered for the maximum number of level 6 credits.</string>
+    <string name="no_module_name_error">Please enter a module name</string>
+    <string name="no_credits_error">Please select a credits amount</string>
+    <string name="no_level_error">Please select a module level</string>
 
     <!-- Add Mark Page Strings -->
     <string name="edit_module_page_title">Edit Mark</string>
@@ -65,6 +68,7 @@
     <string name="level_6_is_not_a_number">Level 6 credits is not a number.</string>
     <string name="level_5_credits_too_low">Level 5 credits is lower than the total credits of your enrolled modules.</string>
     <string name="level_6_credits_too_low">Level 6 credits is lower than the total credits of your enrolled modules.</string>
+
 
     <!-- Login Page Strings -->
     <string name="login_page_image_view_description">Brand Image</string>
