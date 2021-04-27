@@ -89,11 +89,12 @@
 
 
             <Button
+                android:id="@+id/btn_edit_mark_page_submit"
+                style="@style/Button.DuckEgg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/edit_module_button_text"
-                style="@style/Button.DuckEgg"
-                android:onClick="@{() -> viewModel.handleEditButtonClick()}"/>
+                android:onClick="@{() -> viewModel.handleEditButtonClick()}"
+                android:text="@string/edit_module_button_text" />
 
 
         </LinearLayout>
