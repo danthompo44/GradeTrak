@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.services.SettingsService
 
-class AddModuleViewModelFactory (private val moduleService: ModuleService, private val settingsService: SettingsService) : ViewModelProvider.Factory {
+class AddModuleViewModelFactory (private val moduleService: ModuleService,
+                                 private val settingsService: SettingsService)
+    : ViewModelProvider.Factory {
     /**
      * Creates a new instance of the given `Class`.
      *

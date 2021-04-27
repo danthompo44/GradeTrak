@@ -17,10 +17,18 @@ class SettingsRepository {
         getAll()
     }
 
+    /**
+     * Adds or edits settings in the DB
+     * @param settings The settings to be added/edited
+     */
     fun addEditSettings(settings: Settings){
         this.settings.child(settings.userId!!).setValue(settings)
     }
 
+    /**
+     * Adds a listener to the database reference, this then updates the settings live data
+     * which can be observed
+     */
     private fun getAll(){
         // Read from the database
         settings.addValueEventListener(object : ValueEventListener {

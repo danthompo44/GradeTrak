@@ -6,7 +6,8 @@ import com.university.gradetrak.services.SettingsService
 import com.university.gradetrak.services.StudentService
 
 class SignUpViewModelFactory(private val studentService: StudentService,
-                             private val settingsService: SettingsService) : ViewModelProvider.Factory {
+                             private val settingsService: SettingsService)
+    : ViewModelProvider.Factory {
     /**
      * Creates a new instance of the given `Class`.
      *

@@ -31,19 +31,40 @@ class SettingsFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     * Uses the [SettingsViewModelFactory] to create a [SettingsViewModel].
+     * Passes a [Services.getModuleService] and [Services.settingsService]
+     * into the factory.
+     *
+     * Will then setup databinding between the layout and view model using
+     * view binding.
+     */
     private fun setupViewModelBinding(){
-        val viewModelFactory = SettingsViewModelFactory(Services.getModuleService(auth.uid!!), Services.settingsService)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(SettingsViewModel::class.java)
+        val viewModelFactory = SettingsViewModelFactory(
+            Services.getModuleService(auth.uid!!), Services.settingsService)
+        viewModel = ViewModelProvider(this, viewModelFactory)
+            .get(SettingsViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
     }
 
+    /**
+     * Observes [SettingsViewModel.getUserSettings]. If this changes
+     * the lambda will call [SettingsViewModel.setSettings] to update
+     * the settings object in the view model.
+     */
     private fun observeSettingsData(){
         viewModel.getUserSettings().observe(viewLifecycleOwner, { settings ->
             viewModel.setSettings(settings)
         })
     }
 
+    /**
+     * Will setup an observer of the [SettingsViewModel.errorStringIntNumber].
+     *
+     * If this observer is triggered the lambda will call [MainActivity.showSnackBar]
+     * to update the UI with the error message that will be retrieved fro [getResources].
+     */
     private fun observeErrors(){
         viewModel.errorStringIntNumber.observe(viewLifecycleOwner, {
             (activity as? MainActivity)?.showSnackBar(resources.getString(it), true)

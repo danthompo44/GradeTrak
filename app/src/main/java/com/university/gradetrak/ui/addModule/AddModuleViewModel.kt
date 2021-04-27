@@ -23,6 +23,9 @@ class AddModuleViewModel (private val moduleService: ModuleService,
     //Set up error Live Data for the Login Activity to observe and update the UI, snack bars etc.
     val errorStringInt = MutableLiveData<Int>()
 
+    /**
+     * Checks for errors and adds the module to the database
+     */
     fun handleAddClick(){
         if(validateData()){
             val inputtedCredits = Credits.valueOf(moduleCredits.get()!!).value
@@ -42,7 +45,8 @@ class AddModuleViewModel (private val moduleService: ModuleService,
                 }
             }
 
-            val module = Module(moduleName.get().toString(), Credits.valueOf(moduleCredits.get()!!).value, Level.valueOf(moduleLevel.get()!!).value)
+            val module = Module(moduleName.get().toString(), Credits.valueOf(moduleCredits.get()!!)
+                .value, Level.valueOf(moduleLevel.get()!!).value)
 
             moduleService.addModule(module)
 
@@ -50,6 +54,11 @@ class AddModuleViewModel (private val moduleService: ModuleService,
         }
     }
 
+    /**
+     * Gets the total amount of credits a user is register for
+     * @param The level of the module that will be checked against
+     * @return Total number of credits at the level
+     */
     private fun getUsersCredits(level: Int): Int{
         val modules = moduleService.getAll().value
         var credits = 0
@@ -63,6 +72,10 @@ class AddModuleViewModel (private val moduleService: ModuleService,
         return credits
     }
 
+    /**
+     * Validate that the user inputs are not empty
+     * @return true if data is valid
+     */
     private fun validateData(): Boolean{
         val nameString = moduleName.get().toString().trim()
         val credits = moduleCredits.get().toString().trim()

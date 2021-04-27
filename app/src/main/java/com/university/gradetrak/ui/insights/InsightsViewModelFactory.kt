@@ -8,7 +8,8 @@ import com.university.gradetrak.services.StudentService
 
 class InsightsViewModelFactory(private val moduleService: ModuleService,
                                private val settingsService: SettingsService,
-                               private val studentService: StudentService) : ViewModelProvider.Factory {
+                               private val studentService: StudentService)
+    : ViewModelProvider.Factory {
     /**
      * Creates a new instance of the given `Class`.
      *

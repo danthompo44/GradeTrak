@@ -31,6 +31,10 @@ class InsightsFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     * Creates the view model using a factory, sets up data binding between the view model
+     * and layout file
+     */
     private fun setupViewModelBinding() {
         val viewModelFactory = InsightsViewModelFactory(Services.getModuleService(auth.uid!!),
             Services.settingsService, Services.studentService)
@@ -40,6 +44,10 @@ class InsightsFragment : Fragment() {
         binding.lifecycleOwner = this
     }
 
+    /**
+     * A facade method that is in charge of calling the methods that will create
+     * observer of the view model
+     */
     private fun observeViewModel(){
         observeDatabase()
         observeModulePromptTextIntegerValue()
@@ -48,6 +56,17 @@ class InsightsFragment : Fragment() {
         observeShowInsights()
     }
 
+    /**
+     * Observes the [InsightsViewModel.getAllModules] and [InsightsViewModel.getSettings] methods.
+     *
+     * The functions [InsightsViewModel.getAllModules] and [InsightsViewModel.getSettings]
+     * returns live data from firebase, this allows this function to become an
+     * observer of that data.
+     *
+     * When a change is detected in [InsightsViewModel.getAllModules] or
+     * [InsightsViewModel.getSettings] this method the corresponding method will
+     * be called. This will call the [InsightsViewModel.refreshUI] method
+     */
     private fun observeDatabase(){
         viewModel.getAllModules().observe(viewLifecycleOwner, {
             viewModel.refreshUI()
@@ -57,39 +76,73 @@ class InsightsFragment : Fragment() {
         })
     }
 
+    /**
+     * Observes the lowest module prompt text integer value in the view model.
+     *
+     * [InsightsViewModel.modulePromptStringIntegerValue] returns an integer,
+     * this integer relates to a string resource within resources.
+     *
+     * When [InsightsViewModel.modulePromptStringIntegerValue] updates, the lambda
+     * method is triggered, causing the activity to retrieve the required string,
+     * pass it to the layout using view binding and display it to the user.
+     */
     private fun observeModulePromptTextIntegerValue(){
         viewModel.modulePromptStringIntegerValue.observe(viewLifecycleOwner, {
             binding.lowestModulePromptText.setText(it)
         })
     }
 
+    /**
+     * Sets up and observer of [InsightsViewModel.overallGradeResourceId]
+     *
+     * Dependent on what grade the user has, in the form of an integer value
+     * representative of a sting. The observer will change the background colour
+     * of the Text view holing the grade in the layout file.
+     *
+     * This method will also update the text view in the layout file too, using
+     * the integer passed to it from the view model to retrieve the string
+     */
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun observerOverallGradeTextIntegerValue(){
         viewModel.overallGradeResourceId.observe(viewLifecycleOwner, {
             when (it){
                 R.string.fail -> {
-                    binding.tvGrade.background = resources.getDrawable(R.drawable.grade_colour_scheme_fail)
+                    binding.tvGrade.background =
+                        resources.getDrawable(R.drawable.grade_colour_scheme_fail)
                 }
                 R.string.pass -> {
-                    binding.tvGrade.background = resources.getDrawable(R.drawable.grade_colour_scheme_pass)
+                    binding.tvGrade.background =
+                        resources.getDrawable(R.drawable.grade_colour_scheme_pass)
                 }
                 R.string.third -> {
-                    binding.tvGrade.background = resources.getDrawable(R.drawable.grade_colour_scheme_third)
+                    binding.tvGrade.background =
+                        resources.getDrawable(R.drawable.grade_colour_scheme_third)
                 }
                 R.string.two_two -> {
-                    binding.tvGrade.background = resources.getDrawable(R.drawable.grade_colour_scheme_two_two)
+                    binding.tvGrade.background =
+                        resources.getDrawable(R.drawable.grade_colour_scheme_two_two)
                 }
                 R.string.two_one -> {
-                    binding.tvGrade.background = resources.getDrawable(R.drawable.grade_colour_scheme_two_one)
+                    binding.tvGrade.background =
+                        resources.getDrawable(R.drawable.grade_colour_scheme_two_one)
                 }
                 R.string.first -> {
-                    binding.tvGrade.background = resources.getDrawable(R.drawable.grade_colour_scheme_first)
+                    binding.tvGrade.background =
+                        resources.getDrawable(R.drawable.grade_colour_scheme_first)
                 }
             }
             binding.tvGrade.setText(it)
         })
     }
 
+    /**
+     * Sets up an observer of [InsightsViewModel.level5Complete]
+     * and [InsightsViewModel.level6Complete]
+     *
+     * If [InsightsViewModel.level5Complete] or [InsightsViewModel.level6Complete]
+     * changes the corresponding lambda will trigger, calling [InsightsFragment.hideLayout]
+     * and passing through a linear layout file to be hidden from the UI
+     */
     private fun observeLevelsComplete(){
         viewModel.level5Complete.observe(viewLifecycleOwner, {
             hideLayout(binding.currentLevel5Container)
@@ -99,6 +152,15 @@ class InsightsFragment : Fragment() {
         })
     }
 
+    /**
+     * Sets up an observer of the [InsightsViewModel.showInsights] boolean.
+     *
+     * If [InsightsViewModel.showInsights] is true the method will retrieve the users name using
+     * [InsightsViewModel.getStudentName] and passing the id associated with [auth] to it.
+     * This name will then be displayed in the UI.
+     *
+     * If [InsightsViewModel.showInsights] is false the UI will be updated to show "No Insights"
+     */
     private fun observeShowInsights(){
         viewModel.showInsights.observe(viewLifecycleOwner, { showInsights ->
             if(showInsights){
@@ -109,10 +171,20 @@ class InsightsFragment : Fragment() {
         })
     }
 
+    /**
+     * A method that adds a string resource to [name]
+     *
+     * @return [name] with an extra string resource i.e "Bob's Insights"
+     */
     private fun createUserString(name: String): String{
         return name + getString(R.string.users_insights)
     }
 
+    /**
+     * Sets the margins and height of [layout] to 0.
+     *
+     * @param layout is a [LinearLayout]
+     */
     private fun hideLayout(layout: LinearLayout){
         val param = layout.layoutParams as ViewGroup.MarginLayoutParams
         param.setMargins(0,0,0,0)

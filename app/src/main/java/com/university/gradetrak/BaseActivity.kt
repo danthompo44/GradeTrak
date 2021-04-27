@@ -2,7 +2,6 @@ package com.university.gradetrak
 
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
-import android.util.TypedValue
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
@@ -16,7 +15,8 @@ open class BaseActivity : AppCompatActivity() {
      * @param   isError     Denotes if there is an error or not
      */
     fun showSnackBar(message: String, isError: Boolean){
-        val snackBar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
+        val snackBar = Snackbar.make(findViewById(android.R.id.content),
+            message, Snackbar.LENGTH_LONG)
         val snackBarView = snackBar.view
 
         if(isError){

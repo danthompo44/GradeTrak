@@ -44,14 +44,36 @@ class InsightsViewModel (private val moduleService: ModuleService,
     val displayInsights = ObservableInt(LinearLayout.VISIBLE)
     val showInsights = MutableLiveData<Boolean>()
 
+    /**
+     * Retrieves all modules from [ModuleService.getAll].
+     *
+     * @return A list of modules that can be observed.
+     */
     fun getAllModules(): MutableLiveData<List<Module>>{
         return moduleService.getAll()
     }
 
+    /**
+     * Retrieves a users settings from [SettingsService.getAll].
+     *
+     * @return A settings object that can be observed.
+     */
     fun getSettings(): MutableLiveData<Settings>{
         return settingsService.getAll()
     }
 
+    /**
+     * Updates Observable fields using data retrieved from [SettingsService.getAll]
+     *
+     * Stores Strings of information received to be displayed in the UI. Stores integers
+     * of these settings for business logic to be applied to.
+     * If [hasMarks] returns true calls [calculate] which will retrieve insights from
+     * the [InsightsCalculator]. Also retrieves received credits from
+     * [InsightsCalculator.getReceivedCredits] and sets these in Observable Fields to be
+     * displayed in the UI.
+     *
+     * Updates [level5Complete] and [level6Complete] booleans which can be observed in the activity.
+     */
     fun refreshUI(){
         val settings = settingsService.getAll().value
         totalLevel5Credits.set(settings!!.level5Credits.toString())
@@ -75,6 +97,14 @@ class InsightsViewModel (private val moduleService: ModuleService,
         }
     }
 
+    /**
+     * Deduces if a user has registered marks in any modules.
+     * If any [Module] in [getAllModules] has a [Module.result]
+     * [displayInsights] will be set to visible, whilst [showInsights] will
+     * be set to true.
+     *
+     * Else, [displayInsights] is invisible and [showInsights] is false.
+     */
     private fun hasMarks(): Boolean{
         for(module in getAllModules().value!!){
             if(module.result != null){
@@ -88,14 +118,33 @@ class InsightsViewModel (private val moduleService: ModuleService,
         return false
     }
 
+    /**
+     * Retrieves a live data of a [Student].
+     *
+     * Uses [userId] to retrieve the student from [StudentService.getStudent].
+     */
     private fun getStudent(userId: String): MutableLiveData<Student>{
         return studentService.getStudent(userId)
     }
 
+    /**
+     * Retrieves a the current users [Student.firstName]
+     *
+     * Passes [userId] to the [getStudent] method, then abstracts the first name
+     *
+     * @return [Student.firstName]
+     */
     fun getStudentName(userId: String): String{
         return getStudent(userId).value?.firstName!!
     }
 
+    /**
+     * Updates the UI appropriately given the data it receives from
+     * [InsightsCalculator.calculatePercentages] and [InsightsCalculator.getLowestModuleString]
+     *
+     * Will call [runGradeAssignment] so that it can set the users grade and communicate with the
+     * fragment.
+     */
     private fun calculate(){
         val percentages = InsightsCalculator.calculatePercentages(
                 getAllModules().value!!, getSettings().value!!)
@@ -118,10 +167,19 @@ class InsightsViewModel (private val moduleService: ModuleService,
         runGradeAssignment()
     }
 
+    /**
+     * Adds a percentage sign onto the end of [value].
+     */
     private fun addPercentToString(value: Double): String{
         return "$value%"
     }
 
+    /**
+     * Updates the [overallGradeResourceId] dependent on what [overallProgressDouble] is.
+     *
+     * [overallGradeResourceId] can be observed in the fragment to update
+     * the UI and feedback to the user.
+     */
     private fun runGradeAssignment(){
         if(overallProgressDouble < 35){
             overallGradeResourceId.value = R.string.fail

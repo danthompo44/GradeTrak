@@ -4,7 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.university.gradetrak.services.ModuleService
 
-class AddMarkViewModelFactory(private val moduleService: ModuleService) : ViewModelProvider.Factory {
+class AddMarkViewModelFactory(private val moduleService: ModuleService)
+    : ViewModelProvider.Factory {
     /**
      * Creates a new instance of the given `Class`.
      *

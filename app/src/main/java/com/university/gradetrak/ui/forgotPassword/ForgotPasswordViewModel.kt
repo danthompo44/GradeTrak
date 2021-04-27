@@ -13,7 +13,7 @@ class ForgotPasswordViewModel: ViewModel() {
 
     /**
      * Validates the forgot password email details, trims off extra spaces in the string
-     * @return true if and error is found
+     * @return true if an error is found
      */
     fun validateEmail(): Boolean {
         return if(Patterns.EMAIL_ADDRESS.matcher(emailAddress.get().toString().trim()).matches()){
@@ -24,6 +24,9 @@ class ForgotPasswordViewModel: ViewModel() {
         }
     }
 
+    /**
+     * Trims the email observable field, removes blank space at the end/beginning
+     */
     fun getTrimmedEmail(): String{
         return emailAddress.get().toString().trim()
     }

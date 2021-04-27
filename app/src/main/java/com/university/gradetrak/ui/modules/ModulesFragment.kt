@@ -39,30 +39,57 @@ class ModulesFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     * Uses [ModulesViewModelFactory] to create [ModulesViewModel],
+     * passes in [Services.getModuleService] to the factory. Will create
+     * databinding between the layout file using view binding [binding].
+     */
     private fun setupViewModelBinding(){
         val viewModelFactory = ModulesViewModelFactory(Services.getModuleService(auth.uid!!))
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ModulesViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory)
+            .get(ModulesViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
     }
 
+    /**
+     * Sets up the layout manager of the recycler view using view binding.
+     */
     private fun setupRecyclerViews(){
         linearLayoutManager = LinearLayoutManager(activity)
         binding.rvModulesPageModules.layoutManager = linearLayoutManager
     }
 
+    /**
+     * Adds a listener the add module plus sign in the layout file.
+     * Will start the [AddModuleActivity] when pressed, does not finish
+     * [MainActivity].
+     */
     private fun setupNavigationListener(){
         binding.ivAddModuleToolbarAddModule.setOnClickListener {
             startActivity(Intent(activity, AddModuleActivity::class.java))
         }
     }
 
+    /**
+     * A facade method that calls [observeUsersModules],
+     * [observeErrors] and [observeModuleForEdit].
+     */
     private fun setupViewModelObservers(){
         observeUsersModules()
         observeModuleForEdit()
         observeErrors()
     }
 
+    /**
+     * Observes [ModulesViewModel.getUsersModules]. If there is a change a new adapter
+     * is created using [ModuleRecyclerAdapter]. the result of [ModulesViewModel.getUsersModules],
+     * [ModulesViewModel.selectedModule] and [getResources]
+     * will be passed to [ModuleRecyclerAdapter].
+     *
+     * This object of [ModuleRecyclerAdapter] will set as the adapter of the
+     * recycler view in the layout file using view binding.
+     */
     private fun observeUsersModules(){
         viewModel.getUsersModules().observe(viewLifecycleOwner, { modules ->
             val adapter = ModuleRecyclerAdapter(modules, viewModel.selectedModule,
@@ -72,6 +99,13 @@ class ModulesFragment : Fragment() {
         })
     }
 
+    /**
+     * Sets up an observer on [ModulesViewModel.moduleForEdit]. If this changes
+     * and intent will be created for the [AddMarkActivity], whilst passing the selected module
+     * and that modules ID through to this activity.
+     *
+     * The [MainActivity] will not be finished.
+     */
     private fun observeModuleForEdit(){
         viewModel.moduleForEdit.observe(viewLifecycleOwner, { module ->
             val intent = Intent(activity, AddMarkActivity::class.java).apply {
@@ -82,9 +116,15 @@ class ModulesFragment : Fragment() {
         })
     }
 
+    /**
+     * Sets up an observer of [ModulesViewModel.error], if an error occurs
+     * this integer will passed to the lambda function. This will call
+     * [MainActivity.showSnackBar] to show a snack bar in the UI by retrieving
+     * the relevant string from [getResources].
+     */
     private fun observeErrors(){
         viewModel.error.observe(viewLifecycleOwner, { error ->
-            (activity as? MainActivity)?.showSnackBar(error, true)
+            (activity as? MainActivity)?.showSnackBar(getString(error), true)
         })
     }
 }

@@ -43,10 +43,18 @@ class LoginViewModel: ViewModel(){
         }
     }
 
+    /**
+     * @return A string representation of the email Address
+     * Observable field, the string is trimmed.
+     */
     fun getEmail() : String{
         return emailAddress.get().toString().trim()
     }
 
+    /**
+     * @return A string representation of the password
+     * Observable field, the string is trimmed.
+     */
     fun getPassword() : String {
         return password.get().toString().trim()
     }

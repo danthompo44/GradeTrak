@@ -28,12 +28,19 @@ class ForgotPasswordActivity : BaseActivity() {
         observeErrors()
     }
 
+    /**
+     * Adds a listener to the toolbars nav button, finsihes the activity when clicked
+     */
     private fun setupNavigationListener(){
         binding.tbForgotPasswordPage.setNavigationOnClickListener {
             finish()
         }
     }
 
+    /**
+     * Calls the view model top validate the data, if successful sends a reset link
+     * and finished the activity
+     */
     fun handleSubmitButtonClick(view: View){
         if(viewModel.validateEmail()){
             sendFirebaseResetEmailLink()
@@ -41,6 +48,9 @@ class ForgotPasswordActivity : BaseActivity() {
         }
     }
 
+    /**
+     * Observes the error int live data for and errors with the data
+     */
     private fun observeErrors(){
         viewModel.errorIntStringValue.observe(this, {
             showSnackBar(resources.getString(it), true)

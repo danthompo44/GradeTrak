@@ -16,6 +16,11 @@ class AddMarkViewModel(private val moduleService: ModuleService): ViewModel() {
     //Set up error Live Data for the Login Activity to observe and update the UI, snack bars etc.
     val errorStringIntValue = MutableLiveData<Int>()
 
+    /**
+     * Catches errors and updates the live data for observation
+     * If no errors will create a module and pass it to the
+     * module service for adding/editing
+     */
     fun handleEditButtonClick(){
         var mark = -1
 
@@ -42,6 +47,9 @@ class AddMarkViewModel(private val moduleService: ModuleService): ViewModel() {
         clearDetails()
     }
 
+    /**
+     * Clears the UI Observable fields
+     */
     private fun clearDetails(){
         moduleResult.set("")
     }

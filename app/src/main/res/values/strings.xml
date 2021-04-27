@@ -19,6 +19,7 @@
     <string name="recycler_view_module_level">Level:</string>
     <string name="recycler_view_module_result">Result:</string>
     <string name="recycler_view_not_available">N/A</string>
+    <string name="select_a_module">Please select a module</string>
 
     <!-- Enrol Page Strings -->
     <string name="enrol_page_modules_recycler_title">Enrolled Modules</string>

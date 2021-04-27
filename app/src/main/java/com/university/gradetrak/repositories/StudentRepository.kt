@@ -17,10 +17,19 @@ class StudentRepository {
         getAll()
     }
 
+    /**
+     * Adds or edits student in the DB
+     * @param student The settings to be added/edited
+     */
     fun addStudent(student: Student){
         students.child(student.uuid!!).setValue(student)
     }
 
+    /**
+     * Retrieves a student from the DB using their ID
+     * @param userId The user to be retrieved ID
+     * @return Live data of the student, can be observed
+     */
     fun getStudent(userId: String) : MutableLiveData<Student> {
         val student = MutableLiveData<Student>()
         for(s in studentsLD.value!!){
@@ -31,6 +40,10 @@ class StudentRepository {
         return student
     }
 
+    /**
+     * Adds a listener to the database reference, this then updates the students live data
+     * which can be observed
+     */
     private fun getAll(){
         // Read from the database
         students.addValueEventListener(object : ValueEventListener {

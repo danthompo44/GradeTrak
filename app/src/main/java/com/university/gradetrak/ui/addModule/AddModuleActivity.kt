@@ -34,12 +34,19 @@ class AddModuleActivity : BaseActivity() {
         observeSuccess()
     }
 
+    /**
+     * Adds a listener to the toolbar nav arrow
+     * Will finish the activity
+     */
     private fun addNavigationListener(){
         binding.tbAddModulePage.setNavigationOnClickListener {
             finish()
         }
     }
 
+    /**
+     * Setups the spinners with enum values defined in models
+     */
     private fun setupDropdownMenus(){
         val credits = Credits.values()
         val creditsAdapter = ArrayAdapter(this, R.layout.spinner_item, credits)
@@ -51,12 +58,18 @@ class AddModuleActivity : BaseActivity() {
 
     }
 
+    /**
+     * Observers errors in the view model, will show a snack bar with the error
+     */
     private fun observeErrors(){
         viewModel.errorStringInt.observe(this, Observer {
             showSnackBar(resources.getString(it), true)
         })
     }
 
+    /**
+     * Observers successes in the view model, will show a snack bar with the succes
+     */
     private fun observeSuccess(){
         viewModel.success.observe(this, { success ->
             if(success){

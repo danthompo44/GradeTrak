@@ -19,22 +19,36 @@ class ModuleRepository (userId: String) {
         getAll()
     }
 
+    /**
+     * Creates a module within firebase
+     * @param module The module to be added to the database
+     */
     fun addModule(module: Module){
         modules.child(UUID.randomUUID().toString()).setValue(module)
     }
 
+    /**
+     * Edits a module within firebase
+     * @param module The module to be edited in the database
+     */
     fun editModule(module: Module){
         if(module.uuid != null){
             modules.child(module.uuid!!).setValue(module)
         }
     }
 
+    /**
+     * Deletes a module within firebase
+     * @param module The module to be deleted in the database
+     */
     fun delete(module: Module){
         modules.child(module.uuid.toString()).removeValue()
     }
 
-
-
+    /**
+     * Adds a listener to the database reference, this then updates the modules live data
+     * which can be observed
+     */
     private fun getAll(){
         // Read from the database
         modules.addValueEventListener(object : ValueEventListener {

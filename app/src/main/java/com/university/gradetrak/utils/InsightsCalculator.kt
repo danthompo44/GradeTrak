@@ -1,6 +1,5 @@
 package com.university.gradetrak.utils
 
-import android.util.Log
 import com.university.gradetrak.models.Module
 import com.university.gradetrak.models.Settings
 
@@ -58,6 +57,14 @@ object InsightsCalculator {
         }
     }
 
+    /**
+     * Will call [resetData], set [settings] and then [organiseData] using [modules].
+     *
+     * Once the data has been organised it acts as a facade method to call methods such as
+     * [calculateCurrentLevel5Percentage] or [calculateCurrentLevel6Percentage]. These methods
+     * handle the heavy lifting, this method just calls them, gathers the information @return
+     * an array list of the information.
+     */
     fun calculatePercentages(modules: List<Module>, settings: Settings): ArrayList<Double>{
         resetData()
         this.settings = settings
@@ -87,6 +94,10 @@ object InsightsCalculator {
         return percentages
     }
 
+    /**
+     * Returns the received credits of [receivedLevel5Credits]
+     * and [receivedLevel6Credits] in an [ArrayList].
+     */
     fun getReceivedCredits(): ArrayList<Int>{
         val credits: ArrayList<Int> = ArrayList()
         credits.add(receivedLevel5Credits)
@@ -96,11 +107,22 @@ object InsightsCalculator {
     }
 
 
+    /**
+     * Calls [removeLowestModuleResult], after thsi method has complete
+     * it will @return [calculateOverall].
+     */
     private fun getLowestModuleResult(): Double{
         removeLowestModuleResult()
         return calculateOverall()
     }
 
+    /**
+     * Handles complex business logic to remove the lowest module if
+     * there is a module with a result. Removes that modules credit score and
+     * the module itself.
+     *
+     * Makes use of [doLowestModuleChecks] to deduce what is the lowest module.
+     */
     private fun removeLowestModuleResult(){
         lowestScoringModule = if(level5ModulesWithResults.isEmpty()){
             if(level6ModulesWithResults.isEmpty()){
@@ -130,32 +152,46 @@ object InsightsCalculator {
         }
     }
 
+    /**
+     * Uses [calculateWeightedLevel5Percentage]
+     * + [calculateCurrentLevel6Percentage] to deduce
+     * a result of the users overall score.
+     */
     private fun calculateOverall(): Double{
         return (calculateWeightedLevel5Percentage() +
                 calculateWeightedLevel6Percentage()).round()
     }
 
+    /**
+     * Checks if [settings] are set to remove lowest module.
+     *
+     * If true will remove set the lowest scoring module to that
+     * which has the beiggest impact on the overall grade
+     * using [calculateModuleWeightedMark].
+     */
     private fun doLowestModuleChecks(module: Module){
         if(settings.removeLowestModule!!){
             if(module.result!! < lowestScoringModule.result!!){
                 lowestScoringModule = module
             } else if (module.result!! == lowestScoringModule.result!!){
-                if(calculateModuleWeightedMark(module) > calculateModuleWeightedMark(lowestScoringModule)){
+                if(calculateModuleWeightedMark(module)
+                    > calculateModuleWeightedMark(lowestScoringModule)){
                     lowestScoringModule = module
                 }
             }
         }
     }
     /**
-     * Calculates the weighted percentage achieved across level 5 using the results they have received
-     * in all their level 5 modules
+     * Calculates the weighted percentage achieved across level 5 using
+     * the results they have received in all their level 5 modules
      */
     private fun calculateWeightedLevel5Percentage(): Double{
         return addLevel5Weighting(calculateOverallLevel5Percentage()).round()
     }
 
     /**
-     * Calculates the weighted percentage achieved across level 6 using the results they have received
+     * Calculates the weighted percentage achieved across level 6
+     * using the results they have received
      * in all their level 6 modules
      * @param modules A list of all modules attributed to the user
      */
@@ -194,8 +230,6 @@ object InsightsCalculator {
     /**
      * Calculates the current percentage achieved in the level 5 modules the user has
      * results for.
-     * @param modules A list of all modules attributed to the user
-     * @param settings A settings object containing the users settings
      */
     private fun calculateCurrentLevel5Percentage(): Double{
         if(level5ModulesWithResults.size != 0){
@@ -210,6 +244,10 @@ object InsightsCalculator {
         return 0.0
     }
 
+    /**
+     * Calculates the current percentage achieved in the level 6 modules the user has
+     * results for.
+     */
     private fun calculateCurrentLevel6Percentage(): Double{
         if(level6ModulesWithResults.size != 0){
             var totalGradeXCredits = 0.0
@@ -222,10 +260,17 @@ object InsightsCalculator {
         return 0.0
     }
 
+    /**
+     * Returns a string represntation of [lowestScoringModule]'s name.
+     */
     fun getLowestModuleString(): String{
         return lowestScoringModule.name!!
     }
 
+    /**
+     * Uses the credits if the module and the overall credits
+     * set in [Settings] to deduce the weighted mark.
+     */
     private fun calculateModuleWeightedMark(module: Module): Double{
         var overallYearCredits = 0.0
         overallYearCredits = if(module.level == 5){

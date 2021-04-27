@@ -20,6 +20,7 @@ class LoginActivity : BaseActivity() {
     private val viewModel: LoginViewModel by viewModels {
         LoginViewModelFactory()
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -32,12 +33,22 @@ class LoginActivity : BaseActivity() {
         observeErrors()
     }
 
+    /**
+     * Will delegate the validation of user credentials to [LoginViewModel.validateLoginDetails],
+     * if true it will call [attemptSignIn].
+     */
     fun handleLoginButtonClick(view: View){
         if(viewModel.validateLoginDetails()){
             attemptSignIn()
         }
     }
 
+    /**
+     * Uses an email and password to try to sign in a user using firebase [auth]
+     *
+     * If the task is successful the [MainActivity] will start and finish the [LoginActivity].
+     * If an error occurs a snack bar will be display to the user using [BaseActivity.showSnackBar].
+     */
     private fun attemptSignIn(){
         auth.signInWithEmailAndPassword(viewModel.getEmail(), viewModel.getPassword())
                 .addOnCompleteListener(this) { task ->
@@ -51,14 +62,27 @@ class LoginActivity : BaseActivity() {
                 }
     }
 
+    /**
+     * Will start the [SignUpActivity], does not finish [LoginActivity].
+     */
     fun handleSignUpButtonClick(view: View){
         startActivity(Intent(this, SignUpActivity::class.java))
     }
 
+    /**
+     * Will start the [ForgotPasswordActivity], does not finish [LoginActivity].
+     */
     fun handleForgottenPasswordButtonClick(view: View){
         startActivity(Intent(this, ForgotPasswordActivity::class.java))
     }
 
+    /**
+     * Observes errors in the view model
+     *
+     * Observes [LoginViewModel.errorStringIntValue] for changes, if a change
+     * occurs the lambda will retrieve a string resource using the integer that
+     * it is observing.
+     */
     private fun observeErrors(){
         viewModel.errorStringIntValue.observe(this, {
             showSnackBar(resources.getString(it), isError = true)
