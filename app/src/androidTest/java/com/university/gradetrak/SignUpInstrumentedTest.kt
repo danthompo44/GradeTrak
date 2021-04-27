@@ -161,4 +161,9 @@ class SignUpInstrumentedTest {
         enterConfirmPassword(password)
         checkIsOnLoginPage()
     }
+
+    @Test
+    fun test10_try_press_back_button_toolbar_navigation(){
+
+    }
 }

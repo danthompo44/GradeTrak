@@ -44,7 +44,6 @@ class ForgotPasswordActivity : BaseActivity() {
     fun handleSubmitButtonClick(view: View){
         if(viewModel.validateEmail()){
             sendFirebaseResetEmailLink()
-            finish()
         }
     }
 
@@ -65,6 +64,7 @@ class ForgotPasswordActivity : BaseActivity() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         showSnackBar(resources.getString(R.string.reset_password_sent), false)
+                        finish()
                     }
                     else{
                         showSnackBar(task.exception?.localizedMessage.toString(), true)

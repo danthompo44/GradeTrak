@@ -1,0 +1,347 @@
+[33mcommit c233f540435bdf1c9017cae0012581cfe6087c65[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;32mtests[m[33m)[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Tue Apr 27 12:44:50 2021 +0100
+
+    Added KDoc and tidied up code to sit within the guidelines.
+
+[33mcommit a3f7bdc05a0f06533e9d90fc559ada8a40f9de71[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Mon Apr 26 20:40:43 2021 +0100
+
+    Fixed a bug with no validation on the add module page
+
+[33mcommit 6fd4e431ac5bac90ff89a7b07186f5dce152396f[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Fri Apr 16 15:55:33 2021 +0100
+
+    Commit Before Testing
+
+[33mcommit 166c9f41e5263a4865543cab0dd5829fed4d5154[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Fri Apr 16 15:49:10 2021 +0100
+
+    Insights Title will change now using live data to show either the name of the person logged in or if there are no insights
+
+[33mcommit 1243236328299dc41b19638bb32ee4499f141a89[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Fri Apr 16 15:25:39 2021 +0100
+
+    Insights will not be shown if there are no marks
+
+[33mcommit e227123fc86704db3bdb4b909faa8ba55838cff1[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Thu Apr 15 16:33:07 2021 +0100
+
+    Added Forgot Password Functionality
+
+[33mcommit 24d6de1a40ae2be33b1e8f91744412fe6863bf86[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Thu Apr 15 15:59:59 2021 +0100
+
+    User is able to login to the app using Firebase authentication
+
+[33mcommit e8b23cc8ed58f6b841821dc6151d311748578f71[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Thu Apr 15 13:48:09 2021 +0100
+
+    Settings and accounts work together, stopped storing email addresses in the DB as this is not needed due to it being stored in Firebase Auth
+
+[33mcommit dca2b6fe53b7d8a1f4f3c0c5133d252b91b3304a[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Thu Apr 15 13:12:15 2021 +0100
+
+    Account is created alongside a student in the DB with a UUID that is the same as the generated one from Firebase
+
+[33mcommit 93bc6958bcb91dabacfcdb388276dd432975d0b6[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Thu Apr 15 11:54:57 2021 +0100
+
+    A user can now create an account, does not store user info yet. Just email and password in firebase auth
+
+[33mcommit ca53eb797ce49cb0c1b584ca3d3f241049253bc7[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Wed Apr 14 20:47:43 2021 +0100
+
+    Added error handling into the add mark page, with optimise imports
+
+[33mcommit 438f25b1ea1f6f3a7842c1640ce100f537757c94[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Wed Apr 14 20:37:41 2021 +0100
+
+    Fixed an app crash that happened when you typed a string into the settings page credit inputs
+
+[33mcommit c214ec9505c2d013f4d4a7b1a2c1b61067426a1e[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Wed Apr 14 20:25:51 2021 +0100
+
+    Added Error handling to the settings page, can't set the total credits for a module lower than what the user is enrolled upon.
+
+[33mcommit 6fdf87afd3fb73f612a0d156296a5f25d3ba080b[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Wed Apr 14 19:59:48 2021 +0100
+
+    Added checks on the Add Module page to make sure a user can't add more credits than their maximum given in settings
+
+[33mcommit 71d8ee0aa9c2dd1d9847d724818c9da7b0d16f84[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Wed Apr 14 19:32:52 2021 +0100
+
+    Happy with the UI now, will make better if I have time
+
+[33mcommit 2d8d550b2f0ac21154ebde8662de250d3b9684c7[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Wed Apr 14 16:47:49 2021 +0100
+
+    Added colour assignment and string assignment to the overall Grade
+
+[33mcommit 422a54df00b2cf2ccfdea112d4a95351342d754f[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Tue Apr 13 22:19:01 2021 +0100
+
+    Completed the Progress Bars for the Insights Page
+
+[33mcommit bc11f110515604b974d5d7925575b2e7be92d306[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Tue Apr 13 21:40:54 2021 +0100
+
+    Added A basic progress bar that updates with the amount of credits a user has gained for level 5
+
+[33mcommit 58a091ac10bf23a4588c9a81994cfc5019377756[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Tue Apr 13 20:48:22 2021 +0100
+
+    UI changes made to the insights page. Live Data used to dynamically change the string value displayed to the user without hardcoding them and keeping the viewmodel not knowing about app context
+
+[33mcommit 42803ad05911fa1f516fccb28d101142f7d417e7[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Tue Apr 13 20:14:02 2021 +0100
+
+    Calculator works, now making UI changes
+
+[33mcommit 65ed38542917cdb50a5ce6abbca2a559315d4321[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Mon Apr 12 13:21:15 2021 +0100
+
+    Completed a complicated algorithm to deduce which module is worth more when the results are equal
+
+[33mcommit b48359f3c9519ef8dab617ea42eabfeddb3e22d7[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Sun Apr 11 22:50:24 2021 +0100
+
+    Redesigned the settings object with total level 5 and 6 credits now. Added this into settings UI and added callback onto the observable fields to trigger the change of the UI when the settings don't match
+
+[33mcommit 8db005a3625e41ccfe0576d709f8454a5decb864[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Sun Apr 11 22:02:13 2021 +0100
+
+    Tidied up calculator logic
+
+[33mcommit 7983b2d24f6c14cee0a32653e1ffba3d2e39c4ec[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Sun Apr 11 21:37:29 2021 +0100
+
+    Calculator works for everything excpet the lowest module removal
+
+[33mcommit 62621112c4c61e493fa406153f91e4ce7df2acea[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Sat Apr 10 13:02:49 2021 +0100
+
+    Overall Level 6 and current level 6 calculations completed. error handling added for if there are no moudles with results
+
+[33mcommit 48ef538604a74f092fe5f6889f80e61ac5dc6ceb[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Sat Apr 10 12:16:21 2021 +0100
+
+    Overall Level 5 Progress Calculation is working
+
+[33mcommit 039e418787aff3d7f405db27d44e0cce70a807fd[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Sat Apr 10 11:51:25 2021 +0100
+
+    Current Level 5 Progress now calculates
+
+[33mcommit cc8845b9bd833686c5bf0fe5f7138ac09a993d1f[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Fri Apr 9 21:42:09 2021 +0100
+
+    Basic Level 5 Calculator Works and is printing to the Logger as expected
+
+[33mcommit 0301fbd33db27c04d364b9655d07f3db30e8abcb[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Fri Apr 9 20:02:29 2021 +0100
+
+    Settings Page updates the database. No Authorisation done yet though
+
+[33mcommit c69104fdc450ec7347157e83e803b7afdf51a1fb[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Fri Apr 9 10:54:50 2021 +0100
+
+    Removed unneeded Item CLick Listener In the module adapter, tidied up some strings
+
+[33mcommit b8a4a913b808b05c9f2eb0111e2f66fa8f7183df[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Thu Apr 8 22:57:02 2021 +0100
+
+    Fixed a bug where a module was still set to selected in the modules view model after leaving the activity. If you then cam back to this page and tried to navigate to the next page without selecting a module. A module would be selected under the hood, including the old mark value
+
+[33mcommit b4631f08a0dd7df3947ba7742f487e0ee4a0afe3[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Thu Apr 8 21:41:24 2021 +0100
+
+    Refactored the naming convention of edit module to add mark
+
+[33mcommit 233eb57ce73a23d043654faaf5e491583edbb19d[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Thu Apr 8 21:35:21 2021 +0100
+
+    Able to edit a module correctly, recycler view now shows N/A if no mark and the correct mark if there is one
+
+[33mcommit ac20b5bf2c2b42845d0ec3495f66a63c699a1e88[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Thu Apr 8 19:45:02 2021 +0100
+
+    Added the credits and level text to the module page view holder (Recycler view)
+
+[33mcommit 60b6ecc09addf984cdafe834e76dd218f726ad87[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Thu Apr 8 18:42:49 2021 +0100
+
+    Fixed a bug with the edit page
+
+[33mcommit e619858e1d9fb1840c5362b4c6a47fe8d53687ef[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Thu Apr 8 14:30:47 2021 +0100
+
+    Able to delete a module from firebase using the modules page
+
+[33mcommit 7bf853075af6566f2542a8890bb774517e4a7e45[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Thu Apr 8 13:33:40 2021 +0100
+
+    changed Recyler view to display the result, currenlt shows credits but functionality is there
+
+[33mcommit 6c6240aa076303cdb41349b15738b7c9cc16ba5f[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Thu Apr 8 12:16:47 2021 +0100
+
+    Removed everything related to the enrol page
+
+[33mcommit a39f770b99cb91d10794c0e96411662c294ce7d8[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Thu Apr 8 12:11:49 2021 +0100
+
+    Edit module page now retrieves the module to be edited title
+
+[33mcommit 3b29fec75fdc19910d66d3bd845366a9ea9f85f2[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Thu Apr 8 11:32:52 2021 +0100
+
+    Moved the enrol page to be the main module page, less clutter
+
+[33mcommit 441330200e40bb0b218d05d46633ba3134be8c64[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Thu Apr 8 09:59:26 2021 +0100
+
+    Migrated Bottom Navigation to show modules instead of home
+
+[33mcommit 50bbfa5e1daaf942d1e82b28c60cf8360d55b81d[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Wed Apr 7 22:43:48 2021 +0100
+
+    Able to pass through the module to the edit module page
+
+[33mcommit 8baf722a1ad9e3ff0c7c20afb4b8cf38dc1d9bda[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Wed Apr 7 22:30:25 2021 +0100
+
+    Enrol Page Recycler View is selectable and informs the user of this selction
+
+[33mcommit dc5cda63ba59e9958c24c2ccf049ed4e9a795246[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Wed Apr 7 20:31:24 2021 +0100
+
+    Able to display added modules in the enrol page's recycler view
+
+[33mcommit 31c98a188eaa1d220a3de0dffff96526c30d31de[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Wed Apr 7 16:57:12 2021 +0100
+
+    Able to add modules to the Backend from the add module page
+
+[33mcommit 40e74cd07e655ee36d0383b888516403d3b02cf6[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Wed Apr 7 16:17:03 2021 +0100
+
+    Setup Spinner data binding in edit module
+
+[33mcommit 68424f11e046cd76e3ad321a4aa49bb757c757e3[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Wed Apr 7 15:44:50 2021 +0100
+
+    Setup Spinners for now on add module page
+
+[33mcommit 4eb4c776424669ebd39bed116f81b54d76b35e0f[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Wed Apr 7 11:44:01 2021 +0100
+
+    Snack bar functionality created in a base activity that can be extended from
+
+[33mcommit ffb294bc038b773dc40d754893e9a2288c281a8e[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Tue Apr 6 22:17:35 2021 +0100
+
+    Changed all the backgrounds so that they are set to the on surface colour
+
+[33mcommit eeb3d62338273ed4cd6100c8e03d87a5637b86e8[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Tue Apr 6 21:47:03 2021 +0100
+
+    Completed all the layouts and navigation of the UI
+
+[33mcommit aa580643e55be7834f3085b11d69b11ea074068e[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Tue Apr 6 20:52:04 2021 +0100
+
+    Completed the Login Page UI
+
+[33mcommit 8f2d72ea3a5997b1bf998b787b1a9cda09f27873[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Tue Apr 6 16:21:46 2021 +0100
+
+    Completed the Settings Page UI
+
+[33mcommit 052fb6df276ba2ef4d437c05b24607d12ea2dc82[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Tue Apr 6 14:18:26 2021 +0100
+
+    Basic StateList Animator added to recycler view layouts
+
+[33mcommit 269dc4336c06956ceaa16e68cc42e9b1994fef3e[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Tue Apr 6 13:02:40 2021 +0100
+
+    Completed the View and Nav fro Add and Edit Module
+
+[33mcommit 4109eca66e685ece03943192dfd858572592205e[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Tue Apr 6 11:33:58 2021 +0100
+
+    Recycler View Populated with dummy data on enrol page
+
+[33mcommit 86382f43e0bc71ddd2c99e964fdf2895d3fe3fbb[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Mon Apr 5 22:42:15 2021 +0100
+
+    Completed the add a module UI
+
+[33mcommit 73c77981cb5748f7aff4e9920aec5dd3ca50cad9[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Mon Apr 5 20:19:41 2021 +0100
+
+    Layout for home page first draft complete
+
+[33mcommit 0d6a43a64a8a361088fd511365ff30935f202e29[m
+Author: Dan Thompson <daniel.24.thompson@bt.com>
+Date:   Mon Apr 5 17:40:47 2021 +0100
+
+    Initial Commit
