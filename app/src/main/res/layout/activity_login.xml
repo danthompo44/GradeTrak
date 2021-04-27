@@ -114,6 +114,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
+                android:id="@+id/btn_login"
                 style="@style/Button.DuckEgg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -121,6 +122,7 @@
                 android:onClick="handleLoginButtonClick" />
 
             <Button
+                android:id="@+id/btn_sign_up"
                 style="@style/Button.DuckEgg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -128,6 +130,7 @@
                 android:onClick="handleSignUpButtonClick" />
 
             <Button
+                android:id="@+id/btn_forgot_password"
                 style="@style/Button.Cobalt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
