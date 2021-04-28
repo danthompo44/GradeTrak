@@ -22,6 +22,7 @@ class SettingsViewModel(private val moduleService: ModuleService, private val se
     private var level5CreditsComparison = ""
     val level6Credits = ObservableField<String>()
     private var level6CreditsComparison = ""
+    lateinit var userSettings: Settings
 
     var applyChangesButtonVisibility = ObservableInt(Button.INVISIBLE)
 
@@ -44,7 +45,6 @@ class SettingsViewModel(private val moduleService: ModuleService, private val se
      * sets up observables onto observable fields
      */
     init {
-        setSettings(getUserSettings().value)
         level5Credits.addOnPropertyChangedCallback(callback)
         level6Credits.addOnPropertyChangedCallback(callback)
     }
@@ -52,15 +52,14 @@ class SettingsViewModel(private val moduleService: ModuleService, private val se
     /**
      * Will set the low-level settings of the user.
      */
-    fun setSettings(settings: Settings?){
-        if(settings != null){
-            thirtySeventyWeighting.set(settings.thirtySeventyRatio!!)
-            removeLowestModule.set(settings.removeLowestModule!!)
-            level5Credits.set(settings.level5Credits.toString())
-            level5CreditsComparison = settings.level5Credits.toString()
-            level6Credits.set(settings.level6Credits.toString())
-            level6CreditsComparison = settings.level6Credits.toString()
-        }
+    fun setSettings(settings: Settings){
+        userSettings = settings
+        thirtySeventyWeighting.set(settings.thirtySeventyRatio!!)
+        removeLowestModule.set(settings.removeLowestModule!!)
+        level5Credits.set(settings.level5Credits.toString())
+        level5CreditsComparison = settings.level5Credits.toString()
+        level6Credits.set(settings.level6Credits.toString())
+        level6CreditsComparison = settings.level6Credits.toString()
     }
 
     /**
@@ -73,7 +72,7 @@ class SettingsViewModel(private val moduleService: ModuleService, private val se
     /**
      * Retrieves a user settings from [SettingsService.getAll]
      */
-    fun getUserSettings(): MutableLiveData<Settings>{
+    fun getUserSettings(): MutableLiveData<List<Settings>>{
         return settingsService.getAll()
     }
 
@@ -91,10 +90,8 @@ class SettingsViewModel(private val moduleService: ModuleService, private val se
      * whether the button should be visible or not.
      */
     private fun updateApplyChangesButtonVisibility(){
-        val databaseSettings = getUserSettings().value
-
-        if(databaseSettings?.removeLowestModule != removeLowestModule.get() ||
-                databaseSettings.thirtySeventyRatio != thirtySeventyWeighting.get() ||
+        if(userSettings.removeLowestModule != removeLowestModule.get() ||
+                userSettings.thirtySeventyRatio != thirtySeventyWeighting.get() ||
                 level5Credits.get().toString() != level5CreditsComparison ||
                 level6Credits.get().toString() != level6CreditsComparison)
         {

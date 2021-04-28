@@ -43,6 +43,7 @@ class InsightsViewModel (private val moduleService: ModuleService,
 
     val displayInsights = ObservableInt(LinearLayout.VISIBLE)
     val showInsights = MutableLiveData<Boolean>()
+    private lateinit var userSettings: Settings
 
     /**
      * Retrieves all modules from [ModuleService.getAll].
@@ -58,8 +59,12 @@ class InsightsViewModel (private val moduleService: ModuleService,
      *
      * @return A settings object that can be observed.
      */
-    fun getSettings(): MutableLiveData<Settings>{
+    fun getSettings(): MutableLiveData<List<Settings>>{
         return settingsService.getAll()
+    }
+
+    fun setSettings(settings : Settings){
+        userSettings = settings
     }
 
     /**
@@ -75,11 +80,10 @@ class InsightsViewModel (private val moduleService: ModuleService,
      * Updates [level5Complete] and [level6Complete] booleans which can be observed in the activity.
      */
     fun refreshUI(){
-        val settings = settingsService.getAll().value
-        totalLevel5Credits.set(settings!!.level5Credits.toString())
-        totalLevel5CreditsInt.set(settings.level5Credits)
-        totalLevel6Credits.set(settings.level6Credits.toString())
-        totalLevel6CreditsInt.set(settings.level6Credits)
+        totalLevel5Credits.set(userSettings.level5Credits.toString())
+        totalLevel5CreditsInt.set(userSettings.level5Credits)
+        totalLevel6Credits.set(userSettings.level6Credits.toString())
+        totalLevel6CreditsInt.set(userSettings.level6Credits)
 
         if(hasMarks()){
             calculate()
@@ -88,10 +92,10 @@ class InsightsViewModel (private val moduleService: ModuleService,
             receivedLevel5Credits.set(receivedCredits[0])
             receivedLevel6Credits.set(receivedCredits[1])
 
-            if(receivedCredits[0] >= settings.level5Credits!!){
+            if(receivedCredits[0] >= userSettings.level5Credits!!){
                 level5Complete.value = true
             }
-            if(receivedCredits[1] >= settings.level6Credits!!){
+            if(receivedCredits[1] >= userSettings.level6Credits!!){
                 level6Complete.value = true
             }
         }
@@ -147,7 +151,7 @@ class InsightsViewModel (private val moduleService: ModuleService,
      */
     private fun calculate(){
         val percentages = InsightsCalculator.calculatePercentages(
-                getAllModules().value!!, getSettings().value!!)
+                getAllModules().value!!, userSettings)
         currentLevel5Progress.set(addPercentToString(percentages[0]))
         overallLevel5Progress.set(addPercentToString(percentages[1]))
         weightedLevel5Progress.set(addPercentToString(percentages[2]))

@@ -11,7 +11,7 @@ import com.university.gradetrak.models.Settings
 class SettingsRepository {
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     private val settings = database.getReference("settings")
-    val settingsLD = MutableLiveData<Settings>()
+    val settingsLD = MutableLiveData<List<Settings>>()
 
     init {
         getAll()
@@ -32,15 +32,17 @@ class SettingsRepository {
     private fun getAll(){
         // Read from the database
         settings.addValueEventListener(object : ValueEventListener {
-            var settingsValue: Settings? = null
+            var settingsArray = ArrayList<Settings>()
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 for(child in dataSnapshot.children){
-                    settingsValue = child.getValue(Settings::class.java)
-                    settingsValue!!.userId = child.key.toString()
+                    val settings = child.getValue(Settings::class.java)
+                    settings!!.userId = child.key.toString()
+
+                    settingsArray.add(settings)
                 }
-                settingsLD.value = settingsValue
+                settingsLD.value = settingsArray
             }
 
             override fun onCancelled(error: DatabaseError) {

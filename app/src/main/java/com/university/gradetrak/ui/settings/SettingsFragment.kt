@@ -10,12 +10,15 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.university.gradetrak.MainActivity
 import com.university.gradetrak.databinding.FragmentSettingsBinding
+import com.university.gradetrak.repositories.ModuleRepository
+import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.services.Services
 
 class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingsBinding
     private lateinit var viewModel: SettingsViewModel
     private val auth = Firebase.auth
+    private val moduleRepository = ModuleRepository(auth.uid!!)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +44,7 @@ class SettingsFragment : Fragment() {
      */
     private fun setupViewModelBinding(){
         val viewModelFactory = SettingsViewModelFactory(
-            Services.getModuleService(auth.uid!!), Services.settingsService)
+            ModuleService(moduleRepository), Services.settingsService)
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(SettingsViewModel::class.java)
         binding.viewModel = viewModel
@@ -54,8 +57,12 @@ class SettingsFragment : Fragment() {
      * the settings object in the view model.
      */
     private fun observeSettingsData(){
-        viewModel.getUserSettings().observe(viewLifecycleOwner, { settings ->
-            viewModel.setSettings(settings)
+        viewModel.getUserSettings().observe(viewLifecycleOwner, { settingsList ->
+            for (settings in settingsList){
+                if(settings.userId == auth.uid){
+                    viewModel.setSettings(settings)
+                }
+            }
         })
     }
 

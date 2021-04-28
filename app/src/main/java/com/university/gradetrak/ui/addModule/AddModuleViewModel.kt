@@ -7,6 +7,7 @@ import com.university.gradetrak.R
 import com.university.gradetrak.models.Credits
 import com.university.gradetrak.models.Level
 import com.university.gradetrak.models.Module
+import com.university.gradetrak.models.Settings
 import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.services.SettingsService
 
@@ -16,12 +17,24 @@ class AddModuleViewModel (private val moduleService: ModuleService,
         private set
     var moduleCredits = ObservableField<String>()
     var moduleLevel = ObservableField<String>()
+    private lateinit var userSettings: Settings
 
     //Set up success Live Data for the Login Activity to observe and update the UI, snack bars etc.
     val success = MutableLiveData(false)
 
     //Set up error Live Data for the Login Activity to observe and update the UI, snack bars etc.
     val errorStringInt = MutableLiveData<Int>()
+
+    /**
+     * Retrieves a user settings from [SettingsService.getAll]
+     */
+    fun getUserSettings(): MutableLiveData<List<Settings>>{
+        return settingsService.getAll()
+    }
+
+    fun setSettings(settings: Settings){
+        userSettings = settings
+    }
 
     /**
      * Checks for errors and adds the module to the database
@@ -31,14 +44,14 @@ class AddModuleViewModel (private val moduleService: ModuleService,
             val inputtedCredits = Credits.valueOf(moduleCredits.get()!!).value
 
             if(Level.valueOf(moduleLevel.get()!!).value == 5){
-                val level5TotalAllowedCredits = settingsService.getAll().value!!.level5Credits
+                val level5TotalAllowedCredits = userSettings.level5Credits
                 if(getUsersCredits(5) + inputtedCredits > level5TotalAllowedCredits!!){
                     errorStringInt.value = R.string.error_too_many_level_5_modules
                     return
                 }
             }
             if(Level.valueOf(moduleLevel.get()!!).value == 6){
-                val level6TotalAllowedCredits = settingsService.getAll().value!!.level6Credits
+                val level6TotalAllowedCredits = userSettings.level6Credits
                 if(getUsersCredits(6) + inputtedCredits > level6TotalAllowedCredits!!){
                     errorStringInt.value = R.string.error_too_many_level_6_modules
                     return

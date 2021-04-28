@@ -8,16 +8,18 @@ import com.google.firebase.ktx.Firebase
 import com.university.gradetrak.BaseActivity
 import com.university.gradetrak.databinding.ActivityAddMarkBinding
 import com.university.gradetrak.models.Module
-import com.university.gradetrak.services.Services
+import com.university.gradetrak.repositories.ModuleRepository
+import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.utils.SELECTED_MODULE_ID_KEY
 import com.university.gradetrak.utils.SELECTED_MODULE_KEY
 
 class AddMarkActivity : BaseActivity() {
     private lateinit var binding: ActivityAddMarkBinding
     private val auth = Firebase.auth
+    private val moduleRepository = ModuleRepository(auth.uid!!)
 
     private val viewModel: AddMarkViewModel by viewModels {
-        AddMarkViewModelFactory(Services.getModuleService(auth.uid!!))
+        AddMarkViewModelFactory(ModuleService(moduleRepository))
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +62,7 @@ class AddMarkActivity : BaseActivity() {
     }
 
     /**
-     * Observers successes in the view model, will show a snack bar with the succes
+     * Observers successes in the view model, will show a snack bar with the success
      */
     private fun observeSuccess(){
         viewModel.success.observe(this, { success ->

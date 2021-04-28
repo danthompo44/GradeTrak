@@ -12,12 +12,15 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.university.gradetrak.R
 import com.university.gradetrak.databinding.FragmentInsightsBinding
+import com.university.gradetrak.repositories.ModuleRepository
+import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.services.Services
 
 class InsightsFragment : Fragment() {
     private lateinit var binding: FragmentInsightsBinding
     private lateinit var viewModel: InsightsViewModel
     private val auth = Firebase.auth
+    private val moduleRepository = ModuleRepository(auth.uid!!)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +39,7 @@ class InsightsFragment : Fragment() {
      * and layout file
      */
     private fun setupViewModelBinding() {
-        val viewModelFactory = InsightsViewModelFactory(Services.getModuleService(auth.uid!!),
+        val viewModelFactory = InsightsViewModelFactory(ModuleService(moduleRepository),
             Services.settingsService, Services.studentService)
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(InsightsViewModel::class.java)
@@ -68,10 +71,14 @@ class InsightsFragment : Fragment() {
      * be called. This will call the [InsightsViewModel.refreshUI] method
      */
     private fun observeDatabase(){
-        viewModel.getAllModules().observe(viewLifecycleOwner, {
-            viewModel.refreshUI()
-        })
         viewModel.getSettings().observe(viewLifecycleOwner, {
+            for(settings in it){
+                if(settings.userId == auth.uid){
+                    viewModel.setSettings(settings)
+                }
+            }
+        })
+        viewModel.getAllModules().observe(viewLifecycleOwner, {
             viewModel.refreshUI()
         })
     }

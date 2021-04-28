@@ -12,6 +12,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.university.gradetrak.MainActivity
 import com.university.gradetrak.databinding.FragmentModulesBinding
+import com.university.gradetrak.repositories.ModuleRepository
+import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.services.Services
 import com.university.gradetrak.ui.adapters.ModuleRecyclerAdapter
 import com.university.gradetrak.ui.addMark.AddMarkActivity
@@ -24,6 +26,7 @@ class ModulesFragment : Fragment() {
     private lateinit var viewModel: ModulesViewModel
     private lateinit var linearLayoutManager: LinearLayoutManager
     private val auth = Firebase.auth
+    private val moduleRepository = ModuleRepository(auth.uid!!)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +48,7 @@ class ModulesFragment : Fragment() {
      * databinding between the layout file using view binding [binding].
      */
     private fun setupViewModelBinding(){
-        val viewModelFactory = ModulesViewModelFactory(Services.getModuleService(auth.uid!!))
+        val viewModelFactory = ModulesViewModelFactory(ModuleService(moduleRepository))
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ModulesViewModel::class.java)
         binding.viewModel = viewModel

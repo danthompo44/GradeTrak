@@ -12,13 +12,16 @@ import com.university.gradetrak.R
 import com.university.gradetrak.databinding.ActivityAddModuleBinding
 import com.university.gradetrak.models.Credits
 import com.university.gradetrak.models.Level
+import com.university.gradetrak.repositories.ModuleRepository
+import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.services.Services
 
 class AddModuleActivity : BaseActivity() {
     private lateinit var binding: ActivityAddModuleBinding
     private val auth = Firebase.auth
+    private val moduleRepository = ModuleRepository(auth.uid!!)
     private val viewModel: AddModuleViewModel by viewModels {
-        AddModuleViewModelFactory(Services.getModuleService(auth.uid!!), Services.settingsService)
+        AddModuleViewModelFactory(ModuleService(moduleRepository), Services.settingsService)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +35,7 @@ class AddModuleActivity : BaseActivity() {
         setupDropdownMenus()
         observeErrors()
         observeSuccess()
+        observeSettings()
     }
 
     /**
@@ -74,6 +78,16 @@ class AddModuleActivity : BaseActivity() {
         viewModel.success.observe(this, { success ->
             if(success){
                 finish()
+            }
+        })
+    }
+
+    private fun observeSettings(){
+        viewModel.getUserSettings().observe(this, {
+            for (settings in it){
+                if(settings.userId == auth.uid){
+                    viewModel.setSettings(settings)
+                }
             }
         })
     }
