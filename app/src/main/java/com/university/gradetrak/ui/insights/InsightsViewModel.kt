@@ -1,6 +1,5 @@
 package com.university.gradetrak.ui.insights
 
-import android.util.Log
 import android.widget.LinearLayout
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
@@ -13,7 +12,6 @@ import com.university.gradetrak.models.Student
 import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.services.SettingsService
 import com.university.gradetrak.utils.InsightsCalculator
-import com.university.gradetrak.utils.TAG
 
 class InsightsViewModel (private val moduleService: ModuleService,
                          private val settingsService: SettingsService) : ViewModel() {
@@ -66,7 +64,6 @@ class InsightsViewModel (private val moduleService: ModuleService,
 
     fun setSettings(settings : Settings){
         userSettings = settings
-        Log.v(TAG, "Settings Have Been Initialised")
     }
 
     /**

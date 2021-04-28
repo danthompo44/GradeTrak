@@ -74,12 +74,9 @@ class InsightsFragment : Fragment() {
      * be called. This will call the [InsightsViewModel.refreshUI] method
      */
     private fun observeSettings(){
-        Log.v(TAG, "In Get Settings Observer Method")
         viewModel.getSettings().observe(viewLifecycleOwner, {
-            Log.v(TAG, "In Get Settings Observer")
             for(settings in it){
                 if(settings.userId == auth.uid){
-                    Log.v(TAG, "Settings Matches")
                     Log.v(TAG, settings.toString())
                     viewModel.setSettings(settings)
                     viewModel.refreshUI()
