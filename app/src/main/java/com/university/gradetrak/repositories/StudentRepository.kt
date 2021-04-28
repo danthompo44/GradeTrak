@@ -25,19 +25,19 @@ class StudentRepository {
         students.child(student.uuid!!).setValue(student)
     }
 
-    /**
-     * Retrieves a student from the DB using their ID
-     * @param userId The user to be retrieved ID
-     * @return Live data of the student, can be observed
-     */
-    fun getStudent(userId: String) : MutableLiveData<Student> {
-        val student = MutableLiveData<Student>()
-        for(s in studentsLD.value!!){
-            if(s.uuid == userId){
-                student.value = s
+    fun getStudentName(userId: String) : String{
+        var name = ""
+        students.get().addOnSuccessListener {
+            for(child in it.children){
+                val currentStudent = child.getValue(Student::class.java)
+                if (currentStudent?.uuid == userId){
+                    name = currentStudent.firstName!!
+                }
             }
+        }.addOnFailureListener{
+            Log.e("firebase", "Error getting data", it)
         }
-        return student
+        return name
     }
 
     /**

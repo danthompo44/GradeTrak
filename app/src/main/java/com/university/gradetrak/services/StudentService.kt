@@ -13,7 +13,7 @@ class StudentService (private val repository: StudentRepository) {
         repository.addStudent(student)
     }
 
-    fun getStudent(userId: String): MutableLiveData<Student>{
-        return repository.getStudent(userId)
+    fun getStudentName(userId: String) : String{
+        return repository.getStudentName(userId)
     }
 }

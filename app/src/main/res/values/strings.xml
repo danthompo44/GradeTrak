@@ -129,7 +129,7 @@
     <string name="two_two">2 : 2</string>
     <string name="two_one">2 : 1</string>
     <string name="first">1st</string>
-    <string name="users_insights">\'s Insights</string>
+    <string name="users_insights">Insights</string>
     <string name="no_insights_text">No Insights to show, please register some module results.</string>
 
     <!-- Progress Wheel Strings -->

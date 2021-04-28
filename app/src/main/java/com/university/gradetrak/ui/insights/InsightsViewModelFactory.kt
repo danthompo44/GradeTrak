@@ -4,11 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.services.SettingsService
-import com.university.gradetrak.services.StudentService
 
 class InsightsViewModelFactory(private val moduleService: ModuleService,
-                               private val settingsService: SettingsService,
-                               private val studentService: StudentService)
+                               private val settingsService: SettingsService)
     : ViewModelProvider.Factory {
     /**
      * Creates a new instance of the given `Class`.
@@ -22,7 +20,7 @@ class InsightsViewModelFactory(private val moduleService: ModuleService,
     @Suppress("Unchecked_Cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(InsightsViewModel::class.java)){
-            return InsightsViewModel(moduleService, settingsService, studentService) as T
+            return InsightsViewModel(moduleService, settingsService) as T
         }
         throw IllegalArgumentException("View model class does not exist")
     }

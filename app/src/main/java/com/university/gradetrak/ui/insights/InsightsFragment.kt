@@ -2,6 +2,7 @@ package com.university.gradetrak.ui.insights
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.university.gradetrak.databinding.FragmentInsightsBinding
 import com.university.gradetrak.repositories.ModuleRepository
 import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.services.Services
+import com.university.gradetrak.utils.TAG
 
 class InsightsFragment : Fragment() {
     private lateinit var binding: FragmentInsightsBinding
@@ -40,7 +42,7 @@ class InsightsFragment : Fragment() {
      */
     private fun setupViewModelBinding() {
         val viewModelFactory = InsightsViewModelFactory(ModuleService(moduleRepository),
-            Services.settingsService, Services.studentService)
+            Services.settingsService)
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(InsightsViewModel::class.java)
         binding.viewModel = viewModel
@@ -52,11 +54,12 @@ class InsightsFragment : Fragment() {
      * observer of the view model
      */
     private fun observeViewModel(){
-        observeDatabase()
+        observeSettings()
         observeModulePromptTextIntegerValue()
         observerOverallGradeTextIntegerValue()
         observeLevelsComplete()
         observeShowInsights()
+
     }
 
     /**
@@ -70,16 +73,18 @@ class InsightsFragment : Fragment() {
      * [InsightsViewModel.getSettings] this method the corresponding method will
      * be called. This will call the [InsightsViewModel.refreshUI] method
      */
-    private fun observeDatabase(){
+    private fun observeSettings(){
+        Log.v(TAG, "In Get Settings Observer Method")
         viewModel.getSettings().observe(viewLifecycleOwner, {
+            Log.v(TAG, "In Get Settings Observer")
             for(settings in it){
                 if(settings.userId == auth.uid){
+                    Log.v(TAG, "Settings Matches")
+                    Log.v(TAG, settings.toString())
                     viewModel.setSettings(settings)
+                    viewModel.refreshUI()
                 }
             }
-        })
-        viewModel.getAllModules().observe(viewLifecycleOwner, {
-            viewModel.refreshUI()
         })
     }
 
@@ -171,20 +176,11 @@ class InsightsFragment : Fragment() {
     private fun observeShowInsights(){
         viewModel.showInsights.observe(viewLifecycleOwner, { showInsights ->
             if(showInsights){
-                binding.noInsightsText.text = createUserString(viewModel.getStudentName(auth.uid!!))
+                binding.noInsightsText.text = getString(R.string.users_insights)
             } else {
                 binding.noInsightsText.text = getString(R.string.no_insights_text)
             }
         })
-    }
-
-    /**
-     * A method that adds a string resource to [name]
-     *
-     * @return [name] with an extra string resource i.e "Bob's Insights"
-     */
-    private fun createUserString(name: String): String{
-        return name + getString(R.string.users_insights)
     }
 
     /**

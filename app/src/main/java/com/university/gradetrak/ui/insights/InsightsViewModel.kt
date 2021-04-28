@@ -1,5 +1,6 @@
 package com.university.gradetrak.ui.insights
 
+import android.util.Log
 import android.widget.LinearLayout
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
@@ -11,12 +12,11 @@ import com.university.gradetrak.models.Settings
 import com.university.gradetrak.models.Student
 import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.services.SettingsService
-import com.university.gradetrak.services.StudentService
 import com.university.gradetrak.utils.InsightsCalculator
+import com.university.gradetrak.utils.TAG
 
 class InsightsViewModel (private val moduleService: ModuleService,
-                         private val settingsService: SettingsService,
-                         private val studentService: StudentService) : ViewModel() {
+                         private val settingsService: SettingsService) : ViewModel() {
 
     val modulePromptStringIntegerValue = MutableLiveData<Int>()
     val totalLevel5Credits = ObservableField<String>()
@@ -44,6 +44,7 @@ class InsightsViewModel (private val moduleService: ModuleService,
     val displayInsights = ObservableInt(LinearLayout.VISIBLE)
     val showInsights = MutableLiveData<Boolean>()
     private lateinit var userSettings: Settings
+    private lateinit var currentStudent: Student
 
     /**
      * Retrieves all modules from [ModuleService.getAll].
@@ -65,6 +66,7 @@ class InsightsViewModel (private val moduleService: ModuleService,
 
     fun setSettings(settings : Settings){
         userSettings = settings
+        Log.v(TAG, "Settings Have Been Initialised")
     }
 
     /**
@@ -120,26 +122,6 @@ class InsightsViewModel (private val moduleService: ModuleService,
         displayInsights.set(LinearLayout.INVISIBLE)
         showInsights.value =  false
         return false
-    }
-
-    /**
-     * Retrieves a live data of a [Student].
-     *
-     * Uses [userId] to retrieve the student from [StudentService.getStudent].
-     */
-    private fun getStudent(userId: String): MutableLiveData<Student>{
-        return studentService.getStudent(userId)
-    }
-
-    /**
-     * Retrieves a the current users [Student.firstName]
-     *
-     * Passes [userId] to the [getStudent] method, then abstracts the first name
-     *
-     * @return [Student.firstName]
-     */
-    fun getStudentName(userId: String): String{
-        return getStudent(userId).value?.firstName!!
     }
 
     /**
