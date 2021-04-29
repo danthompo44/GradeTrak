@@ -1,6 +1,5 @@
 package com.university.gradetrak.ui.insights
 
-import android.util.Log
 import android.widget.LinearLayout
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
@@ -12,7 +11,6 @@ import com.university.gradetrak.models.Settings
 import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.services.SettingsService
 import com.university.gradetrak.utils.InsightsCalculator
-import com.university.gradetrak.utils.TAG
 
 class InsightsViewModel (private val moduleService: ModuleService,
                          private val settingsService: SettingsService) : ViewModel() {
@@ -48,9 +46,6 @@ class InsightsViewModel (private val moduleService: ModuleService,
     private var settingsAreSet = false
     private var modulesAreSet = false
 
-    init {
-        Log.v(TAG, "iNIT iNISGHTS vIEW moDEL")
-    }
     /**
      * Retrieves all modules from [ModuleService.getAll].
      *
@@ -60,8 +55,11 @@ class InsightsViewModel (private val moduleService: ModuleService,
         return moduleService.getAll()
     }
 
+    /**
+     * Will use [modules] to set [allModules]
+     * and set [modulesAreSet] to true
+     */
     fun setAllModules(modules: List<Module>){
-        Log.v(TAG, "Set modules View Model")
         allModules = modules
         if(!modulesAreSet){
             modulesAreSet = true
@@ -77,8 +75,11 @@ class InsightsViewModel (private val moduleService: ModuleService,
         return settingsService.getAll()
     }
 
+    /**
+     * Will use [settings] to set [userSettings]
+     * and set [settingsAreSet] to true
+     */
     fun setSettings(settings : Settings){
-        Log.v(TAG, "Set Settings View Model")
         userSettings = settings
         if(!settingsAreSet){
             settingsAreSet = true
@@ -87,6 +88,8 @@ class InsightsViewModel (private val moduleService: ModuleService,
 
     /**
      * Updates Observable fields using data retrieved from [SettingsService.getAll]
+     *
+     * Will only run if both the settings and modules have been set.
      *
      * Stores Strings of information received to be displayed in the UI. Stores integers
      * of these settings for business logic to be applied to.
@@ -99,7 +102,6 @@ class InsightsViewModel (private val moduleService: ModuleService,
      */
     fun refreshUI(){
         if(settingsAreSet && modulesAreSet){
-            Log.v(TAG, "Refresh UI View Model")
             totalLevel5Credits.set(userSettings.level5Credits.toString())
             totalLevel5CreditsInt.set(userSettings.level5Credits)
             totalLevel6Credits.set(userSettings.level6Credits.toString())
@@ -131,7 +133,6 @@ class InsightsViewModel (private val moduleService: ModuleService,
      * Else, [displayInsights] is invisible and [showInsights] is false.
      */
     private fun hasMarks(): Boolean{
-        Log.v(TAG, "Has Marks View Model")
         for(module in allModules){
             if(module.result != null){
                 displayInsights.set(LinearLayout.VISIBLE)
@@ -152,7 +153,6 @@ class InsightsViewModel (private val moduleService: ModuleService,
      * fragment.
      */
     private fun calculate(){
-        Log.v(TAG, "Calculate View Model")
         val percentages = InsightsCalculator.calculatePercentages(
                 allModules, userSettings)
         currentLevel5Progress.set(addPercentToString(percentages[0]))

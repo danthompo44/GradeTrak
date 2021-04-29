@@ -70,14 +70,12 @@ class InsightsFragment : Fragment() {
      * returns live data from firebase, this allows this function to become an
      * observer of that data.
      *
-     * When a change is detected in [InsightsViewModel.getAllModules] or
-     * [InsightsViewModel.getSettings] this method the corresponding method will
+     * When a change is detected in [InsightsViewModel.getSettings] or
+     * [InsightsViewModel.setSettings] this method the corresponding method will
      * be called. This will call the [InsightsViewModel.refreshUI] method
      */
     private fun observeSettings(){
-        Log.v(TAG, "All settings method")
         viewModel.getSettings().observe(viewLifecycleOwner, {
-            Log.v(TAG, "All settings observer triggered")
             for(settings in it){
                 if(settings.userId == auth.uid){
                     Log.v(TAG, settings.toString())
@@ -88,10 +86,14 @@ class InsightsFragment : Fragment() {
         })
     }
 
+    /**
+     * Observes Modules in the view model.
+     *
+     * When called will [InsightsViewModel.setAllModules] modules in the view model
+     * then [InsightsViewModel.refreshUI]
+     */
     private fun observeModules(){
-        Log.v(TAG, "All modules method")
         viewModel.getAllModules().observe(viewLifecycleOwner, {
-            Log.v(TAG, "All modules observer triggered")
             viewModel.setAllModules(it)
             viewModel.refreshUI()
         })

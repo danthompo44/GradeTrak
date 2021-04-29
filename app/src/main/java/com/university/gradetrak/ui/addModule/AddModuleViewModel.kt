@@ -32,6 +32,9 @@ class AddModuleViewModel (private val moduleService: ModuleService,
         return settingsService.getAll()
     }
 
+    /**
+     * Called by the activity, sets settings in the view model
+     */
     fun setSettings(settings: Settings){
         userSettings = settings
     }

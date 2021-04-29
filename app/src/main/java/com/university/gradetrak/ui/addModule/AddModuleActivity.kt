@@ -82,6 +82,12 @@ class AddModuleActivity : BaseActivity() {
         })
     }
 
+    /**
+     * Observes settings in the [AddModuleViewModel]
+     *
+     * will set settings in the view model if the settings user id
+     * matches [auth.uid]
+     */
     private fun observeSettings(){
         viewModel.getUserSettings().observe(this, {
             for (settings in it){

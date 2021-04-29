@@ -25,21 +25,6 @@ class StudentRepository {
         students.child(student.uuid!!).setValue(student)
     }
 
-    fun getStudentName(userId: String) : String{
-        var name = ""
-        students.get().addOnSuccessListener {
-            for(child in it.children){
-                val currentStudent = child.getValue(Student::class.java)
-                if (currentStudent?.uuid == userId){
-                    name = currentStudent.firstName!!
-                }
-            }
-        }.addOnFailureListener{
-            Log.e("firebase", "Error getting data", it)
-        }
-        return name
-    }
-
     /**
      * Adds a listener to the database reference, this then updates the students live data
      * which can be observed

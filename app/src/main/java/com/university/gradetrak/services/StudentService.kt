@@ -12,8 +12,4 @@ class StudentService (private val repository: StudentRepository) {
     fun addStudent(student: Student){
         repository.addStudent(student)
     }
-
-    fun getStudentName(userId: String) : String{
-        return repository.getStudentName(userId)
-    }
 }
