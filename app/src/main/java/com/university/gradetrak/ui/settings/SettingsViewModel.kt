@@ -14,7 +14,8 @@ import com.university.gradetrak.models.Settings
 import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.services.SettingsService
 
-class SettingsViewModel(private val moduleService: ModuleService, private val settingsService: SettingsService) : ViewModel() {
+class SettingsViewModel(private val moduleService: ModuleService,
+                        private val settingsService: SettingsService) : ViewModel() {
     var auth = Firebase.auth
     val thirtySeventyWeighting = ObservableBoolean()
     val removeLowestModule = ObservableBoolean()
