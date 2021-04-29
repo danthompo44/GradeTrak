@@ -137,12 +137,12 @@ class SettingsViewModel(private val moduleService: ModuleService, private val se
             errorStringIntNumber.value = R.string.level_6_credits_too_low
             return
         }
-
+        applyChangesButtonVisibility.set(Button.INVISIBLE)
         val settings = Settings(thirtySeventyWeighting.get(), removeLowestModule.get(),
                 level5Credits.get()?.toInt(), level6Credits.get()?.toInt())
         settings.userId = auth.uid
         settingsService.addEditSettings(settings)
-        applyChangesButtonVisibility.set(Button.INVISIBLE)
+
     }
 
     /**
