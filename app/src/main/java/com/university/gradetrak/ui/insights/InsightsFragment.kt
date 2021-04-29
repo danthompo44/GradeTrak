@@ -54,6 +54,7 @@ class InsightsFragment : Fragment() {
      * observer of the view model
      */
     private fun observeViewModel(){
+        observeModules()
         observeSettings()
         observeModulePromptTextIntegerValue()
         observerOverallGradeTextIntegerValue()
@@ -74,7 +75,9 @@ class InsightsFragment : Fragment() {
      * be called. This will call the [InsightsViewModel.refreshUI] method
      */
     private fun observeSettings(){
+        Log.v(TAG, "All settings method")
         viewModel.getSettings().observe(viewLifecycleOwner, {
+            Log.v(TAG, "All settings observer triggered")
             for(settings in it){
                 if(settings.userId == auth.uid){
                     Log.v(TAG, settings.toString())
@@ -82,6 +85,15 @@ class InsightsFragment : Fragment() {
                     viewModel.refreshUI()
                 }
             }
+        })
+    }
+
+    private fun observeModules(){
+        Log.v(TAG, "All modules method")
+        viewModel.getAllModules().observe(viewLifecycleOwner, {
+            Log.v(TAG, "All modules observer triggered")
+            viewModel.setAllModules(it)
+            viewModel.refreshUI()
         })
     }
 

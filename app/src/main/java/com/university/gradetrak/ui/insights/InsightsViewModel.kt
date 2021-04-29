@@ -1,5 +1,6 @@
 package com.university.gradetrak.ui.insights
 
+import android.util.Log
 import android.widget.LinearLayout
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
@@ -8,10 +9,10 @@ import androidx.lifecycle.ViewModel
 import com.university.gradetrak.R
 import com.university.gradetrak.models.Module
 import com.university.gradetrak.models.Settings
-import com.university.gradetrak.models.Student
 import com.university.gradetrak.services.ModuleService
 import com.university.gradetrak.services.SettingsService
 import com.university.gradetrak.utils.InsightsCalculator
+import com.university.gradetrak.utils.TAG
 
 class InsightsViewModel (private val moduleService: ModuleService,
                          private val settingsService: SettingsService) : ViewModel() {
@@ -42,8 +43,14 @@ class InsightsViewModel (private val moduleService: ModuleService,
     val displayInsights = ObservableInt(LinearLayout.VISIBLE)
     val showInsights = MutableLiveData<Boolean>()
     private lateinit var userSettings: Settings
-    private lateinit var currentStudent: Student
+    private lateinit var allModules: List<Module>
 
+    private var settingsAreSet = false
+    private var modulesAreSet = false
+
+    init {
+        Log.v(TAG, "iNIT iNISGHTS vIEW moDEL")
+    }
     /**
      * Retrieves all modules from [ModuleService.getAll].
      *
@@ -51,6 +58,14 @@ class InsightsViewModel (private val moduleService: ModuleService,
      */
     fun getAllModules(): MutableLiveData<List<Module>>{
         return moduleService.getAll()
+    }
+
+    fun setAllModules(modules: List<Module>){
+        Log.v(TAG, "Set modules View Model")
+        allModules = modules
+        if(!modulesAreSet){
+            modulesAreSet = true
+        }
     }
 
     /**
@@ -63,7 +78,11 @@ class InsightsViewModel (private val moduleService: ModuleService,
     }
 
     fun setSettings(settings : Settings){
+        Log.v(TAG, "Set Settings View Model")
         userSettings = settings
+        if(!settingsAreSet){
+            settingsAreSet = true
+        }
     }
 
     /**
@@ -79,23 +98,26 @@ class InsightsViewModel (private val moduleService: ModuleService,
      * Updates [level5Complete] and [level6Complete] booleans which can be observed in the activity.
      */
     fun refreshUI(){
-        totalLevel5Credits.set(userSettings.level5Credits.toString())
-        totalLevel5CreditsInt.set(userSettings.level5Credits)
-        totalLevel6Credits.set(userSettings.level6Credits.toString())
-        totalLevel6CreditsInt.set(userSettings.level6Credits)
+        if(settingsAreSet && modulesAreSet){
+            Log.v(TAG, "Refresh UI View Model")
+            totalLevel5Credits.set(userSettings.level5Credits.toString())
+            totalLevel5CreditsInt.set(userSettings.level5Credits)
+            totalLevel6Credits.set(userSettings.level6Credits.toString())
+            totalLevel6CreditsInt.set(userSettings.level6Credits)
 
-        if(hasMarks()){
-            calculate()
-            val receivedCredits = InsightsCalculator.getReceivedCredits()
+            if(hasMarks()){
+                calculate()
+                val receivedCredits = InsightsCalculator.getReceivedCredits()
 
-            receivedLevel5Credits.set(receivedCredits[0])
-            receivedLevel6Credits.set(receivedCredits[1])
+                receivedLevel5Credits.set(receivedCredits[0])
+                receivedLevel6Credits.set(receivedCredits[1])
 
-            if(receivedCredits[0] >= userSettings.level5Credits!!){
-                level5Complete.value = true
-            }
-            if(receivedCredits[1] >= userSettings.level6Credits!!){
-                level6Complete.value = true
+                if(receivedCredits[0] >= userSettings.level5Credits!!){
+                    level5Complete.value = true
+                }
+                if(receivedCredits[1] >= userSettings.level6Credits!!){
+                    level6Complete.value = true
+                }
             }
         }
     }
@@ -109,7 +131,8 @@ class InsightsViewModel (private val moduleService: ModuleService,
      * Else, [displayInsights] is invisible and [showInsights] is false.
      */
     private fun hasMarks(): Boolean{
-        for(module in getAllModules().value!!){
+        Log.v(TAG, "Has Marks View Model")
+        for(module in allModules){
             if(module.result != null){
                 displayInsights.set(LinearLayout.VISIBLE)
                 showInsights.value =  true
@@ -129,8 +152,9 @@ class InsightsViewModel (private val moduleService: ModuleService,
      * fragment.
      */
     private fun calculate(){
+        Log.v(TAG, "Calculate View Model")
         val percentages = InsightsCalculator.calculatePercentages(
-                getAllModules().value!!, userSettings)
+                allModules, userSettings)
         currentLevel5Progress.set(addPercentToString(percentages[0]))
         overallLevel5Progress.set(addPercentToString(percentages[1]))
         weightedLevel5Progress.set(addPercentToString(percentages[2]))
