@@ -64,7 +64,7 @@ class ForgotPasswordActivity : BaseActivity() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         showSnackBar(resources.getString(R.string.reset_password_sent), false)
-                        finish()
+                        viewModel.clearUI()
                     }
                     else{
                         showSnackBar(task.exception?.localizedMessage.toString(), true)

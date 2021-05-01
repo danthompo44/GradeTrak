@@ -30,4 +30,8 @@ class ForgotPasswordViewModel: ViewModel() {
     fun getTrimmedEmail(): String{
         return emailAddress.get().toString().trim()
     }
+
+    fun clearUI(){
+        emailAddress.set("")
+    }
 }

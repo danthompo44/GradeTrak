@@ -32,4 +32,7 @@
     <dimen name="progress_bar_container_padding">5dp</dimen>
     <dimen name="progress_wheel_radius">60dp</dimen>
     <dimen name="progress_bar_text_margin_start">10dp</dimen>
+
+    <!-- Insights Page   -->
+    <dimen name="insights_vertical_margin">10dp</dimen>
 </resources>
