@@ -161,7 +161,7 @@ class InsightsViewModel (private val moduleService: ModuleService,
         currentLevel6Progress.set(addPercentToString(percentages[3]))
         overallLevel6Progress.set(addPercentToString(percentages[4]))
         weightedLevel6Progress.set(addPercentToString(percentages[5]))
-        if(percentages[6] < percentages[7]){
+        if(percentages[6] < percentages[7] && userSettings.removeLowestModule!!){
             modulePromptStringIntegerValue.value = R.string.overall_progress_removal
             overallProgress.set(addPercentToString(percentages[7]))
             overallProgressDouble = percentages[7]
